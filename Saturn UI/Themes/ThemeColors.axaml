@@ -1,0 +1,154 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- ============================================ -->
+    <!-- Saturn UI 主题颜色定义                            -->
+    <!-- 每个主题包含 15 个颜色变量，用于 UI 各元素着色   -->
+    <!-- ============================================ -->
+
+    <!-- 主题定义：深空黑 (默认) -->
+    <ResourceDictionary x:Key="DeepSpace">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#0A0A0C" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#1A1A1E" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#4FACFE" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#8B5CF6" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#8B8B94" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#2A2A30" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#1D3B5C" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#222228" />
+        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#141418" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#2A2A30" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#2A2A30" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#4FACFE40" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- 主题定义：极昼白 -->
+    <ResourceDictionary x:Key="Daylight">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#F8F9FA" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#2563EB" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#7C3AED" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#111827" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#6B7280" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#E5E7EB" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#DBEAFE" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#F3F4F6" />
+        <SolidColorBrush x:Key="LynError" Color="#DC2626" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#F3F4F6" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#E5E7EB" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#E5E7EB" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#BFDBFE" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#0000000D" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#0000001A" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- 主题定义：星夜蓝 -->
+    <ResourceDictionary x:Key="StarryBlue">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#0B1120" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#151E32" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#38BDF8" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#C084FC" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#F1F5F9" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#94A3B8" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#1E293B" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#0284C7" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#1E293B" />
+        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#0F172A" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#1E293B" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#1E293B" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#38BDF840" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- 主题定义：极光紫 -->
+    <ResourceDictionary x:Key="AuroraPurple">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#16102B" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#241842" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#A855F7" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#EC4899" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#F3E8FF" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#D8B4FE" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#3B2868" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#6B21A8" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#2E1E55" />
+        <SolidColorBrush x:Key="LynError" Color="#F43F5E" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#1A1133" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#3B2868" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#3B2868" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#A855F740" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- 主题定义：冰川青 -->
+    <ResourceDictionary x:Key="GlacierCyan">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#041E26" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#0A2B35" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#06B6D4" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#4F46E5" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#CFFAFE" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#67E8F9" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#164E63" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#0891B2" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#155E75" />
+        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#062731" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#164E63" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#164E63" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#06B6D440" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- 主题定义：星云粉 -->
+    <ResourceDictionary x:Key="NebulaPink">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#230B14" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#361320" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#F43F5E" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#D946EF" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#FFE4E6" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#FDA4AF" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#501B2E" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#BE123C" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#4C1D32" />
+        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#2C0E1A" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#501B2E" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#501B2E" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#F43F5E40" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+
+    <!-- 主题定义：午夜靛蓝 -->
+    <ResourceDictionary x:Key="MidnightIndigo">
+        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#0B0C1E" />
+        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#151733" />
+        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#6366F1" />
+        <SolidColorBrush x:Key="LynAccentBrush" Color="#9333EA" />
+        <SolidColorBrush x:Key="LynTextBrush" Color="#E0E7FF" />
+        <SolidColorBrush x:Key="LynSubTextBrush" Color="#A5B4FC" />
+        <SolidColorBrush x:Key="LynBorderBrush" Color="#262955" />
+        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#4338CA" />
+        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#1E2147" />
+        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
+        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#0E1026" />
+        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#262955" />
+        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#262955" />
+        <SolidColorBrush x:Key="LynSelectionBrush" Color="#6366F140" />
+        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
+        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
+        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+    </ResourceDictionary>
+</ResourceDictionary>

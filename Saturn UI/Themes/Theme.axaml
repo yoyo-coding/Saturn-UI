@@ -1,0 +1,12 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- ============================================ -->
+    <!-- Saturn UI 主题系统                                -->
+    <!-- 颜色定义已提取到 ThemeColors.axaml              -->
+    <!-- 控件样式覆盖在 ThemeStyles.axaml               -->
+    <!-- ============================================ -->
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://SaturnUI/Themes/ThemeColors.axaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

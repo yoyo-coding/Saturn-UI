@@ -1,0 +1,225 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SaturnUI.ViewModels"
+             xmlns:models="using:SaturnUI.Models"
+             xmlns:converters="using:SaturnUI.Converters"
+             xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+             x:Class="SaturnUI.Views.ChatView"
+             x:DataType="vm:ChatViewModel">
+
+    <Grid RowDefinitions="*,Auto">
+        <!-- Messages List -->
+        <ScrollViewer Grid.Row="0"
+                      Name="MessagesScroll"
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="0,0,0,8">
+            <ItemsControl ItemsSource="{Binding Messages}"
+                          Margin="16,8">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:Message">
+                        <Border Margin="0,4"
+                                Classes="msg"
+                                Classes.user="{Binding IsUser}"
+                                CornerRadius="12"
+                                Padding="16,12"
+                                MaxWidth="800"
+                                HorizontalAlignment="{Binding Role, Converter={StaticResource RoleAlignmentConverter}}">
+                            <StackPanel>
+                                <!-- User message: plain text -->
+                                <TextBlock IsVisible="{Binding IsUser}"
+                                           Text="{Binding Content}"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource LynTextBrush}"
+                                           FontSize="14" />
+
+                                <!-- Assistant message: Markdown -->
+                                <md:MarkdownScrollViewer IsVisible="{Binding IsAssistant}"
+                                                         Markdown="{Binding Content}"
+                                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                         MaxWidth="768">
+                                    <md:MarkdownScrollViewer.Styles>
+                                        <Style Selector="TextBlock">
+                                            <Setter Property="Foreground" Value="{DynamicResource LynTextBrush}" />
+                                        </Style>
+                                        <Style Selector="Border.CodeBlock">
+                                            <Setter Property="Background" Value="{DynamicResource LynCodeBackgroundBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource LynCodeBorderBrush}" />
+                                        </Style>
+                                        <Style Selector="Border.Blockquote">
+                                            <Setter Property="Background" Value="{DynamicResource LynSurfaceBrush}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource LynBorderBrush}" />
+                                        </Style>
+                                    </md:MarkdownScrollViewer.Styles>
+                                </md:MarkdownScrollViewer>
+
+                                <!-- Image Attachment -->
+                                <Border IsVisible="{Binding IsImageAttachment}"
+                                        Margin="0,8,0,0"
+                                        CornerRadius="8"
+                                        ClipToBounds="True"
+                                        MaxWidth="400"
+                                        MaxHeight="300"
+                                        HorizontalAlignment="Left">
+                                    <Image Source="{Binding AttachmentPath}"
+                                           Stretch="Uniform" />
+                                </Border>
+
+                                <!-- File Attachment (non-image) -->
+                                <StackPanel IsVisible="{Binding HasAttachment}"
+                                            Margin="0,8,0,0"
+                                            Orientation="Horizontal"
+                                            Spacing="4">
+                                    <PathIcon Data="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"
+                                              Width="16"
+                                              Height="16"
+                                              Foreground="{DynamicResource LynSubTextBrush}" />
+                                    <TextBlock Text="{Binding AttachmentName}"
+                                               Foreground="{DynamicResource LynSubTextBrush}"
+                                               FontSize="12"
+                                               TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+
+                                <StackPanel IsVisible="{Binding IsError}"
+                                            Margin="0,8,0,0">
+                                    <TextBlock Text="{Binding ErrorMessage}"
+                                               Foreground="{DynamicResource LynError}"
+                                               TextWrapping="Wrap"
+                                               FontSize="12" />
+                                </StackPanel>
+                                <StackPanel IsVisible="{Binding IsStreaming}"
+                                            Margin="0,4,0,0"
+                                            Orientation="Horizontal">
+                                    <Border Width="8"
+                                            Height="16"
+                                            Background="{DynamicResource LynPrimaryBrush}"
+                                            Margin="2,0">
+                                        <Border.Styles>
+                                            <Style>
+                                                <Style.Animations>
+                                                    <Animation Duration="0:0:0.6"
+                                                               IterationCount="INFINITE">
+                                                        <KeyFrame Cue="0%">
+                                                            <Setter Property="Opacity" Value="1" />
+                                                        </KeyFrame>
+                                                        <KeyFrame Cue="50%">
+                                                            <Setter Property="Opacity" Value="0.3" />
+                                                        </KeyFrame>
+                                                        <KeyFrame Cue="100%">
+                                                            <Setter Property="Opacity" Value="1" />
+                                                        </KeyFrame>
+                                                    </Animation>
+                                                </Style.Animations>
+                                            </Style>
+                                        </Border.Styles>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource LynSubTextBrush}"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,4,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Input Area -->
+        <Border Grid.Row="1"
+                Background="{DynamicResource LynSurfaceBrush}"
+                BorderBrush="{DynamicResource LynBorderBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="16,12">
+            <Grid RowDefinitions="Auto,Auto">
+                <!-- Pending Attachment -->
+                <Border Grid.Row="0"
+                        IsVisible="{Binding PendingAttachmentName, Converter={x:Static ObjectConverters.IsNotNull}}"
+                        Background="{DynamicResource LynBackgroundBrush}"
+                        BorderBrush="{DynamicResource LynBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Padding="8,6"
+                        Margin="0,0,0,8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    Spacing="6">
+                            <PathIcon Data="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"
+                                      Width="16"
+                                      Height="16"
+                                      Foreground="{DynamicResource LynSubTextBrush}" />
+                            <TextBlock Text="{Binding PendingAttachmentName}"
+                                       Foreground="{DynamicResource LynSubTextBrush}"
+                                       FontSize="12"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                Command="{Binding ClearAttachmentCommand}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="4">
+                            <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                      Width="14"
+                                      Height="14"
+                                      Foreground="{DynamicResource LynSubTextBrush}" />
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto">
+                    <TextBox Grid.Column="0"
+                         Text="{Binding InputText}"
+                         Watermark="输入消息... (Shift+Enter 换行, Ctrl+Enter 发送)"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         MaxHeight="120"
+                         VerticalContentAlignment="Top"
+                         Padding="12,8"
+                         Background="{DynamicResource LynBackgroundBrush}"
+                         Foreground="{DynamicResource LynTextBrush}"
+                         BorderBrush="{DynamicResource LynBorderBrush}"
+                         CornerRadius="8">
+                    <TextBox.KeyBindings>
+                        <KeyBinding Gesture="Ctrl+Enter"
+                                    Command="{Binding SendMessageCommand}" />
+                    </TextBox.KeyBindings>
+                </TextBox>
+
+                <Button Grid.Column="1"
+                        Command="{Binding StopGenerationCommand}"
+                        IsVisible="{Binding IsBusy}"
+                        Margin="8,0,0,0"
+                        Background="{DynamicResource LynError}"
+                        Foreground="White"
+                        CornerRadius="8"
+                        Padding="12,8">
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <PathIcon Data="M18,18H6V6H18V18Z"
+                                  Width="16"
+                                  Height="16" />
+                        <TextBlock Text="停止" />
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Column="2"
+                        Command="{Binding SendMessageCommand}"
+                        IsVisible="{Binding !IsBusy}"
+                        Margin="8,0,0,0"
+                        Background="{DynamicResource LynPrimaryBrush}"
+                        Foreground="White"
+                        CornerRadius="8"
+                        Padding="12,8">
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <PathIcon Data="M2,21L23,12L2,3V10L17,12L2,14V21Z"
+                                  Width="16"
+                                  Height="16" />
+                        <TextBlock Text="发送" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,27 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- ============================================ -->
+    <!-- Saturn UI 控件样式覆盖                            -->
+    <!-- 覆盖 FluentTheme 默认颜色，确保所有控件跟随主题   -->
+    <!-- ============================================ -->
+
+    <!-- Slider 轨道背景 -->
+    <Style Selector="Slider">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <!-- Slider 滑块颜色 -->
+    <Style Selector="Slider:horizontal /template/ Thumb">
+        <Setter Property="Background" Value="{DynamicResource LynPrimaryBrush}" />
+    </Style>
+
+    <!-- ListBoxItem 选中背景 -->
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource LynSelectionBrush}" />
+    </Style>
+
+    <!-- ListBoxItem 悬停背景 -->
+    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource LynHoverBrush}" />
+    </Style>
+</Styles>

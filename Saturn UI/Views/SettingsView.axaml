@@ -1,0 +1,130 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SaturnUI.ViewModels"
+             xmlns:services="using:SaturnUI.Services"
+             x:Class="SaturnUI.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24,16" Spacing="16" MaxWidth="600">
+            <TextBlock Text="后端配置"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource LynTextBrush}" />
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="HTTP 地址"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+                <TextBox Text="{Binding HttpBaseUrl}"
+                         Background="{DynamicResource LynSurfaceBrush}"
+                         Foreground="{DynamicResource LynTextBrush}"
+                         BorderBrush="{DynamicResource LynBorderBrush}"
+                         CornerRadius="6"
+                         Padding="10,8" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="gRPC 地址"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+                <TextBox Text="{Binding GrpcAddress}"
+                         Background="{DynamicResource LynSurfaceBrush}"
+                         Foreground="{DynamicResource LynTextBrush}"
+                         BorderBrush="{DynamicResource LynBorderBrush}"
+                         CornerRadius="6"
+                         Padding="10,8" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="通信协议"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+                <ComboBox SelectedItem="{Binding Protocol}"
+                          Background="{DynamicResource LynSurfaceBrush}"
+                          Foreground="{DynamicResource LynTextBrush}"
+                          BorderBrush="{DynamicResource LynBorderBrush}"
+                          CornerRadius="6"
+                          Padding="10,8">
+                    <ComboBoxItem Content="HTTP" />
+                    <ComboBoxItem Content="SSE" />
+                    <ComboBoxItem Content="WebSocket" />
+                    <ComboBoxItem Content="gRPC" />
+                </ComboBox>
+            </StackPanel>
+
+            <Border Height="1"
+                    Background="{DynamicResource LynBorderBrush}"
+                    Margin="0,8" />
+
+            <TextBlock Text="外观"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource LynTextBrush}" />
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="字体大小"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+                <Slider Value="{Binding FontSize}"
+                        Minimum="10"
+                        Maximum="24"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True" />
+                <TextBlock Text="{Binding FontSize, StringFormat='{}{0} px'}"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="主题"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+                <ComboBox ItemsSource="{Binding AvailableThemes}"
+                          SelectedItem="{Binding Theme}"
+                          Background="{DynamicResource LynSurfaceBrush}"
+                          Foreground="{DynamicResource LynTextBrush}"
+                          BorderBrush="{DynamicResource LynBorderBrush}"
+                          CornerRadius="6"
+                          Padding="10,8">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <TextBlock Text="{Binding Converter={x:Static services:ThemeNameConverter.Instance}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="性能模式"
+                           Foreground="{DynamicResource LynSubTextBrush}"
+                           FontSize="12" />
+                <ToggleSwitch IsChecked="{Binding PerformanceMode}"
+                              OffContent="关闭"
+                              OnContent="开启" />
+            </StackPanel>
+
+            <Border Height="1"
+                    Background="{DynamicResource LynBorderBrush}"
+                    Margin="0,8" />
+
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <Button Command="{Binding SaveSettingsCommand}"
+                        Background="{DynamicResource LynPrimaryBrush}"
+                        Foreground="{DynamicResource LynButtonTextBrush}"
+                        CornerRadius="8"
+                        Padding="16,10">
+                    <TextBlock Text="保存设置" />
+                </Button>
+                <Button Command="{Binding ResetSettingsCommand}"
+                        Background="Transparent"
+                        BorderBrush="{DynamicResource LynBorderBrush}"
+                        Foreground="{DynamicResource LynTextBrush}"
+                        CornerRadius="8"
+                        Padding="16,10">
+                    <TextBlock Text="恢复默认" />
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
