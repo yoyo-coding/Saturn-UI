@@ -1,11 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:materialIcons="using:Material.Icons.Avalonia">
+        xmlns:materialIcons="using:Material.Icons.Avalonia"
+        xmlns:controls="using:SaturnUI.Controls">
     <!-- ============================================ -->
     <!-- Saturn UI Material 3 组件样式                       -->
     <!-- 覆盖 FluentTheme 默认颜色,确保所有控件遵循 M3 设计   -->
     <!-- 形状:全圆角(顶部按钮) / 中圆角(卡片/输入框) / 大圆角(对话框) -->
+    <!-- 所有 Button 样式同时作用于 Button 与 RippleButton     -->
     <!-- ============================================ -->
 
     <Styles.Resources>
@@ -92,8 +94,8 @@
         <Setter Property="FontWeight" Value="Medium" />
     </Style>
 
-    <!-- ===== Button - M3 圆角形状 ===== -->
-    <Style Selector="Button">
+    <!-- ===== Button / RippleButton - M3 圆角形状 ===== -->
+    <Style Selector="Button, controls|RippleButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -107,27 +109,27 @@
     </Style>
 
     <!-- Filled Button (默认) - 实心按钮 -->
-    <Style Selector="Button.Filled">
+    <Style Selector="Button.Filled, controls|RippleButton.Filled">
         <Setter Property="Background" Value="{DynamicResource M3Primary}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimary}" />
     </Style>
-    <Style Selector="Button.Filled:pointerover /template/ ContentPresenter">
+    <Style Selector="Button.Filled:pointerover /template/ ContentPresenter, controls|RippleButton.Filled:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3Primary}" />
         <Setter Property="Opacity" Value="0.92" />
     </Style>
-    <Style Selector="Button.Filled:pressed /template/ ContentPresenter">
+    <Style Selector="Button.Filled:pressed /template/ ContentPresenter, controls|RippleButton.Filled:pressed /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3Primary}" />
         <Setter Property="Opacity" Value="0.88" />
     </Style>
 
     <!-- Tonal Button - 色调按钮 -->
-    <Style Selector="Button.Tonal">
+    <Style Selector="Button.Tonal, controls|RippleButton.Tonal">
         <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
     </Style>
 
     <!-- Outlined Button - 轮廓按钮 -->
-    <Style Selector="Button.Outlined">
+    <Style Selector="Button.Outlined, controls|RippleButton.Outlined">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
         <Setter Property="BorderBrush" Value="{DynamicResource M3Outline}" />
@@ -135,27 +137,27 @@
     </Style>
 
     <!-- Text Button - 文本按钮(默认) -->
-    <Style Selector="Button.Text">
+    <Style Selector="Button.Text, controls|RippleButton.Text">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
         <Setter Property="Padding" Value="12,8" />
     </Style>
 
     <!-- Icon Button - 圆形图标按钮 -->
-    <Style Selector="Button.Icon">
+    <Style Selector="Button.Icon, controls|RippleButton.Icon">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="MinHeight" Value="40" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="CornerRadius" Value="20" />
     </Style>
-    <Style Selector="Button.Icon:pointerover /template/ ContentPresenter">
+    <Style Selector="Button.Icon:pointerover /template/ ContentPresenter, controls|RippleButton.Icon:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3Primary}" />
         <Setter Property="Opacity" Value="0.12" />
     </Style>
 
     <!-- Filled Tonal Icon Button -->
-    <Style Selector="Button.FilledTonal">
+    <Style Selector="Button.FilledTonal, controls|RippleButton.FilledTonal">
         <Setter Property="Background" Value="{DynamicResource M3PrimaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimaryContainer}" />
     </Style>
@@ -302,7 +304,7 @@
     </Style>
 
     <!-- ===== FAB (悬浮操作按钮) ===== -->
-    <Style Selector="Button.FAB">
+    <Style Selector="Button.FAB, controls|RippleButton.FAB">
         <Setter Property="Width" Value="56" />
         <Setter Property="Height" Value="56" />
         <Setter Property="MinHeight" Value="56" />
@@ -311,12 +313,12 @@
         <Setter Property="Background" Value="{DynamicResource M3PrimaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimaryContainer}" />
     </Style>
-    <Style Selector="Button.FAB.Extended">
+    <Style Selector="Button.FAB.Extended, controls|RippleButton.FAB.Extended">
         <Setter Property="Width" Value="NaN" />
         <Setter Property="Padding" Value="20,16" />
         <Setter Property="CornerRadius" Value="16" />
     </Style>
-    <Style Selector="Button.FAB.Small">
+    <Style Selector="Button.FAB.Small, controls|RippleButton.FAB.Small">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="MinHeight" Value="40" />

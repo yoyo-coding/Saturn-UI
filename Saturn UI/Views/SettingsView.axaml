@@ -1,7 +1,8 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SaturnUI.ViewModels"
              xmlns:services="using:SaturnUI.Services"
+             xmlns:controls="using:SaturnUI.Controls"
              x:Class="SaturnUI.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
 
@@ -84,16 +85,16 @@
             <Border Classes="Divider" Margin="0,8" />
 
             <StackPanel Orientation="Horizontal" Spacing="12">
-                <Button Classes="Filled"
+                <controls:RippleButton Classes="Filled"
                         Command="{Binding SaveSettingsCommand}"
                         Padding="24,10">
                     <TextBlock Text="保存设置" />
-                </Button>
-                <Button Classes="Outlined"
+                </controls:RippleButton>
+                <controls:RippleButton Classes="Outlined"
                         Command="{Binding ResetSettingsCommand}"
                         Padding="24,10">
                     <TextBlock Text="恢复默认" />
-                </Button>
+                </controls:RippleButton>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

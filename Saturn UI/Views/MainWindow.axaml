@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:SaturnUI.ViewModels"
         xmlns:converters="using:SaturnUI.Converters"
@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="using:SaturnUI.Views"
         xmlns:materialIcons="using:Material.Icons.Avalonia"
+        xmlns:controls="using:SaturnUI.Controls"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
         x:Class="SaturnUI.Views.MainWindow"
         x:DataType="vm:MainViewModel"
@@ -36,12 +37,12 @@
             <Border Grid.Row="0" Classes="TopAppBar">
                 <Grid ColumnDefinitions="Auto,*,Auto">
                     <!-- Menu / Navigation Icon -->
-                    <Button Grid.Column="0"
+                    <controls:RippleButton Grid.Column="0"
                             Classes="Icon"
                             Command="{Binding ToggleSessionPanelCommand}"
                             ToolTip.Tip="切换会话列表">
                         <materialIcons:MaterialIcon Kind="Menu" Width="24" Height="24" />
-                    </Button>
+                    </controls:RippleButton>
 
                     <TextBlock Grid.Column="1"
                                Text="{Binding ChatViewModel.StatusText}"
@@ -53,16 +54,16 @@
                     <StackPanel Grid.Column="2"
                                 Orientation="Horizontal"
                                 Spacing="4">
-                        <Button Classes="Icon"
+                        <controls:RippleButton Classes="Icon"
                                 Command="{Binding NewChatCommand}"
                                 ToolTip.Tip="新会话">
                             <materialIcons:MaterialIcon Kind="Plus" Width="24" Height="24" />
-                        </Button>
-                        <Button Classes="Icon"
+                        </controls:RippleButton>
+                        <controls:RippleButton Classes="Icon"
                                 Command="{Binding OpenSettingsCommand}"
                                 ToolTip.Tip="设置">
                             <materialIcons:MaterialIcon Kind="Cog" Width="24" Height="24" />
-                        </Button>
+                        </controls:RippleButton>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -84,12 +85,12 @@
                                    Classes="HeadlineSmall"
                                    VerticalAlignment="Center"
                                    Margin="8,0" />
-                        <Button Grid.Column="1"
+                        <controls:RippleButton Grid.Column="1"
                                 Classes="Icon"
                                 Command="{Binding CloseSettingsCommand}"
                                 ToolTip.Tip="关闭">
                             <materialIcons:MaterialIcon Kind="Close" Width="24" Height="24" />
-                        </Button>
+                        </controls:RippleButton>
                     </Grid>
                 </Border>
                 <views:SettingsView Grid.Row="1"

@@ -1,10 +1,11 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SaturnUI.ViewModels"
              xmlns:models="using:SaturnUI.Models"
              xmlns:converters="using:SaturnUI.Converters"
              xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
              xmlns:materialIcons="using:Material.Icons.Avalonia"
+             xmlns:controls="using:SaturnUI.Controls"
              x:Class="SaturnUI.Views.ChatView"
              x:DataType="vm:ChatViewModel">
 
@@ -134,12 +135,12 @@
                                        Classes="BodySmall"
                                        VerticalAlignment="Center" />
                         </StackPanel>
-                        <Button Grid.Column="1"
+                        <controls:RippleButton Grid.Column="1"
                                 Classes="Icon"
                                 Command="{Binding ClearAttachmentCommand}"
                                 Padding="4">
                             <materialIcons:MaterialIcon Kind="Close" Width="16" Height="16" />
-                        </Button>
+                        </controls:RippleButton>
                     </Grid>
                 </Border>
 
@@ -157,23 +158,23 @@
                     </TextBox.KeyBindings>
                 </TextBox>
 
-                    <Button Grid.Column="1"
+                    <controls:RippleButton Grid.Column="1"
                             Classes="FilledTonal Icon"
                             Command="{Binding StopGenerationCommand}"
                             IsVisible="{Binding IsBusy}"
                             Margin="8,0,0,0"
                             ToolTip.Tip="停止生成">
                         <materialIcons:MaterialIcon Kind="Stop" Width="20" Height="20" />
-                    </Button>
+                    </controls:RippleButton>
 
-                    <Button Grid.Column="2"
+                    <controls:RippleButton Grid.Column="2"
                             Classes="Filled Icon"
                             Command="{Binding SendMessageCommand}"
                             IsVisible="{Binding !IsBusy}"
                             Margin="8,0,0,0"
                             ToolTip.Tip="发送 (Ctrl+Enter)">
                         <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
-                    </Button>
+                    </controls:RippleButton>
                 </Grid>
             </Grid>
         </Border>
