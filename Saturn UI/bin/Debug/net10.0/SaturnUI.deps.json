@@ -17,6 +17,7 @@
           "Grpc.Net.Client": "2.70.0",
           "LiteDB": "5.0.21",
           "Markdown.Avalonia": "11.0.2",
+          "Material.Icons.Avalonia": "2.2.0",
           "Microsoft.Extensions.Configuration.Json": "9.0.4",
           "Microsoft.Extensions.DependencyInjection": "9.0.4",
           "Microsoft.Extensions.Logging": "9.0.4"
@@ -454,6 +455,26 @@
           "lib/net6.0/Markdown.Avalonia.dll": {
             "assemblyVersion": "11.0.2.0",
             "fileVersion": "11.0.2.0"
+          }
+        }
+      },
+      "Material.Icons/2.2.0": {
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        }
+      },
+      "Material.Icons.Avalonia/2.2.0": {
+        "dependencies": {
+          "Avalonia": "11.2.7",
+          "Material.Icons": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.Avalonia.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
@@ -950,6 +971,20 @@
       "sha512": "sha512-Ylg0EkSUId42dVUFQvU7UJGWcKiJ+g7TesRe/KCzUYzlypWf1lTiVveT2j60QSldCtuAw3o/aEOEjIahMdRGig==",
       "path": "markdown.avalonia.tight/11.0.2",
       "hashPath": "markdown.avalonia.tight.11.0.2.nupkg.sha512"
+    },
+    "Material.Icons/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-89LJDuaLOwCVf3UixpiDUXTgDj2gw0FP3/ZwIEPHrWevbOraHAZl5X7Z2tXfGnCJZivMv+Y5DXIhGrobXEwx3A==",
+      "path": "material.icons/2.2.0",
+      "hashPath": "material.icons.2.2.0.nupkg.sha512"
+    },
+    "Material.Icons.Avalonia/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kuYTSL3T1+R8KgoFk5kMzeQ2w9Ej1+ZoRD+lxkSTiFgjBX6sMkE1TC0CTeBDm9a8sjsICRZ8BakA59vdw35xSQ==",
+      "path": "material.icons.avalonia/2.2.0",
+      "hashPath": "material.icons.avalonia.2.2.0.nupkg.sha512"
     },
     "MicroCom.Runtime/0.11.0": {
       "type": "package",

@@ -18,15 +18,15 @@ public partial class SplashWindow : Window
     {
         var isLight = themeKey == "Daylight";
 
-        // 背景
+        // 背景(M3 主题令牌)
         RootGrid.Background = isLight
-            ? new SolidColorBrush(Color.Parse("#F0F2F5"))
-            : new SolidColorBrush(Color.Parse("#0B0D12"));
+            ? new SolidColorBrush(Color.Parse("#F9FAFD"))
+            : new SolidColorBrush(Color.Parse("#0F1115"));
 
-        // 文字颜色
+        // 文字颜色(M3 onBackground)
         SplashText.Foreground = isLight
-            ? new SolidColorBrush(Color.Parse("#1A1D23"))
-            : new SolidColorBrush(Color.Parse("#E8ECF1"));
+            ? new SolidColorBrush(Color.Parse("#1A1B21"))
+            : new SolidColorBrush(Color.Parse("#E3E2E6"));
 
         // 图标
         try

@@ -30,12 +30,10 @@ public class RoleBackgroundConverter : IValueConverter
     {
         if (value is MessageRole role)
         {
-            var brush = role == MessageRole.User
-                ? App.Current?.Resources["LynUserMessageBrush"]
-                : App.Current?.Resources["LynAiMessageBrush"];
-            return brush;
+            var key = role == MessageRole.User ? "M3UserBubble" : "M3AiBubble";
+            return App.Current?.Resources[key];
         }
-        return App.Current?.Resources["LynAiMessageBrush"];
+        return App.Current?.Resources["M3AiBubble"];
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

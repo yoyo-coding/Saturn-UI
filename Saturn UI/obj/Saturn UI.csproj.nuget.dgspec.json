@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj": {}
+    "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj": {}
   },
   "projects": {
-    "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj": {
+    "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj",
+        "projectUniqueName": "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj",
         "projectName": "SaturnUI",
-        "projectPath": "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj",
+        "projectPath": "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Lyn-UI\\Saturn UI\\obj\\",
+        "outputPath": "F:\\Saturn-UI\\Saturn UI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files\\MS_VisualStudio_Share\\Shared\\NuGetPackages"
@@ -92,6 +92,10 @@
             "Markdown.Avalonia": {
               "target": "Package",
               "version": "[11.0.2, )"
+            },
+            "Material.Icons.Avalonia": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",

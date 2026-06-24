@@ -604,6 +604,28 @@
           "lib/net6.0/Markdown.Avalonia.dll": {}
         }
       },
+      "Material.Icons/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Material.Icons.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.dll": {}
+        }
+      },
+      "Material.Icons.Avalonia/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.0.0",
+          "Material.Icons": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Material.Icons.Avalonia.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Material.Icons.Avalonia.dll": {}
+        }
+      },
       "MicroCom.Runtime/0.11.0": {
         "type": "package",
         "compile": {
@@ -1963,6 +1985,32 @@
         "markdown.avalonia.tight.nuspec"
       ]
     },
+    "Material.Icons/2.2.0": {
+      "sha512": "89LJDuaLOwCVf3UixpiDUXTgDj2gw0FP3/ZwIEPHrWevbOraHAZl5X7Z2tXfGnCJZivMv+Y5DXIhGrobXEwx3A==",
+      "type": "package",
+      "path": "material.icons/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/Material.Icons.dll",
+        "material.icons.2.2.0.nupkg.sha512",
+        "material.icons.nuspec"
+      ]
+    },
+    "Material.Icons.Avalonia/2.2.0": {
+      "sha512": "kuYTSL3T1+R8KgoFk5kMzeQ2w9Ej1+ZoRD+lxkSTiFgjBX6sMkE1TC0CTeBDm9a8sjsICRZ8BakA59vdw35xSQ==",
+      "type": "package",
+      "path": "material.icons.avalonia/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/Material.Icons.Avalonia.dll",
+        "material.icons.avalonia.2.2.0.nupkg.sha512",
+        "material.icons.avalonia.nuspec"
+      ]
+    },
     "MicroCom.Runtime/0.11.0": {
       "sha512": "MEnrZ3UIiH40hjzMDsxrTyi8dtqB5ziv3iBeeU4bXsL/7NLSal9F1lZKpK+tfBRnUoDSdtcW3KufE4yhATOMCA==",
       "type": "package",
@@ -2653,6 +2701,7 @@
       "Grpc.Tools >= 2.71.0",
       "LiteDB >= 5.0.21",
       "Markdown.Avalonia >= 11.0.2",
+      "Material.Icons.Avalonia >= 2.2.0",
       "Microsoft.Extensions.Configuration.Json >= 9.0.4",
       "Microsoft.Extensions.DependencyInjection >= 9.0.4",
       "Microsoft.Extensions.Logging >= 9.0.4"
@@ -2665,11 +2714,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj",
+      "projectUniqueName": "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj",
       "projectName": "SaturnUI",
-      "projectPath": "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj",
+      "projectPath": "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "F:\\Lyn-UI\\Saturn UI\\obj\\",
+      "outputPath": "F:\\Saturn-UI\\Saturn UI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files\\MS_VisualStudio_Share\\Shared\\NuGetPackages"
@@ -2750,6 +2799,10 @@
           "Markdown.Avalonia": {
             "target": "Package",
             "version": "[11.0.2, )"
+          },
+          "Material.Icons.Avalonia": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",

@@ -4,7 +4,8 @@
         WindowState="FullScreen"
         ShowInTaskbar="False"
         SystemDecorations="None"
-        CanResize="False">
+        CanResize="False"
+        Background="{DynamicResource M3Background}">
     <Grid x:Name="RootGrid">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image x:Name="SplashImage" Width="200" Height="200" />
@@ -12,6 +13,7 @@
                        Text="Saturn UI"
                        FontSize="32"
                        FontWeight="Bold"
+                       Foreground="{DynamicResource M3OnBackground}"
                        HorizontalAlignment="Center"
                        Margin="0,24,0,0" />
         </StackPanel>

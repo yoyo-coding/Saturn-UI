@@ -23,38 +23,38 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property.EntryPointFilePath = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SaturnUI
-build_property.ProjectDir = f:\Lyn-UI\Saturn UI\
+build_property.ProjectDir = f:\Saturn-UI\Saturn UI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[f:/Lyn-UI/Saturn UI/App.axaml]
+[f:/Saturn-UI/Saturn UI/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Themes/Theme.axaml]
+[f:/Saturn-UI/Saturn UI/Themes/Theme.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Themes/ThemeColors.axaml]
+[f:/Saturn-UI/Saturn UI/Themes/ThemeColors.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Themes/ThemeStyles.axaml]
+[f:/Saturn-UI/Saturn UI/Themes/ThemeStyles.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Views/ChatView.axaml]
+[f:/Saturn-UI/Saturn UI/Views/ChatView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Views/MainView.axaml]
+[f:/Saturn-UI/Saturn UI/Views/MainView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Views/MainWindow.axaml]
+[f:/Saturn-UI/Saturn UI/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Views/SessionListView.axaml]
+[f:/Saturn-UI/Saturn UI/Views/SessionListView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Views/SettingsView.axaml]
+[f:/Saturn-UI/Saturn UI/Views/SettingsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[f:/Lyn-UI/Saturn UI/Views/SplashWindow.axaml]
+[f:/Saturn-UI/Saturn UI/Views/SplashWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

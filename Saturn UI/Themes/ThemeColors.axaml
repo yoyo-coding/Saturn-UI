@@ -1,154 +1,333 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- ============================================ -->
-    <!-- Saturn UI 主题颜色定义                            -->
-    <!-- 每个主题包含 15 个颜色变量，用于 UI 各元素着色   -->
+    <!-- Saturn UI 主题颜色定义 - Material 3 设计令牌        -->
+    <!-- 每个主题包含 M3 完整令牌,用于组件着色                -->
+    <!-- 参考: https://m3.material.io/styles/color/system -->
     <!-- ============================================ -->
 
-    <!-- 主题定义：深空黑 (默认) -->
+    <!-- 主题:深空黑 (默认) -->
     <ResourceDictionary x:Key="DeepSpace">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#0A0A0C" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#1A1A1E" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#4FACFE" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#8B5CF6" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#E2E2E2" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#8B8B94" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#2A2A30" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#1D3B5C" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#222228" />
-        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#141418" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#2A2A30" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#2A2A30" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#4FACFE40" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <!-- Primary -->
+        <SolidColorBrush x:Key="M3Primary" Color="#A8C7FA" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#062E6F" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#284777" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#D3E3FD" />
+        <!-- Secondary -->
+        <SolidColorBrush x:Key="M3Secondary" Color="#BEC6DC" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#283044" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#3E4759" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#DAE2F9" />
+        <!-- Tertiary -->
+        <SolidColorBrush x:Key="M3Tertiary" Color="#DEBCDF" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#3F2844" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#583E5C" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#FAD8FC" />
+        <!-- Error -->
+        <SolidColorBrush x:Key="M3Error" Color="#F2B8B5" />
+        <SolidColorBrush x:Key="M3OnError" Color="#601410" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#8C1D18" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#F9DEDC" />
+        <!-- Surface & Background -->
+        <SolidColorBrush x:Key="M3Background" Color="#0F1115" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#E3E2E6" />
+        <SolidColorBrush x:Key="M3Surface" Color="#0F1115" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#E3E2E6" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#44474F" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#C4C6D0" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#0A0C10" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#181B20" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#1C1F25" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#262A30" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#31353B" />
+        <!-- Outline -->
+        <SolidColorBrush x:Key="M3Outline" Color="#8E9099" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#44474F" />
+        <!-- Inverse -->
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#E3E2E6" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#2E3035" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#3B5EA9" />
+        <!-- Misc -->
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <!-- 用户/AI 消息色 -->
+        <SolidColorBrush x:Key="M3UserBubble" Color="#284777" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#D3E3FD" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#262A30" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#E3E2E6" />
+        <!-- 代码块 -->
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#0A0C10" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#44474F" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#31353B" />
     </ResourceDictionary>
 
-    <!-- 主题定义：极昼白 -->
+    <!-- 主题:极昼白 (浅色) -->
     <ResourceDictionary x:Key="Daylight">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#F8F9FA" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#FFFFFF" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#2563EB" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#7C3AED" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#111827" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#6B7280" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#E5E7EB" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#DBEAFE" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#F3F4F6" />
-        <SolidColorBrush x:Key="LynError" Color="#DC2626" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#F3F4F6" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#E5E7EB" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#E5E7EB" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#BFDBFE" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#0000000D" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#0000001A" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3Primary" Color="#1A56DB" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#D8E2FF" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#001947" />
+        <SolidColorBrush x:Key="M3Secondary" Color="#5A6076" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#DEE1F9" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#171B2C" />
+        <SolidColorBrush x:Key="M3Tertiary" Color="#76546E" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#FFD7F1" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#2C1229" />
+        <SolidColorBrush x:Key="M3Error" Color="#BA1A1A" />
+        <SolidColorBrush x:Key="M3OnError" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#FFDAD6" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#410002" />
+        <SolidColorBrush x:Key="M3Background" Color="#F9FAFD" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#1A1B21" />
+        <SolidColorBrush x:Key="M3Surface" Color="#F9FAFD" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#1A1B21" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#E1E2EC" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#44464F" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#F3F4F8" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#EDEDF1" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#E7E8EB" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#E1E2E5" />
+        <SolidColorBrush x:Key="M3Outline" Color="#74777F" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#C4C6D0" />
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#2E3035" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#F1F0F4" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#ADC6FF" />
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <SolidColorBrush x:Key="M3UserBubble" Color="#D8E2FF" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#001947" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#EDEDF1" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#1A1B21" />
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#EDEDF1" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#C4C6D0" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#E1E2EC" />
     </ResourceDictionary>
 
-    <!-- 主题定义：星夜蓝 -->
+    <!-- 主题:星夜蓝 -->
     <ResourceDictionary x:Key="StarryBlue">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#0B1120" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#151E32" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#38BDF8" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#C084FC" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#F1F5F9" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#94A3B8" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#1E293B" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#0284C7" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#1E293B" />
-        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#0F172A" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#1E293B" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#1E293B" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#38BDF840" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3Primary" Color="#7DD3FC" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#00344A" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#004C6A" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#CBE6FF" />
+        <SolidColorBrush x:Key="M3Secondary" Color="#B6C9D8" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#20323F" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#374956" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#D2E5F4" />
+        <SolidColorBrush x:Key="M3Tertiary" Color="#CCBEE1" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#332B41" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#4A4159" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#E8DEFF" />
+        <SolidColorBrush x:Key="M3Error" Color="#FFB4AB" />
+        <SolidColorBrush x:Key="M3OnError" Color="#690005" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#93000A" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#FFDAD6" />
+        <SolidColorBrush x:Key="M3Background" Color="#0B1120" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#DDE3EA" />
+        <SolidColorBrush x:Key="M3Surface" Color="#0B1120" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#DDE3EA" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#3F4856" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#BFC8D4" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#060C19" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#141B2A" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#181F2E" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#222A39" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#2D3544" />
+        <SolidColorBrush x:Key="M3Outline" Color="#89929E" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#3F4856" />
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#DDE3EA" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#272E37" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#00659A" />
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <SolidColorBrush x:Key="M3UserBubble" Color="#004C6A" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#CBE6FF" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#222A39" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#DDE3EA" />
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#060C19" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#3F4856" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#2D3544" />
     </ResourceDictionary>
 
-    <!-- 主题定义：极光紫 -->
+    <!-- 主题:极光紫 -->
     <ResourceDictionary x:Key="AuroraPurple">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#16102B" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#241842" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#A855F7" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#EC4899" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#F3E8FF" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#D8B4FE" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#3B2868" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#6B21A8" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#2E1E55" />
-        <SolidColorBrush x:Key="LynError" Color="#F43F5E" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#1A1133" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#3B2868" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#3B2868" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#A855F740" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3Primary" Color="#D0BCFF" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#371E73" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#4F378B" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#EADDFF" />
+        <SolidColorBrush x:Key="M3Secondary" Color="#CCC2DC" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#332D41" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#4A4458" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#E8DEF8" />
+        <SolidColorBrush x:Key="M3Tertiary" Color="#EFB8C8" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#492532" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#633B48" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#FFD8E4" />
+        <SolidColorBrush x:Key="M3Error" Color="#F2B8B5" />
+        <SolidColorBrush x:Key="M3OnError" Color="#601410" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#8C1D18" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#F9DEDC" />
+        <SolidColorBrush x:Key="M3Background" Color="#16102B" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#E6E0F3" />
+        <SolidColorBrush x:Key="M3Surface" Color="#16102B" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#E6E0F3" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#49454F" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#CAC4D0" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#110B25" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#1F1835" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#231C39" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#2D2645" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#383050" />
+        <SolidColorBrush x:Key="M3Outline" Color="#948F99" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#49454F" />
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#E6E0F3" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#332E41" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#6750A4" />
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <SolidColorBrush x:Key="M3UserBubble" Color="#4F378B" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#EADDFF" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#2D2645" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#E6E0F3" />
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#110B25" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#49454F" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#383050" />
     </ResourceDictionary>
 
-    <!-- 主题定义：冰川青 -->
+    <!-- 主题:冰川青 -->
     <ResourceDictionary x:Key="GlacierCyan">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#041E26" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#0A2B35" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#06B6D4" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#4F46E5" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#CFFAFE" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#67E8F9" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#164E63" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#0891B2" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#155E75" />
-        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#062731" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#164E63" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#164E63" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#06B6D440" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3Primary" Color="#67E8F9" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#003640" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#004E5A" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#B8F4FF" />
+        <SolidColorBrush x:Key="M3Secondary" Color="#B1CCD2" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#1C3438" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#334B4F" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#CDE8EE" />
+        <SolidColorBrush x:Key="M3Tertiary" Color="#BBC6EA" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#25304D" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#3B4666" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#DCE2FF" />
+        <SolidColorBrush x:Key="M3Error" Color="#FFB4AB" />
+        <SolidColorBrush x:Key="M3OnError" Color="#690005" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#93000A" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#FFDAD6" />
+        <SolidColorBrush x:Key="M3Background" Color="#041E26" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#CDE7EE" />
+        <SolidColorBrush x:Key="M3Surface" Color="#041E26" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#CDE7EE" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#3F484C" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#BFC8CC" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#001920" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#0C262E" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#102A33" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#1B353E" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#264049" />
+        <SolidColorBrush x:Key="M3Outline" Color="#899296" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#3F484C" />
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#CDE7EE" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#1B3137" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#006879" />
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <SolidColorBrush x:Key="M3UserBubble" Color="#004E5A" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#B8F4FF" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#1B353E" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#CDE7EE" />
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#001920" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#3F484C" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#264049" />
     </ResourceDictionary>
 
-    <!-- 主题定义：星云粉 -->
+    <!-- 主题:星云粉 -->
     <ResourceDictionary x:Key="NebulaPink">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#230B14" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#361320" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#F43F5E" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#D946EF" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#FFE4E6" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#FDA4AF" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#501B2E" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#BE123C" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#4C1D32" />
-        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#2C0E1A" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#501B2E" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#501B2E" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#F43F5E40" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3Primary" Color="#FDA4AF" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#5E1131" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#7E2A48" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#FFD9E2" />
+        <SolidColorBrush x:Key="M3Secondary" Color="#E0BDC5" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#432930" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#5B3F47" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#FFD9E1" />
+        <SolidColorBrush x:Key="M3Tertiary" Color="#E5BBD2" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#43273B" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#5C3D52" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#FFD7EF" />
+        <SolidColorBrush x:Key="M3Error" Color="#FFB4AB" />
+        <SolidColorBrush x:Key="M3OnError" Color="#690005" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#93000A" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#FFDAD6" />
+        <SolidColorBrush x:Key="M3Background" Color="#230B14" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#F1DCE0" />
+        <SolidColorBrush x:Key="M3Surface" Color="#230B14" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#F1DCE0" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#534345" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#D7C2C5" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#1D050F" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#2C121D" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#30161F" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#3B212A" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#472B35" />
+        <SolidColorBrush x:Key="M3Outline" Color="#A08C8F" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#534345" />
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#F1DCE0" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#3D2A2E" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#9E405B" />
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <SolidColorBrush x:Key="M3UserBubble" Color="#7E2A48" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#FFD9E2" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#3B212A" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#F1DCE0" />
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#1D050F" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#534345" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#472B35" />
     </ResourceDictionary>
 
-    <!-- 主题定义：午夜靛蓝 -->
+    <!-- 主题:午夜靛蓝 -->
     <ResourceDictionary x:Key="MidnightIndigo">
-        <SolidColorBrush x:Key="LynBackgroundBrush" Color="#0B0C1E" />
-        <SolidColorBrush x:Key="LynSurfaceBrush" Color="#151733" />
-        <SolidColorBrush x:Key="LynPrimaryBrush" Color="#6366F1" />
-        <SolidColorBrush x:Key="LynAccentBrush" Color="#9333EA" />
-        <SolidColorBrush x:Key="LynTextBrush" Color="#E0E7FF" />
-        <SolidColorBrush x:Key="LynSubTextBrush" Color="#A5B4FC" />
-        <SolidColorBrush x:Key="LynBorderBrush" Color="#262955" />
-        <SolidColorBrush x:Key="LynUserMessageBrush" Color="#4338CA" />
-        <SolidColorBrush x:Key="LynAiMessageBrush" Color="#1E2147" />
-        <SolidColorBrush x:Key="LynError" Color="#EF4444" />
-        <SolidColorBrush x:Key="LynCodeBackgroundBrush" Color="#0E1026" />
-        <SolidColorBrush x:Key="LynCodeBorderBrush" Color="#262955" />
-        <SolidColorBrush x:Key="LynInlineCodeBackgroundBrush" Color="#262955" />
-        <SolidColorBrush x:Key="LynSelectionBrush" Color="#6366F140" />
-        <SolidColorBrush x:Key="LynHoverBrush" Color="#FFFFFF1A" />
-        <SolidColorBrush x:Key="LynPressedBrush" Color="#FFFFFF33" />
-        <SolidColorBrush x:Key="LynButtonTextBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="M3Primary" Color="#C4C0FF" />
+        <SolidColorBrush x:Key="M3OnPrimary" Color="#1A1865" />
+        <SolidColorBrush x:Key="M3PrimaryContainer" Color="#332F7C" />
+        <SolidColorBrush x:Key="M3OnPrimaryContainer" Color="#E3DFFF" />
+        <SolidColorBrush x:Key="M3Secondary" Color="#C5C4DD" />
+        <SolidColorBrush x:Key="M3OnSecondary" Color="#2D2E42" />
+        <SolidColorBrush x:Key="M3SecondaryContainer" Color="#444559" />
+        <SolidColorBrush x:Key="M3OnSecondaryContainer" Color="#E1E0F9" />
+        <SolidColorBrush x:Key="M3Tertiary" Color="#EAB2D5" />
+        <SolidColorBrush x:Key="M3OnTertiary" Color="#451E3F" />
+        <SolidColorBrush x:Key="M3TertiaryContainer" Color="#5E3457" />
+        <SolidColorBrush x:Key="M3OnTertiaryContainer" Color="#FFCEF1" />
+        <SolidColorBrush x:Key="M3Error" Color="#F2B8B5" />
+        <SolidColorBrush x:Key="M3OnError" Color="#601410" />
+        <SolidColorBrush x:Key="M3ErrorContainer" Color="#8C1D18" />
+        <SolidColorBrush x:Key="M3OnErrorContainer" Color="#F9DEDC" />
+        <SolidColorBrush x:Key="M3Background" Color="#0B0C1E" />
+        <SolidColorBrush x:Key="M3OnBackground" Color="#E3E1F0" />
+        <SolidColorBrush x:Key="M3Surface" Color="#0B0C1E" />
+        <SolidColorBrush x:Key="M3OnSurface" Color="#E3E1F0" />
+        <SolidColorBrush x:Key="M3SurfaceVariant" Color="#47464C" />
+        <SolidColorBrush x:Key="M3OnSurfaceVariant" Color="#C8C5D0" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLowest" Color="#060718" />
+        <SolidColorBrush x:Key="M3SurfaceContainerLow" Color="#14142B" />
+        <SolidColorBrush x:Key="M3SurfaceContainer" Color="#181830" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHigh" Color="#22223B" />
+        <SolidColorBrush x:Key="M3SurfaceContainerHighest" Color="#2D2D47" />
+        <SolidColorBrush x:Key="M3Outline" Color="#928F98" />
+        <SolidColorBrush x:Key="M3OutlineVariant" Color="#47464C" />
+        <SolidColorBrush x:Key="M3InverseSurface" Color="#E3E1F0" />
+        <SolidColorBrush x:Key="M3InverseOnSurface" Color="#312F40" />
+        <SolidColorBrush x:Key="M3InversePrimary" Color="#4B49A0" />
+        <SolidColorBrush x:Key="M3Scrim" Color="#000000" />
+        <SolidColorBrush x:Key="M3Shadow" Color="#000000" />
+        <SolidColorBrush x:Key="M3UserBubble" Color="#332F7C" />
+        <SolidColorBrush x:Key="M3OnUserBubble" Color="#E3DFFF" />
+        <SolidColorBrush x:Key="M3AiBubble" Color="#22223B" />
+        <SolidColorBrush x:Key="M3OnAiBubble" Color="#E3E1F0" />
+        <SolidColorBrush x:Key="M3CodeBackground" Color="#060718" />
+        <SolidColorBrush x:Key="M3CodeBorder" Color="#47464C" />
+        <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#2D2D47" />
     </ResourceDictionary>
 </ResourceDictionary>

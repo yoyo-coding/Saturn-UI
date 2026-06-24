@@ -13,7 +13,52 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5c8fce0-d931-42d9-9d6a-c628c748afc4" name="更改" comment="" />
+    <list default="true" id="e5c8fce0-d931-42d9-9d6a-c628c748afc4" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/App.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/App.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Converters/RoleConverters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Converters/RoleConverters.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Saturn UI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Saturn UI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Themes/ThemeColors.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Themes/ThemeColors.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Themes/ThemeStyles.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Themes/ThemeStyles.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Views/ChatView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Views/ChatView.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Views/MainWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Views/SessionListView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Views/SessionListView.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Views/SettingsView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Views/SettingsView.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Views/SplashWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Views/SplashWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/Views/SplashWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/Views/SplashWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/12fbc7ffe642ca7e_chat.protodep" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/12fbc7ffe642ca7e_chat.protodep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/Resources.Inputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/Resources.Inputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/SaturnUI.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/references" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/references" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/resources" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Protos/Chat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Protos/Chat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Protos/ChatGrpc.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Protos/ChatGrpc.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/ref/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/ref/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/Avalonia/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/Avalonia/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +66,17 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="2" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8,
@@ -33,13 +89,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET 项目.Saturn UI.executor": "Debug",
+    ".NET 项目.Saturn UI.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,6 +139,7 @@
       <updated>1781917817085</updated>
       <workItem from="1781917818352" duration="2404000" />
       <workItem from="1781930258965" duration="1303000" />
+      <workItem from="1782261668494" duration="99000" />
     </task>
     <servers />
   </component>

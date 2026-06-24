@@ -4,6 +4,7 @@
              xmlns:models="using:SaturnUI.Models"
              xmlns:converters="using:SaturnUI.Converters"
              xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              x:Class="SaturnUI.Views.ChatView"
              x:DataType="vm:ChatViewModel">
 
@@ -12,7 +13,8 @@
         <ScrollViewer Grid.Row="0"
                       Name="MessagesScroll"
                       VerticalScrollBarVisibility="Auto"
-                      Margin="0,0,0,8">
+                      Margin="0,0,0,8"
+                      Background="{DynamicResource M3Background}">
             <ItemsControl ItemsSource="{Binding Messages}"
                           Margin="16,8">
                 <ItemsControl.ItemTemplate>
@@ -20,7 +22,7 @@
                         <Border Margin="0,4"
                                 Classes="msg"
                                 Classes.user="{Binding IsUser}"
-                                CornerRadius="12"
+                                CornerRadius="16"
                                 Padding="16,12"
                                 MaxWidth="800"
                                 HorizontalAlignment="{Binding Role, Converter={StaticResource RoleAlignmentConverter}}">
@@ -29,8 +31,7 @@
                                 <TextBlock IsVisible="{Binding IsUser}"
                                            Text="{Binding Content}"
                                            TextWrapping="Wrap"
-                                           Foreground="{DynamicResource LynTextBrush}"
-                                           FontSize="14" />
+                                           Classes="BodyLarge" />
 
                                 <!-- Assistant message: Markdown -->
                                 <md:MarkdownScrollViewer IsVisible="{Binding IsAssistant}"
@@ -40,15 +41,16 @@
                                                          MaxWidth="768">
                                     <md:MarkdownScrollViewer.Styles>
                                         <Style Selector="TextBlock">
-                                            <Setter Property="Foreground" Value="{DynamicResource LynTextBrush}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
                                         </Style>
                                         <Style Selector="Border.CodeBlock">
-                                            <Setter Property="Background" Value="{DynamicResource LynCodeBackgroundBrush}" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource LynCodeBorderBrush}" />
+                                            <Setter Property="Background" Value="{DynamicResource M3CodeBackground}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource M3CodeBorder}" />
+                                            <Setter Property="CornerRadius" Value="8" />
                                         </Style>
                                         <Style Selector="Border.Blockquote">
-                                            <Setter Property="Background" Value="{DynamicResource LynSurfaceBrush}" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource LynBorderBrush}" />
+                                            <Setter Property="Background" Value="{DynamicResource M3SurfaceContainer}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource M3Primary}" />
                                         </Style>
                                     </md:MarkdownScrollViewer.Styles>
                                 </md:MarkdownScrollViewer>
@@ -69,54 +71,35 @@
                                 <StackPanel IsVisible="{Binding HasAttachment}"
                                             Margin="0,8,0,0"
                                             Orientation="Horizontal"
-                                            Spacing="4">
-                                    <PathIcon Data="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"
-                                              Width="16"
-                                              Height="16"
-                                              Foreground="{DynamicResource LynSubTextBrush}" />
+                                            Spacing="6">
+                                    <materialIcons:MaterialIcon Kind="FileDocumentOutline"
+                                                                Width="16"
+                                                                Height="16"
+                                                                Foreground="{DynamicResource M3OnSurfaceVariant}" />
                                     <TextBlock Text="{Binding AttachmentName}"
-                                               Foreground="{DynamicResource LynSubTextBrush}"
-                                               FontSize="12"
+                                               Foreground="{DynamicResource M3OnSurfaceVariant}"
+                                               Classes="BodySmall"
                                                TextTrimming="CharacterEllipsis" />
                                 </StackPanel>
 
                                 <StackPanel IsVisible="{Binding IsError}"
                                             Margin="0,8,0,0">
                                     <TextBlock Text="{Binding ErrorMessage}"
-                                               Foreground="{DynamicResource LynError}"
+                                               Foreground="{DynamicResource M3Error}"
                                                TextWrapping="Wrap"
-                                               FontSize="12" />
+                                               Classes="BodySmall" />
                                 </StackPanel>
                                 <StackPanel IsVisible="{Binding IsStreaming}"
                                             Margin="0,4,0,0"
-                                            Orientation="Horizontal">
-                                    <Border Width="8"
-                                            Height="16"
-                                            Background="{DynamicResource LynPrimaryBrush}"
-                                            Margin="2,0">
-                                        <Border.Styles>
-                                            <Style>
-                                                <Style.Animations>
-                                                    <Animation Duration="0:0:0.6"
-                                                               IterationCount="INFINITE">
-                                                        <KeyFrame Cue="0%">
-                                                            <Setter Property="Opacity" Value="1" />
-                                                        </KeyFrame>
-                                                        <KeyFrame Cue="50%">
-                                                            <Setter Property="Opacity" Value="0.3" />
-                                                        </KeyFrame>
-                                                        <KeyFrame Cue="100%">
-                                                            <Setter Property="Opacity" Value="1" />
-                                                        </KeyFrame>
-                                                    </Animation>
-                                                </Style.Animations>
-                                            </Style>
-                                        </Border.Styles>
-                                    </Border>
+                                            Orientation="Horizontal"
+                                            Spacing="2">
+                                    <Border Width="6" Height="14" Background="{DynamicResource M3Primary}" CornerRadius="3" />
+                                    <Border Width="6" Height="14" Background="{DynamicResource M3Primary}" Opacity="0.7" CornerRadius="3" />
+                                    <Border Width="6" Height="14" Background="{DynamicResource M3Primary}" Opacity="0.4" CornerRadius="3" />
                                 </StackPanel>
                                 <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
-                                           FontSize="10"
-                                           Foreground="{DynamicResource LynSubTextBrush}"
+                                           Classes="LabelSmall"
+                                           Foreground="{DynamicResource M3OnSurfaceVariant}"
                                            HorizontalAlignment="Right"
                                            Margin="0,4,0,0" />
                             </StackPanel>
@@ -126,44 +109,36 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <!-- Input Area -->
+        <!-- Input Area (M3 Bottom App Bar / Search Bar) -->
         <Border Grid.Row="1"
-                Background="{DynamicResource LynSurfaceBrush}"
-                BorderBrush="{DynamicResource LynBorderBrush}"
+                Background="{DynamicResource M3SurfaceContainer}"
+                BorderBrush="{DynamicResource M3OutlineVariant}"
                 BorderThickness="0,1,0,0"
                 Padding="16,12">
             <Grid RowDefinitions="Auto,Auto">
                 <!-- Pending Attachment -->
                 <Border Grid.Row="0"
                         IsVisible="{Binding PendingAttachmentName, Converter={x:Static ObjectConverters.IsNotNull}}"
-                        Background="{DynamicResource LynBackgroundBrush}"
-                        BorderBrush="{DynamicResource LynBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="6"
-                        Padding="8,6"
+                        Classes="Card Filled"
                         Margin="0,0,0,8">
                     <Grid ColumnDefinitions="*,Auto">
                         <StackPanel Grid.Column="0"
                                     Orientation="Horizontal"
-                                    Spacing="6">
-                            <PathIcon Data="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"
-                                      Width="16"
-                                      Height="16"
-                                      Foreground="{DynamicResource LynSubTextBrush}" />
+                                    Spacing="8">
+                            <materialIcons:MaterialIcon Kind="FileDocumentOutline"
+                                                        Width="16"
+                                                        Height="16"
+                                                        Foreground="{DynamicResource M3OnSurfaceVariant}" />
                             <TextBlock Text="{Binding PendingAttachmentName}"
-                                       Foreground="{DynamicResource LynSubTextBrush}"
-                                       FontSize="12"
+                                       Foreground="{DynamicResource M3OnSurfaceVariant}"
+                                       Classes="BodySmall"
                                        VerticalAlignment="Center" />
                         </StackPanel>
                         <Button Grid.Column="1"
+                                Classes="Icon"
                                 Command="{Binding ClearAttachmentCommand}"
-                                Background="Transparent"
-                                BorderThickness="0"
                                 Padding="4">
-                            <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
-                                      Width="14"
-                                      Height="14"
-                                      Foreground="{DynamicResource LynSubTextBrush}" />
+                            <materialIcons:MaterialIcon Kind="Close" Width="16" Height="16" />
                         </Button>
                     </Grid>
                 </Border>
@@ -175,50 +150,31 @@
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          MaxHeight="120"
-                         VerticalContentAlignment="Top"
-                         Padding="12,8"
-                         Background="{DynamicResource LynBackgroundBrush}"
-                         Foreground="{DynamicResource LynTextBrush}"
-                         BorderBrush="{DynamicResource LynBorderBrush}"
-                         CornerRadius="8">
+                         VerticalContentAlignment="Top">
                     <TextBox.KeyBindings>
                         <KeyBinding Gesture="Ctrl+Enter"
                                     Command="{Binding SendMessageCommand}" />
                     </TextBox.KeyBindings>
                 </TextBox>
 
-                <Button Grid.Column="1"
-                        Command="{Binding StopGenerationCommand}"
-                        IsVisible="{Binding IsBusy}"
-                        Margin="8,0,0,0"
-                        Background="{DynamicResource LynError}"
-                        Foreground="White"
-                        CornerRadius="8"
-                        Padding="12,8">
-                    <StackPanel Orientation="Horizontal" Spacing="4">
-                        <PathIcon Data="M18,18H6V6H18V18Z"
-                                  Width="16"
-                                  Height="16" />
-                        <TextBlock Text="停止" />
-                    </StackPanel>
-                </Button>
+                    <Button Grid.Column="1"
+                            Classes="FilledTonal Icon"
+                            Command="{Binding StopGenerationCommand}"
+                            IsVisible="{Binding IsBusy}"
+                            Margin="8,0,0,0"
+                            ToolTip.Tip="停止生成">
+                        <materialIcons:MaterialIcon Kind="Stop" Width="20" Height="20" />
+                    </Button>
 
-                <Button Grid.Column="2"
-                        Command="{Binding SendMessageCommand}"
-                        IsVisible="{Binding !IsBusy}"
-                        Margin="8,0,0,0"
-                        Background="{DynamicResource LynPrimaryBrush}"
-                        Foreground="White"
-                        CornerRadius="8"
-                        Padding="12,8">
-                    <StackPanel Orientation="Horizontal" Spacing="4">
-                        <PathIcon Data="M2,21L23,12L2,3V10L17,12L2,14V21Z"
-                                  Width="16"
-                                  Height="16" />
-                        <TextBlock Text="发送" />
-                    </StackPanel>
-                </Button>
-            </Grid>
+                    <Button Grid.Column="2"
+                            Classes="Filled Icon"
+                            Command="{Binding SendMessageCommand}"
+                            IsVisible="{Binding !IsBusy}"
+                            Margin="8,0,0,0"
+                            ToolTip.Tip="发送 (Ctrl+Enter)">
+                        <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
+                    </Button>
+                </Grid>
             </Grid>
         </Border>
     </Grid>

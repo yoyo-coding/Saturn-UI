@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tNytjDk4sdY=",
+  "dgSpecHash": "RTQtzu/vZC4=",
   "success": true,
-  "projectFilePath": "F:\\Lyn-UI\\Saturn UI\\Saturn UI.csproj",
+  "projectFilePath": "F:\\Saturn-UI\\Saturn UI\\Saturn UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\avalonia\\11.2.7\\avalonia.11.2.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.22045.20230930\\avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",
@@ -39,6 +39,8 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\markdown.avalonia.svg\\11.0.2\\markdown.avalonia.svg.11.0.2.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\markdown.avalonia.syntaxhigh\\11.0.2\\markdown.avalonia.syntaxhigh.11.0.2.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\markdown.avalonia.tight\\11.0.2\\markdown.avalonia.tight.11.0.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\material.icons\\2.2.0\\material.icons.2.2.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\material.icons.avalonia\\2.2.0\\material.icons.avalonia.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microcom.runtime\\0.11.0\\microcom.runtime.0.11.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.4\\microsoft.extensions.configuration.9.0.4.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.4\\microsoft.extensions.configuration.abstractions.9.0.4.nupkg.sha512",

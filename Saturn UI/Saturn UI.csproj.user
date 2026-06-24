@@ -4,7 +4,7 @@
 		<UnoPlatformIDEVersion>1.107.1</UnoPlatformIDEVersion>
 		<UnoPlatformExtension>unoplatform.vscode 0.24.1</UnoPlatformExtension>
 		<UnoRemoteControlPort>0</UnoRemoteControlPort>
-		<UnoVSCodeCSharpExtension>muhammad-sammy.csharp 2.130.6-g84650eb758</UnoVSCodeCSharpExtension>
+		<UnoVSCodeCSharpExtension>muhammad-sammy.csharp 2.145.17-g5a636f5296</UnoVSCodeCSharpExtension>
 		<UnoVSCodeCSharpDevKitExtension>ms-dotnettools.csdevkit unknown</UnoVSCodeCSharpDevKitExtension>
 	</PropertyGroup>
 </Project>
