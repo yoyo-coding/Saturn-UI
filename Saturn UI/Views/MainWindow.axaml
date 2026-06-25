@@ -97,5 +97,22 @@
                                     DataContext="{Binding SettingsViewModel}" />
             </Grid>
         </Border>
+
+        <!-- Splash Overlay (遮罩式启动画面, 放在最后确保在最上层) -->
+        <Border x:Name="SplashOverlay"
+                Background="{DynamicResource M3Background}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Grid.ColumnSpan="2">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="SplashImage" Width="200" Height="200" />
+                <TextBlock Text="Saturn UI"
+                           FontSize="32"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource M3OnBackground}"
+                           HorizontalAlignment="Center"
+                           Margin="0,24,0,0" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

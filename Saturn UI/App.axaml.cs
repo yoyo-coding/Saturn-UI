@@ -34,11 +34,26 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var splash = new SplashWindow();
-            splash.ApplyTheme(settings.Settings.Theme);
-            splash.Show();
+            themeService.Initialize();
 
-            _ = ShowMainWindowDelayedAsync(desktop, splash, settings, themeService);
+            var mainWindow = new MainWindow
+            {
+                DataContext = Services.GetRequiredService<MainViewModel>()
+            };
+
+            mainWindow.SetSplashIcon(settings.Settings.Theme);
+            ApplyWindowIcon(mainWindow, settings.Settings.Theme);
+
+            themeService.ThemeChanged += (_, theme) =>
+            {
+                ApplyWindowIcon(mainWindow, theme);
+            };
+
+            desktop.MainWindow = mainWindow;
+            mainWindow.Show();
+
+            // 延迟淡出遮罩
+            _ = DismissSplashAsync(mainWindow);
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
@@ -52,31 +67,10 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private async Task ShowMainWindowDelayedAsync(
-        IClassicDesktopStyleApplicationLifetime desktop,
-        SplashWindow splash,
-        SettingsService settings,
-        ThemeService themeService)
+    private async Task DismissSplashAsync(MainWindow mainWindow)
     {
         await Task.Delay(1000);
-
-        themeService.Initialize();
-
-        var mainWindow = new MainWindow
-        {
-            DataContext = Services.GetRequiredService<MainViewModel>()
-        };
-
-        ApplyWindowIcon(mainWindow, settings.Settings.Theme);
-
-        themeService.ThemeChanged += (_, theme) =>
-        {
-            ApplyWindowIcon(mainWindow, theme);
-        };
-
-        desktop.MainWindow = mainWindow;
-        mainWindow.Show();
-        splash.Close();
+        mainWindow.DismissSplash();
     }
 
     private static void ApplyWindowIcon(Window window, string theme)
