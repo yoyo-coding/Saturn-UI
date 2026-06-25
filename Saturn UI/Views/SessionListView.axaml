@@ -48,6 +48,18 @@
                  BorderThickness="0"
                  Margin="8,0"
                  SelectionChanged="SessionsList_SelectionChanged">
+            <ListBox.ItemContainerTheme>
+                <ControlTheme TargetType="ListBoxItem">
+                    <!-- 为 ListBoxItem 附加涟漪效果 -->
+                    <Setter Property="controls:RippleEffect.IsEnabled" Value="True" />
+                    <Setter Property="controls:RippleEffect.Opacity" Value="0.24" />
+                    <!-- 圆角与列表项一致(M3 风格) -->
+                    <Setter Property="CornerRadius" Value="12" />
+                    <Setter Property="Padding" Value="12,10" />
+                    <Setter Property="Margin" Value="4,2" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </ControlTheme>
+            </ListBox.ItemContainerTheme>
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="models:Session">
                     <Grid ColumnDefinitions="*,Auto">

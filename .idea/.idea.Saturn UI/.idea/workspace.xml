@@ -14,6 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5c8fce0-d931-42d9-9d6a-c628c748afc4" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
@@ -112,7 +113,7 @@
       <workItem from="1782386084050" duration="1529000" />
       <workItem from="1782388210253" duration="36000" />
       <workItem from="1782388776891" duration="45000" />
-      <workItem from="1782389348166" duration="333000" />
+      <workItem from="1782389348166" duration="964000" />
     </task>
     <servers />
   </component>
