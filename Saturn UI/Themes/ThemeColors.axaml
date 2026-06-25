@@ -59,6 +59,9 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#0A0C10" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#44474F" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#31353B" />
+        <!-- Hover/Focus 状态层(主色叠加 12% alpha,仅作用于背景) -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FA8C7FA" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FD3E3FD" />
     </ResourceDictionary>
 
     <!-- 主题:极昼白 (浅色) -->
@@ -104,6 +107,9 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#EDEDF1" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#C4C6D0" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#E1E2EC" />
+        <!-- Hover/Focus 状态层 -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1F1A56DB" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1F001947" />
     </ResourceDictionary>
 
     <!-- 主题:星夜蓝 -->
@@ -149,6 +155,9 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#060C19" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#3F4856" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#2D3544" />
+        <!-- Hover/Focus 状态层 -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1F7DD3FC" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FCBE6FF" />
     </ResourceDictionary>
 
     <!-- 主题:极光紫 -->
@@ -194,6 +203,9 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#110B25" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#49454F" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#383050" />
+        <!-- Hover/Focus 状态层 -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FD0BCFF" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FEADDFF" />
     </ResourceDictionary>
 
     <!-- 主题:冰川青 -->
@@ -239,6 +251,9 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#001920" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#3F484C" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#264049" />
+        <!-- Hover/Focus 状态层 -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1F67E8F9" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FB8F4FF" />
     </ResourceDictionary>
 
     <!-- 主题:星云粉 -->
@@ -284,6 +299,9 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#1D050F" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#534345" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#472B35" />
+        <!-- Hover/Focus 状态层 -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FFDA4AF" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FFFD9E2" />
     </ResourceDictionary>
 
     <!-- 主题:午夜靛蓝 -->
@@ -329,5 +347,8 @@
         <SolidColorBrush x:Key="M3CodeBackground" Color="#060718" />
         <SolidColorBrush x:Key="M3CodeBorder" Color="#47464C" />
         <SolidColorBrush x:Key="M3InlineCodeBackground" Color="#2D2D47" />
+        <!-- Hover/Focus 状态层 -->
+        <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FC4C0FF" />
+        <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FE3DFFF" />
     </ResourceDictionary>
 </ResourceDictionary>

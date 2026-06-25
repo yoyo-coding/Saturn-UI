@@ -210,13 +210,13 @@
         <Setter Property="MinHeight" Value="48" />
         <Setter Property="CornerRadius" Value="20" />
     </Style>
+    <!-- 悬停指示: 仅背景颜色变化,不影响文字 -->
     <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-        <Setter Property="Opacity" Value="0.08" />
+        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
     </Style>
+    <!-- 选中状态: 使用 SecondaryContainer 实色背景,文字使用 OnSecondaryContainer 颜色 -->
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
-        <Setter Property="Opacity" Value="1" />
     </Style>
     <Style Selector="ListBoxItem:selected TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
