@@ -48,7 +48,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="models:Session">
                         <controls:RippleSelectableItem
-                            IsSelected="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectedSession, Converter={x:Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Binding}, Mode=OneWay}"
+                            IsSelected="{Binding IsSelected, Mode=OneWay}"
                             Command="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectSessionCommand}"
                             CommandParameter="{Binding}">
                             <Grid ColumnDefinitions="*,Auto">

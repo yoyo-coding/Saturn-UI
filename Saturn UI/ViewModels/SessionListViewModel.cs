@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -14,7 +15,8 @@ namespace SaturnUI.ViewModels;
 /// 优化:
 ///   1. 搜索框使用 OnSearchTextChanged 实时过滤
 ///   2. Sessions 集合用 Clear+Add 增量更新,避免重置
-///   3. SelectSession 命令设置 SelectedSession,触发 IsSelected 双向绑定
+///   3. SelectSession 命令设置 SelectedSession + 同步每个 Session 的 IsSelected
+///      (避免 XAML 复杂 binding 表达式,直接用 Session.IsSelected 通知)
 /// </summary>
 public partial class SessionListViewModel : ViewModelBase
 {
@@ -54,14 +56,26 @@ public partial class SessionListViewModel : ViewModelBase
 
         // 增量更新
         Sessions.Clear();
-        foreach (var s in filtered) Sessions.Add(s);
+        foreach (var s in filtered)
+        {
+            s.IsSelected = ReferenceEquals(s, SelectedSession);
+            Sessions.Add(s);
+        }
     }
 
     [RelayCommand]
     private void SelectSession(Session? session)
     {
         if (session is null) return;
+
+        // 1. 更新每个 Session 的 IsSelected(直接属性通知,简单可靠)
+        foreach (var s in Sessions) s.IsSelected = false;
+        session.IsSelected = true;
+
+        // 2. 同步 SelectedSession 供其他 ViewModel 使用
         SelectedSession = session;
+
+        // 3. 加载完整 session 并通知监听者
         var full = _storage.GetSession(session.Id);
         if (full != null) SessionSelected?.Invoke(this, full);
     }
@@ -73,7 +87,10 @@ public partial class SessionListViewModel : ViewModelBase
         _storage.DeleteSession(session.Id);
         _allSessions.Remove(session);
         Sessions.Remove(session);
-        if (SelectedSession?.Id == session.Id) SelectedSession = null;
+        if (SelectedSession?.Id == session.Id)
+        {
+            SelectedSession = null;
+        }
     }
 
     [RelayCommand]

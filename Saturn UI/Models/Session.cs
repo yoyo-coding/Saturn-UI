@@ -21,6 +21,9 @@ public partial class Session : ObservableObject
     [ObservableProperty]
     private ObservableCollection<Message> _messages = new();
 
+    [ObservableProperty]
+    private bool _isSelected;
+
     public Session() { }
 
     public Session(string title)

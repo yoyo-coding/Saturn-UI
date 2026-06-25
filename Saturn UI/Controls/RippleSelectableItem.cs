@@ -22,7 +22,7 @@ namespace SaturnUI.Controls;
 ///       &lt;DataTemplate&gt;
 ///         &lt;controls:RippleSelectableItem
 ///             IsSelected="{Binding IsSelected, Mode=TwoWay}"
-///             Command="{Binding $parent[ItemsControl].((vm:MyVm)DataContext).SelectCommand}"
+///             Command="{Binding ...}"
 ///             CommandParameter="{Binding}"&gt;
 ///           &lt;TextBlock Text="{Binding Name}" /&gt;
 ///         &lt;/controls:RippleSelectableItem&gt;
@@ -32,6 +32,8 @@ namespace SaturnUI.Controls;
 /// </summary>
 public class RippleSelectableItem : ContentControl
 {
+    // ===== Styled Properties =====
+
     public static readonly StyledProperty<bool> IsSelectedProperty =
         AvaloniaProperty.Register<RippleSelectableItem, bool>(nameof(IsSelected));
 
@@ -56,6 +58,20 @@ public class RippleSelectableItem : ContentControl
 
     public static readonly StyledProperty<IBrush?> RippleBrushProperty =
         AvaloniaProperty.Register<RippleSelectableItem, IBrush?>(nameof(RippleBrush));
+
+    // ===== Static Constructor: 同步 :selected 伪类 =====
+
+    static RippleSelectableItem()
+    {
+        // 关键: IsSelected 是普通 StyledProperty,不会自动触发 :selected 伪类
+        // 必须显式同步,样式 Selector "controls|RippleSelectableItem:selected" 才能生效
+        IsSelectedProperty.Changed.AddClassHandler<RippleSelectableItem>((item, e) =>
+        {
+            item.PseudoClasses.Set(":selected", e.NewValue is true);
+        });
+    }
+
+    // ===== Property Accessors =====
 
     public bool IsSelected
     {
@@ -106,6 +122,32 @@ public class RippleSelectableItem : ContentControl
     }
 
     /// <summary>
+    /// 属性变化时同步视觉状态(Background/Foreground)
+    /// 不依赖 :selected 伪类,直接通过代码设置,确保跨主题/跨样式生效
+    /// </summary>
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == IsSelectedProperty)
+        {
+            UpdateVisualState();
+        }
+    }
+
+    private void UpdateVisualState()
+    {
+        if (IsSelected && SelectedBackground != null)
+        {
+            Background = SelectedBackground;
+        }
+        else
+        {
+            Background = Avalonia.Media.Brushes.Transparent;
+        }
+    }
+
+    /// <summary>
     /// 拦截 PointerPressed - 触发涟漪 + 执行命令
     /// ContentControl 没有内置交互,可完美触发
     /// </summary>
@@ -122,7 +164,17 @@ public class RippleSelectableItem : ContentControl
             {
                 Command.Execute(CommandParameter);
             }
+
+            // 3. 立即更新自己,不等 binding 回流(避免视觉延迟)
+            IsSelected = true;
+            PseudoClasses.Set(":selected", true);
         }
         base.OnPointerPressed(e);
+    }
+
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        base.OnApplyTemplate(e);
+        UpdateVisualState();
     }
 }
