@@ -378,4 +378,22 @@
     <Style Selector="Border.msg.user TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource M3OnUserBubble}" />
     </Style>
+
+    <!-- ===== RippleSelectableItem - M3 选中列表项样式 ===== -->
+    <Style Selector="controls|RippleSelectableItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SelectedBackground" Value="{DynamicResource M3SecondaryContainer}" />
+        <Setter Property="HoverBackground" Value="{DynamicResource M3HoverOverlay}" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="Margin" Value="4,2" />
+        <Setter Property="RippleOpacity" Value="0.24" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="controls|RippleSelectableItem:pointerover">
+        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
+    </Style>
+    <Style Selector="controls|RippleSelectableItem:selected">
+        <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
+    </Style>
 </Styles>

@@ -12,9 +12,9 @@ namespace SaturnUI.ViewModels;
 /// 会话列表视图模型
 ///
 /// 优化:
-///   1. 搜索框使用 [NotifyCanExecuteChangedFor] 实时过滤
+///   1. 搜索框使用 OnSearchTextChanged 实时过滤
 ///   2. Sessions 集合用 Clear+Add 增量更新,避免重置
-///   3. SelectSession 通过命令自动处理 null 参数
+///   3. SelectSession 命令设置 SelectedSession,触发 IsSelected 双向绑定
 /// </summary>
 public partial class SessionListViewModel : ViewModelBase
 {
@@ -52,7 +52,7 @@ public partial class SessionListViewModel : ViewModelBase
             ? _allSessions
             : _allSessions.Where(s => s.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
-        // 增量更新,避免整体重置触发 ListBox 全量刷新
+        // 增量更新
         Sessions.Clear();
         foreach (var s in filtered) Sessions.Add(s);
     }

@@ -39,48 +39,39 @@
                                         Foreground="{DynamicResource M3OnSurfaceVariant}" />
         </Grid>
 
-        <!-- Session List -->
-        <ListBox Grid.Row="2"
-                 ItemsSource="{Binding Sessions}"
-                 SelectedItem="{Binding SelectedSession}"
-                 SelectionMode="Single"
-                 Background="Transparent"
-                 BorderThickness="0"
-                 Margin="8,0"
-                 SelectionChanged="SessionsList_SelectionChanged">
-            <ListBox.ItemContainerTheme>
-                <ControlTheme TargetType="controls:RippleListBoxItem"
-                              BasedOn="{StaticResource {x:Type ListBoxItem}}"
-                              x:DataType="models:Session">
-                    <Setter Property="CornerRadius" Value="12" />
-                    <Setter Property="Padding" Value="12,10" />
-                    <Setter Property="Margin" Value="4,2" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="RippleOpacity" Value="0.24" />
-                </ControlTheme>
-            </ListBox.ItemContainerTheme>
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="models:Session">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <StackPanel Grid.Column="0" Spacing="2">
-                            <TextBlock Text="{Binding Title}"
-                                       Classes="TitleMedium"
-                                       TextTrimming="CharacterEllipsis" />
-                            <TextBlock Text="{Binding UpdatedAt, StringFormat='{}{0:MM-dd HH:mm}'}"
-                                       Classes="BodySmall"
-                                       Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                        </StackPanel>
-                        <controls:RippleButton Grid.Column="1"
-                                Classes="Icon"
-                                Command="{ReflectionBinding #RootView.DataContext.DeleteSessionCommand}"
-                                CommandParameter="{Binding}"
-                                ToolTip.Tip="删除会话"
-                                Opacity="0.7">
-                            <materialIcons:MaterialIcon Kind="DeleteOutline" Width="18" Height="18" />
-                        </controls:RippleButton>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <!-- Session List - 使用 ItemsControl + RippleSelectableItem(确保涟漪) -->
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="Transparent">
+            <ItemsControl ItemsSource="{Binding Sessions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:Session">
+                        <controls:RippleSelectableItem
+                            IsSelected="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectedSession, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={Binding}, Mode=TwoWay}"
+                            Command="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectSessionCommand}"
+                            CommandParameter="{Binding}">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackPanel Grid.Column="0" Spacing="2">
+                                    <TextBlock Text="{Binding Title}"
+                                               Classes="TitleMedium"
+                                               TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="{Binding UpdatedAt, StringFormat='{}{0:MM-dd HH:mm}'}"
+                                               Classes="BodySmall"
+                                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                                </StackPanel>
+                                <controls:RippleButton Grid.Column="1"
+                                        Classes="Icon"
+                                        Command="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).DeleteSessionCommand}"
+                                        CommandParameter="{Binding}"
+                                        ToolTip.Tip="删除会话"
+                                        Opacity="0.7">
+                                    <materialIcons:MaterialIcon Kind="DeleteOutline" Width="18" Height="18" />
+                                </controls:RippleButton>
+                            </Grid>
+                        </controls:RippleSelectableItem>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
