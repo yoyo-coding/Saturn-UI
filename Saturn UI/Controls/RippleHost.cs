@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
@@ -11,6 +10,7 @@ namespace SaturnUI.Controls;
 
 /// <summary>
 /// 继承 Button 的 M3 涟漪按钮,点击时从按压点向四周扩散的圆形涟漪动效
+/// 使用 ScaleTransform 缩放 + 透明度衰减,GPU 加速渲染,流畅不卡顿
 /// </summary>
 public class RippleButton : Button
 {
@@ -18,11 +18,11 @@ public class RippleButton : Button
         AvaloniaProperty.Register<RippleButton, IBrush?>(nameof(RippleBrush));
 
     public static readonly StyledProperty<double> RippleOpacityProperty =
-        AvaloniaProperty.Register<RippleButton, double>(nameof(RippleOpacity), 0.16);
+        AvaloniaProperty.Register<RippleButton, double>(nameof(RippleOpacity), 0.32);
 
     public static readonly StyledProperty<TimeSpan> RippleDurationProperty =
         AvaloniaProperty.Register<RippleButton, TimeSpan>(nameof(RippleDuration),
-            TimeSpan.FromMilliseconds(450));
+            TimeSpan.FromMilliseconds(550));
 
     public IBrush? RippleBrush
     {
@@ -42,110 +42,127 @@ public class RippleButton : Button
         set => SetValue(RippleDurationProperty, value);
     }
 
-    private Canvas? _rippleCanvas;
-    private readonly DispatcherTimer _cleanupTimer;
-    private readonly List<Ellipse> _activeRipples = new();
+    private readonly List<RippleInfo> _activeRipples = new();
 
-    public RippleButton()
+    private class RippleInfo
     {
-        ClipToBounds = true;
-        _cleanupTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
-        _cleanupTimer.Tick += (_, _) => CleanupRipples();
-    }
-
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-
-        // 找到 ContentPresenter,把 Canvas 插入到它的父级 Panel 中
-        var presenter = e.NameScope.Find<ContentPresenter>("PART_ContentPresenter");
-        if (presenter?.Parent is not Panel host) return;
-
-        _rippleCanvas = new Canvas
-        {
-            Name = "PART_RippleCanvas",
-            IsHitTestVisible = false
-        };
-        host.Children.Add(_rippleCanvas);
+        public Ellipse Element { get; set; } = null!;
+        public Grid Container { get; set; } = null!;
+        public double Diameter { get; set; }
+        public long StartTicks { get; set; }
     }
 
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
-        var p = e.GetCurrentPoint(this);
-        if (p.Properties.IsLeftButtonPressed && _rippleCanvas is not null)
-        {
-            SpawnRipple(p.Position);
-        }
+        if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) return;
+
+        var position = e.GetCurrentPoint(this).Position;
+        var adornerLayer = AdornerLayer.GetAdornerLayer(this);
+        if (adornerLayer is null) return;
+
+        CreateRipple(adornerLayer, position);
     }
 
-    private void SpawnRipple(Point position)
+    private void CreateRipple(AdornerLayer adornerLayer, Point position)
     {
-        if (_rippleCanvas is null) return;
+        if (Bounds.Width <= 0 || Bounds.Height <= 0) return;
 
-        var diameter = Math.Max(Bounds.Width, Bounds.Height) * 2.2;
-        var radius = diameter / 2.0;
+        // 涟漪直径 = 按钮最大边长 * 2.5
+        var diameter = Math.Max(Bounds.Width, Bounds.Height) * 2.5;
 
-        // 涟漪颜色:用户自定义 / 用 Foreground(主色)/ 兜底白色
+        // 涟漪颜色
         var brush = RippleBrush ?? Foreground ?? new SolidColorBrush(Colors.White);
 
-        var ripple = new Ellipse
+        // 使用 ScaleTransform 而非 Width/Height(触发渲染属性而不重新布局)
+        var scaleTransform = new ScaleTransform(0, 0);
+        var ellipse = new Ellipse
         {
-            Width = 0,
-            Height = 0,
+            Width = diameter,
+            Height = diameter,
             Fill = brush,
-            Opacity = RippleOpacity,
-            IsHitTestVisible = false
+            IsHitTestVisible = false,
+            RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
+            RenderTransform = scaleTransform,
+            Opacity = 0
         };
 
-        Canvas.SetLeft(ripple, position.X - radius);
-        Canvas.SetTop(ripple, position.Y - radius);
-        _rippleCanvas.Children.Add(ripple);
+        // 容器 Grid
+        var container = new Grid
+        {
+            Width = Bounds.Width,
+            Height = Bounds.Height,
+            IsHitTestVisible = false,
+            ClipToBounds = true,
+            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Left,
+            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Top
+        };
+        container.Children.Add(ellipse);
+
+        // 定位椭圆中心对准点击位置
+        ellipse.Margin = new Thickness(position.X - diameter / 2, position.Y - diameter / 2, 0, 0);
+
+        // 定位容器到按钮位置
+        var buttonPos = this.TranslatePoint(new Point(0, 0), adornerLayer);
+        if (buttonPos.HasValue)
+        {
+            container.Margin = new Thickness(buttonPos.Value.X, buttonPos.Value.Y, 0, 0);
+        }
+
+        // 添加到 AdornerLayer
+        adornerLayer.Children.Add(container);
+
+        var ripple = new RippleInfo
+        {
+            Element = ellipse,
+            Container = container,
+            Diameter = diameter,
+            StartTicks = Environment.TickCount64
+        };
         _activeRipples.Add(ripple);
 
-        var frames = 30;
-        var interval = RippleDuration.TotalMilliseconds / frames;
-        var step = 0;
-
-        var sizeTick = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(interval) };
-        sizeTick.Tick += (_, _) =>
-        {
-            step++;
-            var t = (double)step / frames;
-            var eased = 1.0 - Math.Pow(1.0 - t, 3); // easeOutCubic
-            var cur = diameter * eased;
-            ripple.Width = cur;
-            ripple.Height = cur;
-            if (step >= frames) sizeTick.Stop();
-        };
-
-        var fadeTick = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(interval) };
-        fadeTick.Tick += (_, _) =>
-        {
-            var t = (double)step / frames;
-            ripple.Opacity = RippleOpacity * (1.0 - t);
-            if (step >= frames) fadeTick.Stop();
-        };
-
-        sizeTick.Start();
-        fadeTick.Start();
-
-        if (!_cleanupTimer.IsEnabled) _cleanupTimer.Start();
+        // 使用 60fps 定时器(每帧 ~16ms),ScaleTransform 不触发重新布局,性能高
+        var timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(16) };
+        timer.Tick += (_, _) => AnimateRipple(ripple, scaleTransform, timer, adornerLayer);
+        timer.Start();
     }
 
-    private void CleanupRipples()
+    private void AnimateRipple(RippleInfo ripple, ScaleTransform scale, DispatcherTimer timer, AdornerLayer adornerLayer)
     {
-        if (_rippleCanvas is null) return;
-        var threshold = Math.Max(Bounds.Width, Bounds.Height) * 2.0;
-        _activeRipples.RemoveAll(r =>
+        var elapsed = Environment.TickCount64 - ripple.StartTicks;
+        var progress = Math.Min(1.0, elapsed / (double)RippleDuration.TotalMilliseconds);
+
+        if (progress >= 1.0)
         {
-            if (r.Width >= threshold)
-            {
-                _rippleCanvas.Children.Remove(r);
-                return true;
-            }
-            return false;
-        });
-        if (_activeRipples.Count == 0) _cleanupTimer.Stop();
+            timer.Stop();
+            adornerLayer.Children.Remove(ripple.Container);
+            _activeRipples.Remove(ripple);
+            return;
+        }
+
+        // easeOutCubic 缓动曲线(让动画开始快速,结束平滑)
+        var eased = 1.0 - Math.Pow(1.0 - progress, 3);
+
+        // 透明度曲线: 0 -> max(快) -> 0(慢)
+        // 前 20% 快速上升至峰值,后 80% 平滑衰减
+        var opacity = progress < 0.2
+            ? RippleOpacity * (progress / 0.2)
+            : RippleOpacity * (1.0 - (progress - 0.2) / 0.8);
+
+        scale.ScaleX = eased;
+        scale.ScaleY = eased;
+        ripple.Element.Opacity = opacity;
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+
+        var adornerLayer = AdornerLayer.GetAdornerLayer(this);
+        foreach (var ripple in _activeRipples)
+        {
+            adornerLayer?.Children.Remove(ripple.Container);
+        }
+        _activeRipples.Clear();
     }
 }
