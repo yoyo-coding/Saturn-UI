@@ -11,10 +11,8 @@ namespace SaturnUI.Controls;
 
 /// <summary>
 /// 继承 Button 的 M3 涟漪按钮,点击时从按压点向四周扩散的圆形涟漪动效
-/// 关键修复:
-/// - 直接在 AdornerLayer 上渲染 Ellipse,不再包裹 Border 容器
-/// - 避免 AdornerLayer 中额外容器与按钮自身可视树的渲染不同步(悬停闪烁)
-/// - 涟漪是圆形,自然扩散到按钮外(M3 标准行为),不需要矩形遮罩
+/// - 涟漪 Ellipse 通过 AdornerLayer 渲染,包裹在 Border 容器中
+/// - 容器继承按钮 CornerRadius,矩形遮罩与按钮形状一致
 /// - ScaleTransform 缩放 + Opacity 衰减,GPU 加速,60fps
 /// </summary>
 public class RippleButton : Button
@@ -71,8 +69,7 @@ public class RippleButton : Button
         // 涟漪颜色
         var brush = RippleBrush ?? Foreground ?? new SolidColorBrush(Colors.White);
 
-        // 涟漪 Ellipse: 直接渲染,不包裹 Border 容器
-        // 圆形天然扩散,无需矩形遮罩
+        // 涟漪 Ellipse: 中心对准点击位置
         var ellipse = new Ellipse
         {
             Width = diameter,
@@ -84,17 +81,33 @@ public class RippleButton : Button
             RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
             RenderTransform = new ScaleTransform(0, 0),
             Opacity = 0,
+            Margin = new Thickness(
+                buttonPosition.X - diameter / 2,
+                buttonPosition.Y - diameter / 2, 0, 0)
         };
 
-        // 直接转换为 AdornerLayer 坐标系,定位 ellipse 中心 = 点击位置
-        var clickPos = this.TranslatePoint(buttonPosition, adornerLayer);
-        if (!clickPos.HasValue) return;
+        // 容器: Border,继承按钮 CornerRadius,让裁剪形状与按钮一致
+        var container = new Border
+        {
+            Width = Bounds.Width,
+            Height = Bounds.Height,
+            IsHitTestVisible = false,
+            ClipToBounds = true,
+            CornerRadius = CornerRadius,
+            Background = null,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Child = ellipse
+        };
 
-        ellipse.Margin = new Thickness(
-            clickPos.Value.X - diameter / 2,
-            clickPos.Value.Y - diameter / 2, 0, 0);
+        // 容器在 AdornerLayer 坐标系中,定位到按钮位置
+        var containerPos = this.TranslatePoint(new Point(0, 0), adornerLayer);
+        if (containerPos.HasValue)
+        {
+            container.Margin = new Thickness(containerPos.Value.X, containerPos.Value.Y, 0, 0);
+        }
 
-        adornerLayer.Children.Add(ellipse);
+        adornerLayer.Children.Add(container);
 
         // 启动动画
         var scale = (ScaleTransform)ellipse.RenderTransform!;
@@ -112,7 +125,7 @@ public class RippleButton : Button
             if (progress >= 1.0)
             {
                 timer.Stop();
-                adornerLayer.Children.Remove(ellipse);
+                adornerLayer.Children.Remove(container);
                 return;
             }
 
