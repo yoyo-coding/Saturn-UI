@@ -16,12 +16,19 @@ namespace SaturnUI.Controls;
 ///   - Button 的 OnPointerPressed 也会被某些场景标记 Handled
 ///   - ContentControl 没有内置交互逻辑,可完美拦截 PointerPressed,完全控制行为
 ///
+/// 视觉状态机(代码驱动,不依赖样式优先级):
+///   默认       → Transparent
+///   pointerover → HoverBackground(12% 主色)
+///
+///   选中       → SelectedBackground(M3 SecondaryContainer)
+///   选中+hover → SelectedHoverBackground(主色加深)
+///
 /// 用法 (XAML):
 ///   &lt;ItemsControl ItemsSource="{Binding Items}"&gt;
 ///     &lt;ItemsControl.ItemTemplate&gt;
 ///       &lt;DataTemplate&gt;
 ///         &lt;controls:RippleSelectableItem
-///             IsSelected="{Binding IsSelected, Mode=TwoWay}"
+///             IsSelected="{Binding IsSelected, Mode=OneWay}"
 ///             Command="{Binding ...}"
 ///             CommandParameter="{Binding}"&gt;
 ///           &lt;TextBlock Text="{Binding Name}" /&gt;
@@ -46,6 +53,9 @@ public class RippleSelectableItem : ContentControl
     public static readonly StyledProperty<IBrush?> SelectedBackgroundProperty =
         AvaloniaProperty.Register<RippleSelectableItem, IBrush?>(nameof(SelectedBackground));
 
+    public static readonly StyledProperty<IBrush?> SelectedHoverBackgroundProperty =
+        AvaloniaProperty.Register<RippleSelectableItem, IBrush?>(nameof(SelectedHoverBackground));
+
     public static readonly StyledProperty<IBrush?> HoverBackgroundProperty =
         AvaloniaProperty.Register<RippleSelectableItem, IBrush?>(nameof(HoverBackground));
 
@@ -59,17 +69,9 @@ public class RippleSelectableItem : ContentControl
     public static readonly StyledProperty<IBrush?> RippleBrushProperty =
         AvaloniaProperty.Register<RippleSelectableItem, IBrush?>(nameof(RippleBrush));
 
-    // ===== Static Constructor: 同步 :selected 伪类 =====
+    // ===== 内部状态 =====
 
-    static RippleSelectableItem()
-    {
-        // 关键: IsSelected 是普通 StyledProperty,不会自动触发 :selected 伪类
-        // 必须显式同步,样式 Selector "controls|RippleSelectableItem:selected" 才能生效
-        IsSelectedProperty.Changed.AddClassHandler<RippleSelectableItem>((item, e) =>
-        {
-            item.PseudoClasses.Set(":selected", e.NewValue is true);
-        });
-    }
+    private bool _isPointerOver;
 
     // ===== Property Accessors =====
 
@@ -97,6 +99,12 @@ public class RippleSelectableItem : ContentControl
         set => SetValue(SelectedBackgroundProperty, value);
     }
 
+    public IBrush? SelectedHoverBackground
+    {
+        get => GetValue(SelectedHoverBackgroundProperty);
+        set => SetValue(SelectedHoverBackgroundProperty, value);
+    }
+
     public IBrush? HoverBackground
     {
         get => GetValue(HoverBackgroundProperty);
@@ -121,31 +129,71 @@ public class RippleSelectableItem : ContentControl
         set => SetValue(RippleBrushProperty, value);
     }
 
+    // ===== 视觉状态机 =====
+
     /// <summary>
-    /// 属性变化时同步视觉状态(Background/Foreground)
-    /// 不依赖 :selected 伪类,直接通过代码设置,确保跨主题/跨样式生效
+    /// 属性变化时同步视觉状态
     /// </summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property == IsSelectedProperty)
+        if (change.Property == IsSelectedProperty ||
+            change.Property == SelectedBackgroundProperty ||
+            change.Property == SelectedHoverBackgroundProperty ||
+            change.Property == HoverBackgroundProperty)
         {
             UpdateVisualState();
         }
     }
 
+    static RippleSelectableItem()
+    {
+        IsSelectedProperty.Changed.AddClassHandler<RippleSelectableItem>((item, e) =>
+        {
+            item.PseudoClasses.Set(":selected", e.NewValue is true);
+        });
+
+        // 订阅 PointerEntered/Exited 事件 (因为 ContentControl 不暴露 OnPointerEntered/OnPointerLeaved 重写点)
+        InputElement.PointerEnteredEvent.AddClassHandler<RippleSelectableItem>((item, e) =>
+        {
+            item._isPointerOver = true;
+            item.UpdateVisualState();
+        });
+
+        InputElement.PointerExitedEvent.AddClassHandler<RippleSelectableItem>((item, e) =>
+        {
+            item._isPointerOver = false;
+            item.UpdateVisualState();
+        });
+    }
+
+    /// <summary>
+    /// 视觉状态决策:
+    ///   1. 选中 + hover → SelectedHoverBackground
+    ///   2. 选中         → SelectedBackground
+    ///   3. hover        → HoverBackground
+    ///   4. 默认         → Transparent
+    /// </summary>
     private void UpdateVisualState()
     {
-        if (IsSelected && SelectedBackground != null)
+        if (IsSelected)
         {
-            Background = SelectedBackground;
+            if (_isPointerOver && SelectedHoverBackground != null)
+                Background = SelectedHoverBackground;
+            else if (SelectedBackground != null)
+                Background = SelectedBackground;
         }
         else
         {
-            Background = Avalonia.Media.Brushes.Transparent;
+            if (_isPointerOver && HoverBackground != null)
+                Background = HoverBackground;
+            else
+                Background = Avalonia.Media.Brushes.Transparent;
         }
     }
+
+    // ===== 点击处理 =====
 
     /// <summary>
     /// 拦截 PointerPressed - 触发涟漪 + 执行命令

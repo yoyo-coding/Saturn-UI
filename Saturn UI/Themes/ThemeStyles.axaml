@@ -380,10 +380,14 @@
     </Style>
 
     <!-- ===== RippleSelectableItem - M3 选中列表项样式 ===== -->
+    <!-- 视觉状态由代码驱动(代码状态机),样式只配置颜色属性与静态外观 -->
     <Style Selector="controls|RippleSelectableItem">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="SelectedBackground" Value="{DynamicResource M3SecondaryContainer}" />
+        <!-- hover 背景(12% 主色叠加) -->
         <Setter Property="HoverBackground" Value="{DynamicResource M3HoverOverlay}" />
+        <!-- 选中背景(M3 SecondaryContainer 实色) -->
+        <Setter Property="SelectedBackground" Value="{DynamicResource M3SecondaryContainer}" />
+        <!-- 选中+hover 背景(M3 SecondaryContainer 更深色) -->
+        <Setter Property="SelectedHoverBackground" Value="{DynamicResource M3FilledTonalPressed}" />
         <Setter Property="CornerRadius" Value="12" />
         <Setter Property="Padding" Value="12,10" />
         <Setter Property="Margin" Value="4,2" />
@@ -391,14 +395,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
     </Style>
-    <Style Selector="controls|RippleSelectableItem:pointerover">
-        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
-    </Style>
-    <!-- 选中状态: 强视觉指示 - 容器背景 + OnSecondaryContainer 文字色 -->
-    <Style Selector="controls|RippleSelectableItem:selected">
-        <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
-    </Style>
+    <!-- 选中状态: 子元素文字色 -->
     <Style Selector="controls|RippleSelectableItem:selected TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
     </Style>
