@@ -31,6 +31,7 @@ public class ThemeService
 {
     private readonly SettingsService _settingsService;
     private ResourceDictionary? _themeDictionary;
+    private string? _currentThemeKey;  // 跟踪当前应用的主题,避免重复应用
 
     public event EventHandler<string>? ThemeChanged;
 
@@ -62,6 +63,12 @@ public class ThemeService
         if (_themeDictionary == null || App.Current == null)
             return;
 
+        // 关键优化: 仅在主题真正变化时才重新应用
+        // 否则 SettingsService.Save() 触发 SettingsChanged 会导致按钮闪烁
+        // (每次 ApplyTheme 都会重新赋值所有 brushes,触发所有 DynamicResource 引用者重新查询)
+        if (_currentThemeKey == themeKey)
+            return;
+
         // Find the theme dictionary by key
         if (_themeDictionary.TryGetResource(themeKey, ThemeVariant.Default, out var themeResource)
             && themeResource is ResourceDictionary themeDict)
@@ -79,6 +86,7 @@ public class ThemeService
             var isLight = themeKey == "Daylight";
             App.Current.RequestedThemeVariant = isLight ? ThemeVariant.Light : ThemeVariant.Dark;
 
+            _currentThemeKey = themeKey;  // 记录当前主题
             ThemeChanged?.Invoke(this, themeKey);
         }
     }
