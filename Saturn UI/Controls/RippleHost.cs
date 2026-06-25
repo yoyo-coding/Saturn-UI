@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 
@@ -10,7 +11,9 @@ namespace SaturnUI.Controls;
 
 /// <summary>
 /// 继承 Button 的 M3 涟漪按钮,点击时从按压点向四周扩散的圆形涟漪动效
-/// 使用 ScaleTransform 缩放 + 透明度衰减,GPU 加速渲染,流畅不卡顿
+/// - 涟漪精确从 PointerEventArgs.Position 发出
+/// - 容器用 Border + CornerRadius(继承按钮圆角),矩形遮罩不可察觉
+/// - ScaleTransform 缩放 + 透明度衰减,GPU 加速渲染
 /// </summary>
 public class RippleButton : Button
 {
@@ -42,127 +45,112 @@ public class RippleButton : Button
         set => SetValue(RippleDurationProperty, value);
     }
 
-    private readonly List<RippleInfo> _activeRipples = new();
-
-    private class RippleInfo
-    {
-        public Ellipse Element { get; set; } = null!;
-        public Grid Container { get; set; } = null!;
-        public double Diameter { get; set; }
-        public long StartTicks { get; set; }
-    }
-
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
         if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) return;
 
+        // 1) 精准记录点击位置(相对按钮坐标系)
         var position = e.GetCurrentPoint(this).Position;
+
+        // 获取 AdornerLayer
         var adornerLayer = AdornerLayer.GetAdornerLayer(this);
         if (adornerLayer is null) return;
 
         CreateRipple(adornerLayer, position);
     }
 
-    private void CreateRipple(AdornerLayer adornerLayer, Point position)
+    private void CreateRipple(AdornerLayer adornerLayer, Point buttonPosition)
     {
         if (Bounds.Width <= 0 || Bounds.Height <= 0) return;
 
-        // 涟漪直径 = 按钮最大边长 * 2.5
+        // 涟漪直径 = 按钮最大边长 * 2.5(确保完全覆盖)
         var diameter = Math.Max(Bounds.Width, Bounds.Height) * 2.5;
 
         // 涟漪颜色
         var brush = RippleBrush ?? Foreground ?? new SolidColorBrush(Colors.White);
 
-        // 使用 ScaleTransform 而非 Width/Height(触发渲染属性而不重新布局)
-        var scaleTransform = new ScaleTransform(0, 0);
+        // 2) 涟漪 Ellipse,中心精确对准点击位置
+        // 用 Margin 让椭圆中心 = 点击位置(buttonPosition)
         var ellipse = new Ellipse
         {
             Width = diameter,
             Height = diameter,
             Fill = brush,
             IsHitTestVisible = false,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
             RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
-            RenderTransform = scaleTransform,
-            Opacity = 0
+            RenderTransform = new ScaleTransform(0, 0),
+            Opacity = 0,
+            // 中心 = 点击位置: 左上 = (click - diameter/2)
+            Margin = new Thickness(
+                buttonPosition.X - diameter / 2,
+                buttonPosition.Y - diameter / 2, 0, 0)
         };
 
-        // 容器 Grid
-        var container = new Grid
+        // 3) 容器: Border,继承按钮的 CornerRadius,让裁剪形状与按钮一致
+        // 矩形遮罩变成与按钮形状一致的圆角矩形,完全不可察觉
+        var container = new Border
         {
             Width = Bounds.Width,
             Height = Bounds.Height,
             IsHitTestVisible = false,
             ClipToBounds = true,
-            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Left,
-            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Top
+            CornerRadius = CornerRadius,  // 直接继承按钮圆角(20px / FAB 16px 等)
+            Background = null,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Child = ellipse
         };
-        container.Children.Add(ellipse);
 
-        // 定位椭圆中心对准点击位置
-        ellipse.Margin = new Thickness(position.X - diameter / 2, position.Y - diameter / 2, 0, 0);
-
-        // 定位容器到按钮位置
-        var buttonPos = this.TranslatePoint(new Point(0, 0), adornerLayer);
-        if (buttonPos.HasValue)
+        // 容器在 AdornerLayer 坐标系中,定位到按钮位置
+        var containerPos = this.TranslatePoint(new Point(0, 0), adornerLayer);
+        if (containerPos.HasValue)
         {
-            container.Margin = new Thickness(buttonPos.Value.X, buttonPos.Value.Y, 0, 0);
+            container.Margin = new Thickness(containerPos.Value.X, containerPos.Value.Y, 0, 0);
         }
 
-        // 添加到 AdornerLayer
         adornerLayer.Children.Add(container);
 
-        var ripple = new RippleInfo
+        // 启动动画
+        var scale = (ScaleTransform)ellipse.RenderTransform!;
+        var startTicks = Environment.TickCount64;
+
+        var timer = new DispatcherTimer(DispatcherPriority.Render)
         {
-            Element = ellipse,
-            Container = container,
-            Diameter = diameter,
-            StartTicks = Environment.TickCount64
+            Interval = TimeSpan.FromMilliseconds(16)
         };
-        _activeRipples.Add(ripple);
-
-        // 使用 60fps 定时器(每帧 ~16ms),ScaleTransform 不触发重新布局,性能高
-        var timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(16) };
-        timer.Tick += (_, _) => AnimateRipple(ripple, scaleTransform, timer, adornerLayer);
-        timer.Start();
-    }
-
-    private void AnimateRipple(RippleInfo ripple, ScaleTransform scale, DispatcherTimer timer, AdornerLayer adornerLayer)
-    {
-        var elapsed = Environment.TickCount64 - ripple.StartTicks;
-        var progress = Math.Min(1.0, elapsed / (double)RippleDuration.TotalMilliseconds);
-
-        if (progress >= 1.0)
+        timer.Tick += (_, _) =>
         {
-            timer.Stop();
-            adornerLayer.Children.Remove(ripple.Container);
-            _activeRipples.Remove(ripple);
-            return;
-        }
+            var elapsed = Environment.TickCount64 - startTicks;
+            var progress = Math.Min(1.0, elapsed / (double)RippleDuration.TotalMilliseconds);
 
-        // easeOutCubic 缓动曲线(让动画开始快速,结束平滑)
-        var eased = 1.0 - Math.Pow(1.0 - progress, 3);
+            if (progress >= 1.0)
+            {
+                timer.Stop();
+                adornerLayer.Children.Remove(container);
+                return;
+            }
 
-        // 透明度曲线: 0 -> max(快) -> 0(慢)
-        // 前 20% 快速上升至峰值,后 80% 平滑衰减
-        var opacity = progress < 0.2
-            ? RippleOpacity * (progress / 0.2)
-            : RippleOpacity * (1.0 - (progress - 0.2) / 0.8);
+            // easeOutCubic 缓动曲线
+            var eased = 1.0 - Math.Pow(1.0 - progress, 3);
 
-        scale.ScaleX = eased;
-        scale.ScaleY = eased;
-        ripple.Element.Opacity = opacity;
+            // 透明度曲线: 0 → max(快,前 20%)→ 0(慢,后 80%)
+            var opacity = progress < 0.2
+                ? RippleOpacity * (progress / 0.2)
+                : RippleOpacity * (1.0 - (progress - 0.2) / 0.8);
+
+            scale.ScaleX = eased;
+            scale.ScaleY = eased;
+            ellipse.Opacity = opacity;
+        };
+        timer.Start();
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-
-        var adornerLayer = AdornerLayer.GetAdornerLayer(this);
-        foreach (var ripple in _activeRipples)
-        {
-            adornerLayer?.Children.Remove(ripple.Container);
-        }
-        _activeRipples.Clear();
+        // 容器会自动随 AdornerLayer 失效,无需手动清理
     }
 }
