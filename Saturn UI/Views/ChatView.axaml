@@ -162,14 +162,13 @@
                     <Grid ColumnDefinitions="*,Auto">
                         <!-- TextBox: 透明背景,无边距,与容器融为一体 -->
                         <TextBox Grid.Column="0"
+                                 Classes="flat"
                                  Text="{Binding InputText}"
                                  Watermark="输入消息... (Shift+Enter 换行, Ctrl+Enter 发送)"
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
                                  MaxHeight="120"
                                  VerticalContentAlignment="Center"
-                                 Background="Transparent"
-                                 BorderThickness="0"
                                  Padding="20,12">
                             <TextBox.KeyBindings>
                                 <KeyBinding Gesture="Ctrl+Enter"
