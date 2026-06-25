@@ -12,6 +12,13 @@ public class AppSettings
     public string Theme { get; set; } = "DeepSpace";
     public double FontSize { get; set; } = 14;
     public bool PerformanceMode { get; set; } = false;
+
+    // OpenAI 兼容 API 配置
+    public string OpenAiApiKey { get; set; } = "";
+    public string OpenAiModel { get; set; } = "gpt-3.5-turbo";
+    public string OpenAiBaseUrl { get; set; } = "https://api.openai.com/v1";
+    public double OpenAiTemperature { get; set; } = 0.7;
+    public int OpenAiMaxTokens { get; set; } = 2048;
 }
 
 public class SettingsService

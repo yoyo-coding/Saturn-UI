@@ -27,6 +27,22 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty]
     private string _theme = "DeepSpace";
 
+    // OpenAI 兼容 API 配置
+    [ObservableProperty]
+    private string _openAiApiKey = "";
+
+    [ObservableProperty]
+    private string _openAiModel = "gpt-3.5-turbo";
+
+    [ObservableProperty]
+    private string _openAiBaseUrl = "https://api.openai.com/v1";
+
+    [ObservableProperty]
+    private double _openAiTemperature = 0.7;
+
+    [ObservableProperty]
+    private int _openAiMaxTokens = 2048;
+
     public IReadOnlyList<string> AvailableThemes => ThemeDefinitions.ThemeKeys;
 
     public SettingsViewModel(SettingsService settingsService)
@@ -44,6 +60,12 @@ public partial class SettingsViewModel : ViewModelBase
         FontSize = s.FontSize;
         PerformanceMode = s.PerformanceMode;
         Theme = s.Theme;
+
+        OpenAiApiKey = s.OpenAiApiKey;
+        OpenAiModel = s.OpenAiModel;
+        OpenAiBaseUrl = s.OpenAiBaseUrl;
+        OpenAiTemperature = s.OpenAiTemperature;
+        OpenAiMaxTokens = s.OpenAiMaxTokens;
     }
 
     [RelayCommand]
@@ -57,6 +79,12 @@ public partial class SettingsViewModel : ViewModelBase
             s.FontSize = FontSize;
             s.PerformanceMode = PerformanceMode;
             s.Theme = Theme;
+
+            s.OpenAiApiKey = OpenAiApiKey;
+            s.OpenAiModel = OpenAiModel;
+            s.OpenAiBaseUrl = OpenAiBaseUrl;
+            s.OpenAiTemperature = OpenAiTemperature;
+            s.OpenAiMaxTokens = OpenAiMaxTokens;
         });
     }
 
@@ -69,6 +97,13 @@ public partial class SettingsViewModel : ViewModelBase
         FontSize = 14;
         PerformanceMode = false;
         Theme = "DeepSpace";
+
+        OpenAiApiKey = "";
+        OpenAiModel = "gpt-3.5-turbo";
+        OpenAiBaseUrl = "https://api.openai.com/v1";
+        OpenAiTemperature = 0.7;
+        OpenAiMaxTokens = 2048;
+
         SaveSettings();
     }
 }

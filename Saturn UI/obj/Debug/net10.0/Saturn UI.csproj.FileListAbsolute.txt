@@ -1,109 +1,3 @@
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.exe
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.deps.json
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.runtimeconfig.json
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.pdb
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Base.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Controls.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.DesignerSupport.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Dialogs.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Markup.Xaml.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Markup.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Metal.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.MicroCom.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.OpenGL.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Vulkan.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\AvaloniaEdit.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Desktop.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Fonts.Inter.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.FreeDesktop.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Native.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Remote.Protocol.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Skia.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Svg.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Themes.Fluent.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Win32.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.X11.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\ColorTextBlock.Avalonia.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\CommunityToolkit.Mvvm.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\ExCSS.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Fizzler.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Google.Protobuf.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Grpc.Core.Api.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Grpc.Net.Client.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Grpc.Net.Common.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\HarfBuzzSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\HtmlAgilityPack.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\LiteDB.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Markdown.Avalonia.Full.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Markdown.Avalonia.Html.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Markdown.Avalonia.Svg.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Markdown.Avalonia.SyntaxHigh.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Markdown.Avalonia.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\MicroCom.Runtime.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Configuration.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Configuration.FileExtensions.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Json.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.FileProviders.Abstractions.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.FileProviders.Physical.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.FileSystemGlobbing.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Logging.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Logging.Abstractions.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Options.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Microsoft.Extensions.Primitives.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\ShimSkiaSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\SkiaSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Svg.Custom.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Svg.Model.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\Tmds.DBus.Protocol.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-arm64\native\av_libglesv2.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x64\native\av_libglesv2.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x86\native\av_libglesv2.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\osx\native\libAvaloniaNative.dylib
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\osx\native\libHarfBuzzSharp.dylib
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-arm\native\libSkiaSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-arm64\native\libSkiaSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-x64\native\libSkiaSharp.so
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\osx\native\libSkiaSharp.dylib
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-arm64\native\libSkiaSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x64\native\libSkiaSharp.dll
-f:\Lyn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x86\native\libSkiaSharp.dll
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.AssemblyReference.cache
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\Resources.Inputs.cache
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\resources
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.GeneratedMSBuildEditorConfig.editorconfig
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.AssemblyInfoInputs.cache
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.AssemblyInfo.cs
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.CoreCompileInputs.cache
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\SaturnUI.dll
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\SaturnUI.pdb
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\refint\Avalonia\SaturnUI.dll
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.Up2Date
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.genruntimeconfig.cache
-f:\Lyn-UI\Saturn UI\obj\Debug\net10.0\ref\SaturnUI.dll
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.AssemblyReference.cache
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\Resources.Inputs.cache
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\resources
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.GeneratedMSBuildEditorConfig.editorconfig
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.AssemblyInfoInputs.cache
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.AssemblyInfo.cs
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.CoreCompileInputs.cache
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.sourcelink.json
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\SaturnUI.dll
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\SaturnUI.pdb
-F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\refint\Avalonia\SaturnUI.dll
 F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.exe
 F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.deps.json
 F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\SaturnUI.runtimeconfig.json
@@ -188,6 +82,25 @@ F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\osx\native\libSkiaSharp.dylib
 F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-arm64\native\libSkiaSharp.dll
 F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x64\native\libSkiaSharp.dll
 F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\win-x86\native\libSkiaSharp.dll
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.AssemblyReference.cache
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\Resources.Inputs.cache
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Avalonia\resources
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.GeneratedMSBuildEditorConfig.editorconfig
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.AssemblyInfoInputs.cache
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.AssemblyInfo.cs
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.CoreCompileInputs.cache
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.sourcelink.json
 F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.csproj.Up2Date
 F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\Saturn UI.genruntimeconfig.cache
 F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\ref\SaturnUI.dll
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\Avalonia.Win32.Automation.dll
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-loongarch64\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-musl-arm\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-musl-arm64\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-musl-loongarch64\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-musl-riscv64\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-riscv64\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\bin\Debug\net10.0\runtimes\linux-x86\native\libHarfBuzzSharp.so
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\SaturnUI.dll
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\refint\SaturnUI.dll
+F:\Saturn-UI\Saturn UI\obj\Debug\net10.0\SaturnUI.pdb

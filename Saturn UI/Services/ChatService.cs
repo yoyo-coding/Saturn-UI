@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Runtime.CompilerServices;
@@ -71,6 +74,11 @@ public class ChatService
             return reply?.Content;
         }
 
+        if (_settings.Settings.Protocol == "OpenAI")
+        {
+            return await SendMessageOpenAiAsync(message, conversationId, ct);
+        }
+
         var url = GetUrl("/chat");
         var requestJson = new Models.ChatRequest
         {
@@ -117,6 +125,13 @@ public class ChatService
                 else if (!string.IsNullOrEmpty(reply.Content))
                     yield return reply.Content;
             }
+            yield break;
+        }
+
+        if (_settings.Settings.Protocol == "OpenAI")
+        {
+            await foreach (var token in SendMessageOpenAiStreamAsync(message, conversationId, ct))
+                yield return token;
             yield break;
         }
 
@@ -171,5 +186,226 @@ public class ChatService
     {
         var baseUrl = _settings.Settings.HttpBaseUrl.TrimEnd('/');
         return $"{baseUrl}{path}";
+    }
+
+    // ==================== OpenAI 兼容 API ====================
+
+    /// <summary>
+    /// 获取 OpenAI API 端点 URL
+    /// </summary>
+    private string GetOpenAiUrl()
+    {
+        var baseUrl = _settings.Settings.OpenAiBaseUrl.TrimEnd('/');
+        return $"{baseUrl}/chat/completions";
+    }
+
+    /// <summary>
+    /// 构建 OpenAI 请求头（包含 API Key 认证）
+    /// </summary>
+    private HttpRequestMessage BuildOpenAiRequest(string json)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Post, GetOpenAiUrl())
+        {
+            Content = new StringContent(json, Encoding.UTF8, "application/json")
+        };
+
+        // 添加 API Key 认证头
+        var apiKey = _settings.Settings.OpenAiApiKey;
+        if (!string.IsNullOrEmpty(apiKey))
+        {
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        }
+
+        return request;
+    }
+
+    /// <summary>
+    /// 处理 OpenAI API 错误响应
+    /// </summary>
+    private string HandleOpenAiError(HttpResponseMessage response, string responseBody)
+    {
+        var statusCode = (int)response.StatusCode;
+
+        // 尝试解析错误信息
+        string? errorMessage = null;
+        try
+        {
+            var error = JsonSerializer.Deserialize<OpenAiError>(responseBody);
+            errorMessage = error?.Message;
+        }
+        catch { }
+
+        var prefix = $"[ERROR]";
+
+        return statusCode switch
+        {
+            401 => $"{prefix}认证失败：请检查 API Key 是否正确",
+            403 => $"{prefix}访问被拒绝：API Key 无权限",
+            404 => $"{prefix}端点不存在：请检查 Base URL 配置",
+            429 => $"{prefix}请求过于频繁：请稍后重试",
+            >= 500 => $"{prefix}服务端错误 ({statusCode}){(errorMessage != null ? $": {errorMessage}" : "")}",
+            _ => $"{prefix}请求失败 ({statusCode}){(errorMessage != null ? $": {errorMessage}" : "")}"
+        };
+    }
+
+    /// <summary>
+    /// OpenAI 非流式调用
+    /// </summary>
+    public async Task<string?> SendMessageOpenAiAsync(string message, string? conversationId, CancellationToken ct = default)
+    {
+        var settings = _settings.Settings;
+
+        if (string.IsNullOrEmpty(settings.OpenAiApiKey))
+        {
+            return "[ERROR]请先在设置中配置 OpenAI API Key";
+        }
+
+        var request = new OpenAiChatRequest
+        {
+            Model = settings.OpenAiModel,
+            Temperature = settings.OpenAiTemperature,
+            MaxTokens = settings.OpenAiMaxTokens,
+            Stream = false,
+            Messages = new List<OpenAiMessage>
+            {
+                new() { Role = "user", Content = message }
+            }
+        };
+
+        var json = JsonSerializer.Serialize(request);
+        using var httpRequest = BuildOpenAiRequest(json);
+
+        try
+        {
+            var response = await _httpClient.SendAsync(httpRequest, ct);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var responseBody = await response.Content.ReadAsStringAsync(ct);
+                return HandleOpenAiError(response, responseBody);
+            }
+
+            var responseJson = await response.Content.ReadAsStringAsync(ct);
+            var result = JsonSerializer.Deserialize<OpenAiChatResponse>(responseJson);
+
+            if (result?.Error != null)
+            {
+                return $"[ERROR]{result.Error.Message}";
+            }
+
+            return result?.Choices?.FirstOrDefault()?.Message?.Content;
+        }
+        catch (HttpRequestException ex)
+        {
+            return $"[ERROR]网络请求失败：{ex.Message}";
+        }
+        catch (TaskCanceledException)
+        {
+            return "[ERROR]请求超时，请检查网络连接";
+        }
+        catch (Exception ex)
+        {
+            return $"[ERROR]未知错误：{ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// OpenAI 流式调用（SSE）
+    /// </summary>
+    public async IAsyncEnumerable<string> SendMessageOpenAiStreamAsync(
+        string message,
+        string? conversationId,
+        [EnumeratorCancellation] CancellationToken ct = default)
+    {
+        var settings = _settings.Settings;
+
+        if (string.IsNullOrEmpty(settings.OpenAiApiKey))
+        {
+            yield return "[ERROR]请先在设置中配置 OpenAI API Key";
+            yield break;
+        }
+
+        var request = new OpenAiChatRequest
+        {
+            Model = settings.OpenAiModel,
+            Temperature = settings.OpenAiTemperature,
+            MaxTokens = settings.OpenAiMaxTokens,
+            Stream = true,
+            Messages = new List<OpenAiMessage>
+            {
+                new() { Role = "user", Content = message }
+            }
+        };
+
+        var json = JsonSerializer.Serialize(request);
+        using var httpRequest = BuildOpenAiRequest(json);
+
+        HttpResponseMessage? response = null;
+        string? httpError = null;
+
+        // 发送请求（不在 try-catch 中 yield）
+        try
+        {
+            response = await _httpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, ct);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var responseBody = await response.Content.ReadAsStringAsync(ct);
+                httpError = HandleOpenAiError(response, responseBody);
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            httpError = $"网络请求失败：{ex.Message}";
+        }
+        catch (TaskCanceledException)
+        {
+            httpError = "请求超时，请检查网络连接";
+        }
+        catch (Exception ex)
+        {
+            httpError = $"未知错误：{ex.Message}";
+        }
+
+        if (httpError != null)
+        {
+            yield return $"[ERROR]{httpError}";
+            yield break;
+        }
+
+        // 读取 SSE 流（无 catch 的 try 块允许 yield）
+        if (response != null)
+        {
+            using var stream = await response.Content.ReadAsStreamAsync(ct);
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+
+            while (!ct.IsCancellationRequested)
+            {
+                var line = await reader.ReadLineAsync(ct);
+                if (line is null) break;
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                if (!line.StartsWith("data:")) continue;
+
+                var data = line.AsSpan(5).Trim().ToString();
+                if (data == "[DONE]") yield break;
+
+                OpenAiStreamChunk? chunk = null;
+                try
+                {
+                    chunk = JsonSerializer.Deserialize<OpenAiStreamChunk>(data);
+                }
+                catch { continue; }
+
+                if (chunk?.Choices == null || chunk.Choices.Count == 0) continue;
+
+                var choice = chunk.Choices[0];
+
+                if (choice.FinishReason != null)
+                    yield break;
+
+                if (!string.IsNullOrEmpty(choice.Delta?.Content))
+                    yield return choice.Delta.Content;
+            }
+        }
     }
 }

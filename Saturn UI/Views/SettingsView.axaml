@@ -36,7 +36,61 @@
                     <ComboBoxItem Content="SSE" />
                     <ComboBoxItem Content="WebSocket" />
                     <ComboBoxItem Content="gRPC" />
+                    <ComboBoxItem Content="OpenAI" />
                 </ComboBox>
+            </StackPanel>
+
+            <Border Classes="Divider" Margin="0,8" />
+
+            <TextBlock Text="OpenAI 配置"
+                       Classes="TitleLarge" />
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="API Key"
+                           Classes="LabelMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                <TextBox Text="{Binding OpenAiApiKey}"
+                         Watermark="sk-..." />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="模型"
+                           Classes="LabelMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                <TextBox Text="{Binding OpenAiModel}"
+                         Watermark="gpt-3.5-turbo" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="Base URL"
+                           Classes="LabelMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                <TextBox Text="{Binding OpenAiBaseUrl}"
+                         Watermark="https://api.openai.com/v1" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="Temperature"
+                           Classes="LabelMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                <Slider Value="{Binding OpenAiTemperature}"
+                        Minimum="0"
+                        Maximum="2"
+                        TickFrequency="0.1"
+                        IsSnapToTickEnabled="True" />
+                <TextBlock Text="{Binding OpenAiTemperature, StringFormat='{}{0:F1}'}"
+                           Classes="BodySmall"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="Max Tokens"
+                           Classes="LabelMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                <NumericUpDown Value="{Binding OpenAiMaxTokens}"
+                               Minimum="1"
+                               Maximum="128000"
+                               HorizontalAlignment="Stretch" />
             </StackPanel>
 
             <Border Classes="Divider" Margin="0,8" />

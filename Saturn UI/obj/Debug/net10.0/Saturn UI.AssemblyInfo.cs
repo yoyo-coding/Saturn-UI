@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SaturnUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bc0951594d242a97d6490fa0a61da777dfd63fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+437df0653c2e81245397a18ea36d0785d458b1e7")]
 [assembly: System.Reflection.AssemblyProductAttribute("SaturnUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SaturnUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
