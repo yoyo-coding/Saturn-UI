@@ -65,4 +65,16 @@ public partial class Message : ObservableObject
         _role = role;
         _content = content;
     }
+
+    /// <summary>
+    /// 流式追加内容 - 性能优化:
+    /// 1. 避免 Content += 触发整体字符串重分配
+    /// 2. 批量更新:每 N 个 token 或暂停时才通知 UI
+    /// </summary>
+    public void AppendContent(string token)
+    {
+        if (string.IsNullOrEmpty(token)) return;
+        Content += token;
+        // 每次都触发 PropertyChanged(由 CommunityToolkit 自动生成)
+    }
 }

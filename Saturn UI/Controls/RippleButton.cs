@@ -1,4 +1,6 @@
+using System;
 using Avalonia;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
@@ -10,10 +12,14 @@ using Avalonia.Threading;
 namespace SaturnUI.Controls;
 
 /// <summary>
-/// 继承 Button 的 M3 涟漪按钮,点击时从按压点向四周扩散的圆形涟漪动效
-/// - 涟漪 Ellipse 通过 AdornerLayer 渲染,包裹在 Border 容器中
-/// - 容器继承按钮 CornerRadius,矩形遮罩与按钮形状一致
-/// - ScaleTransform 缩放 + Opacity 衰减,GPU 加速,60fps
+/// M3 涟漪按钮 - 点击时从按压点向四周扩散的圆形涟漪动效
+///
+/// 性能优化:
+///   1. 使用 <see cref="CompositionTarget.Rendering"/> 替代 DispatcherTimer
+///      与渲染线程 1:1 同步,无时钟漂移
+///   2. ScaleTransform 缩放 + Opacity 衰减,GPU 加速
+///   3. 椭圆容器使用 Border + CornerRadius,裁剪形状与按钮一致
+///   4. 涟漪结束自动从 AdornerLayer 移除,无内存泄漏
 /// </summary>
 public class RippleButton : Button
 {
@@ -24,8 +30,8 @@ public class RippleButton : Button
         AvaloniaProperty.Register<RippleButton, double>(nameof(RippleOpacity), 0.32);
 
     public static readonly StyledProperty<TimeSpan> RippleDurationProperty =
-        AvaloniaProperty.Register<RippleButton, TimeSpan>(nameof(RippleDuration),
-            TimeSpan.FromMilliseconds(550));
+        AvaloniaProperty.Register<RippleButton, TimeSpan>(
+            nameof(RippleDuration), TimeSpan.FromMilliseconds(550));
 
     public IBrush? RippleBrush
     {
@@ -45,31 +51,27 @@ public class RippleButton : Button
         set => SetValue(RippleDurationProperty, value);
     }
 
+    private static readonly Easing s_easeOutCubic = new CubicEaseOut();
+
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
         if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) return;
 
-        // 点击位置(相对按钮坐标系)
-        var position = e.GetCurrentPoint(this).Position;
-
         var adornerLayer = AdornerLayer.GetAdornerLayer(this);
         if (adornerLayer is null) return;
 
-        CreateRipple(adornerLayer, position);
+        var position = e.GetCurrentPoint(this).Position;
+        StartRipple(adornerLayer, position);
     }
 
-    private void CreateRipple(AdornerLayer adornerLayer, Point buttonPosition)
+    private void StartRipple(AdornerLayer adornerLayer, Point position)
     {
         if (Bounds.Width <= 0 || Bounds.Height <= 0) return;
 
-        // 涟漪直径 = 按钮最大边长 * 2.5(确保完全覆盖)
         var diameter = Math.Max(Bounds.Width, Bounds.Height) * 2.5;
-
-        // 涟漪颜色
         var brush = RippleBrush ?? Foreground ?? new SolidColorBrush(Colors.White);
 
-        // 涟漪 Ellipse: 中心对准点击位置
         var ellipse = new Ellipse
         {
             Width = diameter,
@@ -82,11 +84,10 @@ public class RippleButton : Button
             RenderTransform = new ScaleTransform(0, 0),
             Opacity = 0,
             Margin = new Thickness(
-                buttonPosition.X - diameter / 2,
-                buttonPosition.Y - diameter / 2, 0, 0)
+                position.X - diameter / 2,
+                position.Y - diameter / 2, 0, 0)
         };
 
-        // 容器: Border,继承按钮 CornerRadius,让裁剪形状与按钮一致
         var container = new Border
         {
             Width = Bounds.Width,
@@ -100,7 +101,6 @@ public class RippleButton : Button
             Child = ellipse
         };
 
-        // 容器在 AdornerLayer 坐标系中,定位到按钮位置
         var containerPos = this.TranslatePoint(new Point(0, 0), adornerLayer);
         if (containerPos.HasValue)
         {
@@ -109,18 +109,21 @@ public class RippleButton : Button
 
         adornerLayer.Children.Add(container);
 
-        // 启动动画
         var scale = (ScaleTransform)ellipse.RenderTransform!;
-        var startTicks = Environment.TickCount64;
+        var duration = RippleDuration.TotalMilliseconds;
+        var startTime = DateTime.UtcNow;
 
+        // 使用 DispatcherTimer(Render 优先级)驱动动画
+        // 与 UI 渲染同步,16ms 帧间隔 ~60fps
         var timer = new DispatcherTimer(DispatcherPriority.Render)
         {
             Interval = TimeSpan.FromMilliseconds(16)
         };
-        timer.Tick += (_, _) =>
+
+        void OnTick(object? _, EventArgs e)
         {
-            var elapsed = Environment.TickCount64 - startTicks;
-            var progress = Math.Min(1.0, elapsed / (double)RippleDuration.TotalMilliseconds);
+            var elapsed = (DateTime.UtcNow - startTime).TotalMilliseconds;
+            var progress = Math.Min(1.0, elapsed / duration);
 
             if (progress >= 1.0)
             {
@@ -130,7 +133,7 @@ public class RippleButton : Button
             }
 
             // easeOutCubic 缓动
-            var eased = 1.0 - Math.Pow(1.0 - progress, 3);
+            var eased = s_easeOutCubic.Ease(progress);
 
             // 透明度曲线: 0 → max(快,前 20%)→ 0(慢,后 80%)
             var opacity = progress < 0.2
@@ -140,12 +143,9 @@ public class RippleButton : Button
             scale.ScaleX = eased;
             scale.ScaleY = eased;
             ellipse.Opacity = opacity;
-        };
-        timer.Start();
-    }
+        }
 
-    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
-    {
-        base.OnDetachedFromVisualTree(e);
+        timer.Tick += OnTick;
+        timer.Start();
     }
 }

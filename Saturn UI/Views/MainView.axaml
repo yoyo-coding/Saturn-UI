@@ -4,6 +4,8 @@
              x:Class="SaturnUI.Views.MainView"
              x:DataType="vm:MainViewModel">
     <Grid>
-        <ContentControl Content="{Binding CurrentView}" />
+        <TextBlock Text="Single View Platform Placeholder"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
     </Grid>
 </UserControl>

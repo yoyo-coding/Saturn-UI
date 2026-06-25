@@ -1,12 +1,18 @@
+using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SaturnUI.Models;
 
 namespace SaturnUI.ViewModels;
 
+/// <summary>
+/// 主视图模型 - 聚合子 ViewModel,管理主窗口全局状态
+/// </summary>
 public partial class MainViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private ViewModelBase _currentView;
+    public ChatViewModel ChatViewModel { get; }
+    public SessionListViewModel SessionListViewModel { get; }
+    public SettingsViewModel SettingsViewModel { get; }
 
     [ObservableProperty]
     private bool _isSessionPanelOpen = true;
@@ -14,44 +20,43 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isSettingsOpen;
 
-    public ChatViewModel ChatViewModel { get; }
-    public SessionListViewModel SessionListViewModel { get; }
-    public SettingsViewModel SettingsViewModel { get; }
+    [ObservableProperty]
+    private string _currentViewName = "Chat";
 
-    public MainViewModel(ChatViewModel chatVm, SessionListViewModel sessionListVm, SettingsViewModel settingsVm)
+    public MainViewModel(
+        ChatViewModel chatVm,
+        SessionListViewModel sessionListVm,
+        SettingsViewModel settingsVm)
     {
         ChatViewModel = chatVm;
         SessionListViewModel = sessionListVm;
         SettingsViewModel = settingsVm;
-        _currentView = chatVm;
 
-        SessionListViewModel.SessionSelected += (_, session) =>
-        {
-            ChatViewModel.LoadSession(session);
-        };
+        SessionListViewModel.SessionSelected += OnSessionSelected;
+    }
+
+    private void OnSessionSelected(object? sender, Session session)
+    {
+        ChatViewModel.LoadSession(session);
+        CurrentViewName = "Chat";
     }
 
     [RelayCommand]
-    private void ToggleSessionPanel()
-    {
-        IsSessionPanelOpen = !IsSessionPanelOpen;
-    }
+    private void ToggleSessionPanel() => IsSessionPanelOpen = !IsSessionPanelOpen;
 
     [RelayCommand]
-    private void OpenSettings()
-    {
-        IsSettingsOpen = true;
-    }
+    private void OpenSettings() => IsSettingsOpen = true;
 
     [RelayCommand]
-    private void CloseSettings()
-    {
-        IsSettingsOpen = false;
-    }
+    private void CloseSettings() => IsSettingsOpen = false;
 
     [RelayCommand]
-    private void NewChat()
+    private void NewChat() => ChatViewModel.NewSession();
+
+    protected override void DisposeCore()
     {
-        ChatViewModel.NewSession();
+        SessionListViewModel.SessionSelected -= OnSessionSelected;
+        ChatViewModel.Dispose();
+        SettingsViewModel.Dispose();
     }
 }
