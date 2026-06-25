@@ -4,6 +4,7 @@
              xmlns:models="using:SaturnUI.Models"
              xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:controls="using:SaturnUI.Controls"
+             xmlns:converters="using:SaturnUI.Converters"
              x:Class="SaturnUI.Views.SessionListView"
              x:DataType="vm:SessionListViewModel"
              x:Name="RootView">
@@ -47,7 +48,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="models:Session">
                         <controls:RippleSelectableItem
-                            IsSelected="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectedSession, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={Binding}, Mode=TwoWay}"
+                            IsSelected="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectedSession, Converter={x:Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Binding}, Mode=OneWay}"
                             Command="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectSessionCommand}"
                             CommandParameter="{Binding}">
                             <Grid ColumnDefinitions="*,Auto">

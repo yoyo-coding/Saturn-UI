@@ -389,11 +389,22 @@
         <Setter Property="Margin" Value="4,2" />
         <Setter Property="RippleOpacity" Value="0.24" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
     </Style>
     <Style Selector="controls|RippleSelectableItem:pointerover">
         <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
     </Style>
+    <!-- 选中状态: 强视觉指示 - 容器背景 + OnSecondaryContainer 文字色 -->
     <Style Selector="controls|RippleSelectableItem:selected">
         <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
+        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
+    </Style>
+    <Style Selector="controls|RippleSelectableItem:selected TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
+    </Style>
+    <!-- 选中时时间文字弱化 -->
+    <Style Selector="controls|RippleSelectableItem:selected TextBlock.BodySmall">
+        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
+        <Setter Property="Opacity" Value="0.7" />
     </Style>
 </Styles>
