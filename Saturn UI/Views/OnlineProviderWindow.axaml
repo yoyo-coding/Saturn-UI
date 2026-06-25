@@ -1,0 +1,91 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SaturnUI.ViewModels"
+        xmlns:controls="using:SaturnUI.Controls"
+        xmlns:materialIcons="using:Material.Icons.Avalonia"
+        x:Class="SaturnUI.Views.OnlineProviderWindow"
+        x:DataType="vm:SettingsViewModel"
+        Title="OpenAI 兼容配置"
+        Background="{DynamicResource M3Surface}"
+        Foreground="{DynamicResource M3OnSurface}"
+        Width="500" Height="500"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24,16" Spacing="16">
+                <TextBlock Text="OpenAI 兼容配置"
+                           Classes="TitleLarge" />
+
+                <TextBlock Text="支持 OpenAI、Azure OpenAI、Ollama、vLLM、LM Studio 等"
+                           Classes="BodyMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="API Key"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <TextBox Text="{Binding OpenAiApiKey}"
+                             Watermark="sk-..." />
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="模型"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <TextBox Text="{Binding OpenAiModel}"
+                             Watermark="gpt-3.5-turbo" />
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Base URL"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <TextBox Text="{Binding OpenAiBaseUrl}"
+                             Watermark="https://api.openai.com/v1" />
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Temperature"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <Slider Value="{Binding OpenAiTemperature}"
+                            Minimum="0"
+                            Maximum="2"
+                            TickFrequency="0.1"
+                            IsSnapToTickEnabled="True" />
+                    <TextBlock Text="{Binding OpenAiTemperature, StringFormat='{}{0:F1}'}"
+                               Classes="BodySmall"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Max Tokens"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <NumericUpDown Value="{Binding OpenAiMaxTokens}"
+                                   Minimum="1"
+                                   Maximum="128000"
+                                   HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="1"
+                Background="{DynamicResource M3SurfaceContainerHigh}"
+                Padding="16">
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right">
+                <controls:RippleButton Classes="Filled"
+                        Click="OnSaveClick"
+                        Padding="24,10">
+                    <TextBlock Text="保存" />
+                </controls:RippleButton>
+                <controls:RippleButton Classes="Outlined"
+                        Click="OnCancelClick"
+                        Padding="24,10">
+                    <TextBlock Text="取消" />
+                </controls:RippleButton>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

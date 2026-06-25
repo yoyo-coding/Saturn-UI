@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SaturnUI.ViewModels"
+        xmlns:controls="using:SaturnUI.Controls"
+        xmlns:materialIcons="using:Material.Icons.Avalonia"
+        x:Class="SaturnUI.Views.LocalProviderWindow"
+        x:DataType="vm:SettingsViewModel"
+        Title="本地后端配置"
+        Background="{DynamicResource M3Surface}"
+        Foreground="{DynamicResource M3OnSurface}"
+        Width="500" Height="400"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="24,16" Spacing="16">
+                <TextBlock Text="本地后端配置"
+                           Classes="TitleLarge" />
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="HTTP 地址"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <TextBox Text="{Binding HttpBaseUrl}" />
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="gRPC 地址"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <TextBox Text="{Binding GrpcAddress}" />
+                </StackPanel>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="通信协议"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <ComboBox SelectedItem="{Binding Protocol}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBoxItem Content="HTTP" />
+                        <ComboBoxItem Content="SSE" />
+                        <ComboBoxItem Content="WebSocket" />
+                        <ComboBoxItem Content="gRPC" />
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="1"
+                Background="{DynamicResource M3SurfaceContainerHigh}"
+                Padding="16">
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right">
+                <controls:RippleButton Classes="Filled"
+                        Click="OnSaveClick"
+                        Padding="24,10">
+                    <TextBlock Text="保存" />
+                </controls:RippleButton>
+                <controls:RippleButton Classes="Outlined"
+                        Click="OnCancelClick"
+                        Padding="24,10">
+                    <TextBlock Text="取消" />
+                </controls:RippleButton>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

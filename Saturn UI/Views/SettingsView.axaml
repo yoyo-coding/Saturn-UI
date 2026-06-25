@@ -9,92 +9,54 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   Background="{DynamicResource M3Background}">
         <StackPanel Margin="24,16" Spacing="16" MaxWidth="600">
-            <TextBlock Text="后端配置"
+
+            <!-- 提供商选择 -->
+            <TextBlock Text="提供商"
                        Classes="TitleLarge" />
 
             <StackPanel Spacing="8">
-                <TextBlock Text="HTTP 地址"
+                <TextBlock Text="选择 AI 服务提供商"
                            Classes="LabelMedium"
                            Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <TextBox Text="{Binding HttpBaseUrl}" />
+                <ComboBox ItemsSource="{Binding AvailableProviders}"
+                          SelectedItem="{Binding Provider}"
+                          HorizontalAlignment="Stretch" />
             </StackPanel>
 
+            <!-- 提供商配置入口 -->
             <StackPanel Spacing="8">
-                <TextBlock Text="gRPC 地址"
+                <TextBlock Text="提供商配置"
                            Classes="LabelMedium"
                            Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <TextBox Text="{Binding GrpcAddress}" />
+                <controls:RippleButton Classes="Filled"
+                        Command="{Binding OpenProviderConfigCommand}"
+                        Padding="16,10"
+                        HorizontalAlignment="Stretch">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding ProviderConfigButtonText}"
+                                   Classes="BodyLarge"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </controls:RippleButton>
             </StackPanel>
 
-            <StackPanel Spacing="8">
-                <TextBlock Text="通信协议"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <ComboBox SelectedItem="{Binding Protocol}"
-                          HorizontalAlignment="Stretch">
-                    <ComboBoxItem Content="HTTP" />
-                    <ComboBoxItem Content="SSE" />
-                    <ComboBoxItem Content="WebSocket" />
-                    <ComboBoxItem Content="gRPC" />
-                    <ComboBoxItem Content="OpenAI" />
-                </ComboBox>
-            </StackPanel>
+            <!-- 当前提供商状态 -->
+            <Border Background="{DynamicResource M3SurfaceContainerHigh}"
+                    CornerRadius="12"
+                    Padding="16">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="当前配置"
+                               Classes="LabelMedium"
+                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <TextBlock Text="{Binding CurrentProviderStatus}"
+                               Classes="BodyMedium" />
+                </StackPanel>
+            </Border>
 
             <Border Classes="Divider" Margin="0,8" />
 
-            <TextBlock Text="OpenAI 配置"
-                       Classes="TitleLarge" />
-
-            <StackPanel Spacing="8">
-                <TextBlock Text="API Key"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <TextBox Text="{Binding OpenAiApiKey}"
-                         Watermark="sk-..." />
-            </StackPanel>
-
-            <StackPanel Spacing="8">
-                <TextBlock Text="模型"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <TextBox Text="{Binding OpenAiModel}"
-                         Watermark="gpt-3.5-turbo" />
-            </StackPanel>
-
-            <StackPanel Spacing="8">
-                <TextBlock Text="Base URL"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <TextBox Text="{Binding OpenAiBaseUrl}"
-                         Watermark="https://api.openai.com/v1" />
-            </StackPanel>
-
-            <StackPanel Spacing="8">
-                <TextBlock Text="Temperature"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <Slider Value="{Binding OpenAiTemperature}"
-                        Minimum="0"
-                        Maximum="2"
-                        TickFrequency="0.1"
-                        IsSnapToTickEnabled="True" />
-                <TextBlock Text="{Binding OpenAiTemperature, StringFormat='{}{0:F1}'}"
-                           Classes="BodySmall"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-            </StackPanel>
-
-            <StackPanel Spacing="8">
-                <TextBlock Text="Max Tokens"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <NumericUpDown Value="{Binding OpenAiMaxTokens}"
-                               Minimum="1"
-                               Maximum="128000"
-                               HorizontalAlignment="Stretch" />
-            </StackPanel>
-
-            <Border Classes="Divider" Margin="0,8" />
-
+            <!-- 外观 -->
             <TextBlock Text="外观"
                        Classes="TitleLarge" />
 

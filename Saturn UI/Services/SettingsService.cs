@@ -13,6 +13,9 @@ public class AppSettings
     public double FontSize { get; set; } = 14;
     public bool PerformanceMode { get; set; } = false;
 
+    // 提供商选择：本地 / 在线
+    public string Provider { get; set; } = "本地";
+
     // OpenAI 兼容 API 配置
     public string OpenAiApiKey { get; set; } = "";
     public string OpenAiModel { get; set; } = "gpt-3.5-turbo";

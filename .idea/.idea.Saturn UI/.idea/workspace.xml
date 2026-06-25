@@ -14,72 +14,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5c8fce0-d931-42d9-9d6a-c628c748afc4" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Base.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Base.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Controls.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Controls.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.DesignerSupport.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.DesignerSupport.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Desktop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Desktop.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Dialogs.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Dialogs.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Fonts.Inter.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Fonts.Inter.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.FreeDesktop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.FreeDesktop.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Markup.Xaml.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Markup.Xaml.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Markup.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Markup.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Metal.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Metal.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.MicroCom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.MicroCom.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Native.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Native.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.OpenGL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.OpenGL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Remote.Protocol.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Remote.Protocol.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Skia.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Skia.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Themes.Fluent.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Themes.Fluent.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Vulkan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Vulkan.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Win32.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.Win32.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.X11.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.X11.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Avalonia.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/HarfBuzzSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/HarfBuzzSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Tmds.DBus.Protocol.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/Tmds.DBus.Protocol.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-arm/native/libHarfBuzzSharp.so" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-arm/native/libHarfBuzzSharp.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-arm64/native/libHarfBuzzSharp.so" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-arm64/native/libHarfBuzzSharp.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-musl-x64/native/libHarfBuzzSharp.so" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-musl-x64/native/libHarfBuzzSharp.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-x64/native/libHarfBuzzSharp.so" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/linux-x64/native/libHarfBuzzSharp.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/osx/native/libAvaloniaNative.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/osx/native/libAvaloniaNative.dylib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/osx/native/libHarfBuzzSharp.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/osx/native/libHarfBuzzSharp.dylib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-arm64/native/av_libglesv2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-arm64/native/av_libglesv2.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-arm64/native/libHarfBuzzSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-arm64/native/libHarfBuzzSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x64/native/av_libglesv2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x64/native/av_libglesv2.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x64/native/libHarfBuzzSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x64/native/libHarfBuzzSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x86/native/av_libglesv2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x86/native/av_libglesv2.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x86/native/libHarfBuzzSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/runtimes/win-x86/native/libHarfBuzzSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/Resources.Inputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/Resources.Inputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/SaturnUI.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/SaturnUI.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/references" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/references" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/resources" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/resources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/ref/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/ref/SaturnUI.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/Avalonia/SaturnUI.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/SaturnUI.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Saturn UI.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +111,7 @@
       <workItem from="1782385003339" duration="1047000" />
       <workItem from="1782386084050" duration="1529000" />
       <workItem from="1782388210253" duration="36000" />
+      <workItem from="1782388776891" duration="45000" />
     </task>
     <servers />
   </component>
