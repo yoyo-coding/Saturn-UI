@@ -110,18 +110,25 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <!-- Input Area (M3 Bottom App Bar / Search Bar) -->
-        <Border Grid.Row="1"
-                Background="{DynamicResource M3SurfaceContainer}"
-                BorderBrush="{DynamicResource M3OutlineVariant}"
-                BorderThickness="0,1,0,0"
-                Padding="16,12">
-            <Grid RowDefinitions="Auto,Auto">
-                <!-- Pending Attachment -->
+        <!-- 悬浮输入框区域(M3 Floating Chat Bar) -->
+        <Grid Grid.Row="1">
+            <!-- 顶部阴影渐变: 让消息内容自然渐隐到输入框 -->
+            <Border Height="32" VerticalAlignment="Top" IsHitTestVisible="False">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="Transparent" />
+                        <GradientStop Offset="1" Color="{Binding $parent[Window].Background}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <!-- 输入框容器: 附件预览 + 输入框,贴底悬浮 -->
+            <Grid VerticalAlignment="Bottom" Margin="16,0,16,12" RowDefinitions="Auto,Auto">
+                <!-- Pending Attachment Chip -->
                 <Border Grid.Row="0"
                         IsVisible="{Binding PendingAttachmentName, Converter={x:Static ObjectConverters.IsNotNull}}"
                         Classes="Card Filled"
-                        Margin="0,0,0,8">
+                        Margin="4,0,4,8">
                     <Grid ColumnDefinitions="*,Auto">
                         <StackPanel Grid.Column="0"
                                     Orientation="Horizontal"
@@ -144,39 +151,52 @@
                     </Grid>
                 </Border>
 
-                <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto">
-                    <TextBox Grid.Column="0"
-                         Text="{Binding InputText}"
-                         Watermark="输入消息... (Shift+Enter 换行, Ctrl+Enter 发送)"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         MaxHeight="120"
-                         VerticalContentAlignment="Top">
-                    <TextBox.KeyBindings>
-                        <KeyBinding Gesture="Ctrl+Enter"
-                                    Command="{Binding SendMessageCommand}" />
-                    </TextBox.KeyBindings>
-                </TextBox>
+                <!-- 悬浮输入框: 圆角 + 阴影 + 集成发送按钮 -->
+                <Border Grid.Row="1"
+                        Background="{DynamicResource M3SurfaceContainer}"
+                        BorderBrush="{DynamicResource M3OutlineVariant}"
+                        BorderThickness="1"
+                        CornerRadius="28"
+                        Padding="4"
+                        BoxShadow="0 2 12 0 #30000000">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <!-- TextBox: 透明背景,无边距,与容器融为一体 -->
+                        <TextBox Grid.Column="0"
+                                 Text="{Binding InputText}"
+                                 Watermark="输入消息... (Shift+Enter 换行, Ctrl+Enter 发送)"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 MaxHeight="120"
+                                 VerticalContentAlignment="Center"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Padding="20,12">
+                            <TextBox.KeyBindings>
+                                <KeyBinding Gesture="Ctrl+Enter"
+                                            Command="{Binding SendMessageCommand}" />
+                            </TextBox.KeyBindings>
+                        </TextBox>
 
-                    <controls:RippleButton Grid.Column="1"
-                            Classes="FilledTonal Icon"
-                            Command="{Binding StopGenerationCommand}"
-                            IsVisible="{Binding IsBusy}"
-                            Margin="8,0,0,0"
-                            ToolTip.Tip="停止生成">
-                        <materialIcons:MaterialIcon Kind="Stop" Width="20" Height="20" />
-                    </controls:RippleButton>
-
-                    <controls:RippleButton Grid.Column="2"
-                            Classes="Filled Icon"
-                            Command="{Binding SendMessageCommand}"
-                            IsVisible="{Binding !IsBusy}"
-                            Margin="8,0,0,0"
-                            ToolTip.Tip="发送 (Ctrl+Enter)">
-                        <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
-                    </controls:RippleButton>
-                </Grid>
+                        <!-- 发送 / 停止 按钮: 圆形,集成在输入框右侧 -->
+                        <controls:RippleButton Grid.Column="1"
+                                Classes="Filled Icon"
+                                Command="{Binding SendMessageCommand}"
+                                IsVisible="{Binding !IsBusy}"
+                                Margin="4"
+                                ToolTip.Tip="发送 (Ctrl+Enter)">
+                            <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
+                        </controls:RippleButton>
+                        <controls:RippleButton Grid.Column="1"
+                                Classes="FilledTonal Icon"
+                                Command="{Binding StopGenerationCommand}"
+                                IsVisible="{Binding IsBusy}"
+                                Margin="4"
+                                ToolTip.Tip="停止生成">
+                            <materialIcons:MaterialIcon Kind="Stop" Width="20" Height="20" />
+                        </controls:RippleButton>
+                    </Grid>
+                </Border>
             </Grid>
-        </Border>
+        </Grid>
     </Grid>
 </UserControl>
