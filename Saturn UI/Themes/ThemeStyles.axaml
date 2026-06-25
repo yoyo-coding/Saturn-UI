@@ -114,18 +114,19 @@
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimary}" />
     </Style>
     <Style Selector="Button.Filled:pointerover /template/ ContentPresenter, controls|RippleButton.Filled:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-        <Setter Property="Opacity" Value="0.92" />
+        <Setter Property="Background" Value="{DynamicResource M3FilledHover}" />
     </Style>
     <Style Selector="Button.Filled:pressed /template/ ContentPresenter, controls|RippleButton.Filled:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-        <Setter Property="Opacity" Value="0.88" />
+        <Setter Property="Background" Value="{DynamicResource M3FilledPressed}" />
     </Style>
 
     <!-- Tonal Button - 色调按钮 -->
     <Style Selector="Button.Tonal, controls|RippleButton.Tonal">
         <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
+    </Style>
+    <Style Selector="Button.Tonal:pointerover /template/ ContentPresenter, controls|RippleButton.Tonal:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
     </Style>
 
     <!-- Outlined Button - 轮廓按钮 -->
@@ -135,12 +136,18 @@
         <Setter Property="BorderBrush" Value="{DynamicResource M3Outline}" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
+    <Style Selector="Button.Outlined:pointerover /template/ ContentPresenter, controls|RippleButton.Outlined:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
+    </Style>
 
     <!-- Text Button - 文本按钮(默认) -->
     <Style Selector="Button.Text, controls|RippleButton.Text">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
         <Setter Property="Padding" Value="12,8" />
+    </Style>
+    <Style Selector="Button.Text:pointerover /template/ ContentPresenter, controls|RippleButton.Text:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
     </Style>
 
     <!-- Icon Button - 圆形图标按钮 -->
@@ -152,14 +159,16 @@
         <Setter Property="CornerRadius" Value="20" />
     </Style>
     <Style Selector="Button.Icon:pointerover /template/ ContentPresenter, controls|RippleButton.Icon:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-        <Setter Property="Opacity" Value="0.12" />
+        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
     </Style>
 
     <!-- Filled Tonal Icon Button -->
     <Style Selector="Button.FilledTonal, controls|RippleButton.FilledTonal">
         <Setter Property="Background" Value="{DynamicResource M3PrimaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimaryContainer}" />
+    </Style>
+    <Style Selector="Button.FilledTonal:pointerover /template/ ContentPresenter, controls|RippleButton.FilledTonal:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
     </Style>
 
     <!-- ===== TextBox - M3 填充式输入框 ===== -->
@@ -312,6 +321,9 @@
         <Setter Property="CornerRadius" Value="16" />
         <Setter Property="Background" Value="{DynamicResource M3PrimaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimaryContainer}" />
+    </Style>
+    <Style Selector="Button.FAB:pointerover /template/ ContentPresenter, controls|RippleButton.FAB:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
     </Style>
     <Style Selector="Button.FAB.Extended, controls|RippleButton.FAB.Extended">
         <Setter Property="Width" Value="NaN" />

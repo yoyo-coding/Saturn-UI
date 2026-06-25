@@ -254,6 +254,12 @@
         <!-- Hover/Focus 状态层 -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1F67E8F9" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FB8F4FF" />
+        <!-- Filled Button hover/pressed -->
+        <SolidColorBrush x:Key="M3FilledHover" Color="#5FDAEA" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#5BD3E3" />
+        <!-- FilledTonal/Tonal/FAB hover/pressed -->
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#0F5B67" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#16626E" />
     </ResourceDictionary>
 
     <!-- 主题:星云粉 -->
@@ -350,5 +356,11 @@
         <!-- Hover/Focus 状态层 -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FC4C0FF" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FE3DFFF" />
+        <!-- Filled Button hover/pressed -->
+        <SolidColorBrush x:Key="M3FilledHover" Color="#B6B3F3" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#B0ACED" />
+        <!-- FilledTonal/Tonal/FAB hover/pressed -->
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#413D86" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#48448C" />
     </ResourceDictionary>
 </ResourceDictionary>
