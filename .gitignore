@@ -1,0 +1,206 @@
+# =============================================================================
+# Saturn UI .gitignore
+# 针对 Avalonia 11 + .NET 10 + JetBrains Rider + VSCode 组合
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# .NET / C# 编译产物
+# -----------------------------------------------------------------------------
+bin/
+obj/
+out/
+publish/
+artifacts/
+
+# 编译输出
+*.dll
+*.exe
+*.pdb
+*.so
+*.dylib
+*.dll.config
+*.exe.config
+*.exe.mdb
+*.dll.mdb
+
+# NuGet 还原
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+*.nupkg.info
+*.nupkg.spec
+*.lock.json
+
+# Visual Studio / Rider 项目缓存
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+*.userosscache
+*.sln.ide
+*.csproj.user
+*.csproj.user.*
+
+# .NET Core 运行时配置
+*.runtimeconfig.json.bak
+app.config
+app.amo
+app.config
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Ll]og/
+[Ll]ogs/
+
+# 测试结果
+TestResults/
+[Tt]est[Rr]esult*/
+*.coverage
+*.coveragexml
+.coverage
+.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+*.cover
+*.cover.xml
+*.coverage.html
+*.coverage.xml
+
+# MSTest / xUnit / NUnit
+[Tt]est[Rr]esult*/
+*.testsettings
+*.vsmdi
+
+# 单元测试 / 集成测试输出
+*.trx
+*.coverage
+*.coveragexml
+*.testlog
+
+# -----------------------------------------------------------------------------
+# Avalonia 特定
+# -----------------------------------------------------------------------------
+# Avalonia.Generators 编译输出
+Avalonia.Generators.Compiled.dll
+Generated\Pages\
+.generated\
+
+# Avalonia Designer 缓存
+.designer/
+Designer.avalonia
+
+# Avalonia 资源缓存
+*.cache
+Resources.Inputs.cache
+*.resources.cache
+
+# -----------------------------------------------------------------------------
+# IDE
+# -----------------------------------------------------------------------------
+
+# JetBrains Rider / IntelliJ
+.idea/
+*.sln.iml
+*.csproj.iml
+
+# Visual Studio Code
+.vscode/
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Visual Studio
+.vs/
+.vscode/
+*.swp
+*.swo
+
+# -----------------------------------------------------------------------------
+# 操作系统
+# -----------------------------------------------------------------------------
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.url
+[Bb]ackup*/
+*.[Bb]ak
+*.orig
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# -----------------------------------------------------------------------------
+# 本地构建 / 用户配置
+# -----------------------------------------------------------------------------
+*.local
+*.local.json
+appsettings.*.local.json
+secrets.json
+appsettings.Development.json
+
+# 数据库 / 缓存数据 (Saturn UI 用 LiteDB 存储会话)
+*.ldb
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+Data/
+storage/
+sessions.db
+*.localstorage
+
+# 日志
+*.log
+*.log.*
+
+# 临时文件
+tmp/
+temp/
+.cache/
+.tmp/
+*.tmp
+*.temp
+
+# -----------------------------------------------------------------------------
+# 截屏 / 设计素材 (本地非仓库资产)
+# -----------------------------------------------------------------------------
+# 注释掉的: 如果你希望 design mocks 进库就保留, 否则忽略
+# *-preview.png
+# *.sketch
+# *.fig
+
+# -----------------------------------------------------------------------------
+# NuGet
+# -----------------------------------------------------------------------------
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
