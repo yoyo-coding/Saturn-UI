@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using SaturnUI.Services;
 
 namespace SaturnUI.Views;
 
@@ -24,7 +25,7 @@ public partial class MainWindow : Window
     /// </summary>
     public void SetSplashIcon(string theme)
     {
-        var isLight = theme == "Daylight";
+        var isLight = ThemeDefinitions.IsLightTheme(theme);
         var iconName = isLight
             ? "avares://SaturnUI/Themes/icon/icon_light.png"
             : "avares://SaturnUI/Themes/icon/icon_dark.png";

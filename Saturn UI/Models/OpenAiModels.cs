@@ -5,7 +5,7 @@ namespace SaturnUI.Models;
 
 /// <summary>
 /// OpenAI Chat Completions API 请求模型
-/// 兼容 OpenAI 官方 API、Azure OpenAI、Ollama、vLLM、LM Studio 等
+/// 兼容 OpenAI 官方 API、Azure OpenAI、vLLM、LM Studio 等
 /// </summary>
 public class OpenAiChatRequest
 {

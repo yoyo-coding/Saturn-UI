@@ -1,11 +1,35 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:vm="using:SaturnUI.ViewModels"
              x:Class="SaturnUI.Views.MainView"
              x:DataType="vm:MainViewModel">
-    <Grid>
-        <TextBlock Text="Single View Platform Placeholder"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+    <Grid Background="{DynamicResource M3Background}">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="16">
+            <Border Width="64"
+                    Height="64"
+                    CornerRadius="20"
+                    Background="{DynamicResource M3PrimaryContainer}">
+                <materialIcons:MaterialIcon Kind="Planet"
+                                            Width="36"
+                                            Height="36"
+                                            Foreground="{DynamicResource M3OnPrimaryContainer}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" />
+            </Border>
+            <StackPanel Spacing="4"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Saturn UI"
+                           Classes="TitleLarge"
+                           Foreground="{DynamicResource M3OnSurface}"
+                           HorizontalAlignment="Center" />
+                <TextBlock Text="正在准备界面"
+                           Classes="BodyMedium"
+                           Foreground="{DynamicResource M3OnSurfaceVariant}"
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

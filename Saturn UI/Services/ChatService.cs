@@ -50,9 +50,11 @@ public sealed class ChatService : IDisposable
 
     private IChatProvider GetProvider()
     {
-        var protocol = _settings.Settings.Provider == "在线"
-            ? OpenAiChatProvider.ProtocolName
-            : _settings.Settings.Protocol;
+        var protocol = _settings.Settings.Provider switch
+        {
+            "在线" => OpenAiChatProvider.ProtocolName,
+            _ => _settings.Settings.Protocol
+        };
         return _providers.TryGetValue(protocol, out var p)
             ? p
             : _providers[HttpChatProvider.ProtocolName];

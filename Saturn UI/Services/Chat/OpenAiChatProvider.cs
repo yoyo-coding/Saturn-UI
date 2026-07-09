@@ -15,7 +15,7 @@ namespace SaturnUI.Services.Chat;
 
 /// <summary>
 /// OpenAI 兼容 API 协议提供器
-/// 支持 OpenAI 官方、Azure OpenAI、Ollama、vLLM、LM Studio 等
+/// 支持 OpenAI 官方、Azure OpenAI、vLLM、LM Studio 等
 /// </summary>
 public sealed class OpenAiChatProvider : IChatProvider
 {

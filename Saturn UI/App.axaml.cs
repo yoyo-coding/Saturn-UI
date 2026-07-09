@@ -77,7 +77,7 @@ public partial class App : Application
     {
         try
         {
-            var isLight = theme == "Daylight";
+            var isLight = ThemeDefinitions.IsLightTheme(theme);
             var iconName = isLight
                 ? "avares://SaturnUI/Themes/icon/icon_light.png"
                 : "avares://SaturnUI/Themes/icon/icon_dark.png";

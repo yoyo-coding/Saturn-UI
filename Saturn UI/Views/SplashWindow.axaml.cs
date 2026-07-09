@@ -16,7 +16,7 @@ public partial class SplashWindow : Window
 
     public void ApplyTheme(string themeKey)
     {
-        var isLight = themeKey == "Daylight";
+        var isLight = ThemeDefinitions.IsLightTheme(themeKey);
 
         // 背景(M3 主题令牌)
         RootGrid.Background = isLight

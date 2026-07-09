@@ -62,6 +62,10 @@
         <!-- Hover/Focus 状态层(主色叠加 12% alpha,仅作用于背景) -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FA8C7FA" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FD3E3FD" />
+        <SolidColorBrush x:Key="M3FilledHover" Color="#9DBBEE" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#94B1E4" />
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#334F80" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#3A5687" />
     </ResourceDictionary>
 
     <!-- 主题:极昼白 (浅色) -->
@@ -110,6 +114,10 @@
         <!-- Hover/Focus 状态层 -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1F1A56DB" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1F001947" />
+        <SolidColorBrush x:Key="M3FilledHover" Color="#164CC3" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#1246B8" />
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#CCD8F5" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#C2CFEC" />
     </ResourceDictionary>
 
     <!-- 主题:星夜蓝 -->
@@ -158,6 +166,10 @@
         <!-- Hover/Focus 状态层 -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1F7DD3FC" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FCBE6FF" />
+        <SolidColorBrush x:Key="M3FilledHover" Color="#74C6EE" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#6DBDE5" />
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#0A5674" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#125D7B" />
     </ResourceDictionary>
 
     <!-- 主题:极光紫 -->
@@ -206,6 +218,10 @@
         <!-- Hover/Focus 状态层 -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FD0BCFF" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FEADDFF" />
+        <SolidColorBrush x:Key="M3FilledHover" Color="#C2B0F1" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#B9A6E8" />
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#5A4296" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#60499C" />
     </ResourceDictionary>
 
     <!-- 主题:冰川青 -->
@@ -308,6 +324,10 @@
         <!-- Hover/Focus 状态层 -->
         <SolidColorBrush x:Key="M3HoverOverlay" Color="#1FFDA4AF" />
         <SolidColorBrush x:Key="M3FocusOverlay" Color="#1FFFD9E2" />
+        <SolidColorBrush x:Key="M3FilledHover" Color="#EF9AA5" />
+        <SolidColorBrush x:Key="M3FilledPressed" Color="#E5919C" />
+        <SolidColorBrush x:Key="M3FilledTonalHover" Color="#8A3451" />
+        <SolidColorBrush x:Key="M3FilledTonalPressed" Color="#913B58" />
     </ResourceDictionary>
 
     <!-- 主题:午夜靛蓝 -->

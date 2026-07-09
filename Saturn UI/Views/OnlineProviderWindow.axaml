@@ -17,7 +17,7 @@
                 <TextBlock Text="OpenAI 兼容配置"
                            Classes="TitleLarge" />
 
-                <TextBlock Text="支持 OpenAI、Azure OpenAI、Ollama、vLLM、LM Studio 等"
+                <TextBlock Text="支持 OpenAI、Azure OpenAI、vLLM、LM Studio 等"
                            Classes="BodyMedium"
                            Foreground="{DynamicResource M3OnSurfaceVariant}" />
 

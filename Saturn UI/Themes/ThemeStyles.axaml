@@ -128,6 +128,9 @@
     <Style Selector="Button.Tonal:pointerover /template/ ContentPresenter, controls|RippleButton.Tonal:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
     </Style>
+    <Style Selector="Button.Tonal:pressed /template/ ContentPresenter, controls|RippleButton.Tonal:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FilledTonalPressed}" />
+    </Style>
 
     <!-- Outlined Button - 轮廓按钮 -->
     <Style Selector="Button.Outlined, controls|RippleButton.Outlined">
@@ -139,6 +142,9 @@
     <Style Selector="Button.Outlined:pointerover /template/ ContentPresenter, controls|RippleButton.Outlined:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
     </Style>
+    <Style Selector="Button.Outlined:pressed /template/ ContentPresenter, controls|RippleButton.Outlined:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FocusOverlay}" />
+    </Style>
 
     <!-- Text Button - 文本按钮(默认) -->
     <Style Selector="Button.Text, controls|RippleButton.Text">
@@ -148,6 +154,9 @@
     </Style>
     <Style Selector="Button.Text:pointerover /template/ ContentPresenter, controls|RippleButton.Text:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
+    </Style>
+    <Style Selector="Button.Text:pressed /template/ ContentPresenter, controls|RippleButton.Text:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FocusOverlay}" />
     </Style>
 
     <!-- Icon Button - 圆形图标按钮 -->
@@ -161,6 +170,9 @@
     <Style Selector="Button.Icon:pointerover /template/ ContentPresenter, controls|RippleButton.Icon:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
     </Style>
+    <Style Selector="Button.Icon:pressed /template/ ContentPresenter, controls|RippleButton.Icon:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FocusOverlay}" />
+    </Style>
 
     <!-- Filled Tonal Icon Button -->
     <Style Selector="Button.FilledTonal, controls|RippleButton.FilledTonal">
@@ -169,6 +181,9 @@
     </Style>
     <Style Selector="Button.FilledTonal:pointerover /template/ ContentPresenter, controls|RippleButton.FilledTonal:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
+    </Style>
+    <Style Selector="Button.FilledTonal:pressed /template/ ContentPresenter, controls|RippleButton.FilledTonal:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FilledTonalPressed}" />
     </Style>
 
     <!-- ===== TextBox - M3 填充式输入框 ===== -->
@@ -347,6 +362,9 @@
     </Style>
     <Style Selector="Button.FAB:pointerover /template/ ContentPresenter, controls|RippleButton.FAB:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
+    </Style>
+    <Style Selector="Button.FAB:pressed /template/ ContentPresenter, controls|RippleButton.FAB:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource M3FilledTonalPressed}" />
     </Style>
     <Style Selector="Button.FAB.Extended, controls|RippleButton.FAB.Extended">
         <Setter Property="Width" Value="NaN" />
