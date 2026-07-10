@@ -1,16 +1,21 @@
+using System;
 using System.Collections.Generic;
-using System.Windows.Input;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SaturnUI.Services;
 
 namespace SaturnUI.ViewModels;
 
+public sealed record ColorPaletteOption(string Name, string Color)
+{
+    public IBrush Brush => new SolidColorBrush(Avalonia.Media.Color.Parse(Color));
+}
+
 public partial class SettingsViewModel : ViewModelBase
 {
     private readonly SettingsService _settingsService;
 
-    // 本地后端配置
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
     private string _httpBaseUrl = AppConstants.DefaultHttpBaseUrl;
@@ -23,24 +28,30 @@ public partial class SettingsViewModel : ViewModelBase
     private string _protocol = AppConstants.ProtocolHttp;
 
     [ObservableProperty]
-    private double _fontSize = 14;
+    private double _fontSize = AppConstants.DefaultFontSize;
 
     [ObservableProperty]
     private bool _performanceMode;
 
     [ObservableProperty]
-    private string _theme = AppConstants.DefaultTheme;
+    [NotifyPropertyChangedFor(nameof(AccentPreviewBrush))]
+    [NotifyPropertyChangedFor(nameof(NormalizedAccentColor))]
+    private string _accentColor = AppConstants.DefaultAccentColor;
 
-    // 提供商选择
+    [ObservableProperty]
+    private bool _useLightTheme = AppConstants.DefaultUseLightTheme;
+
+    [ObservableProperty]
+    private ColorPaletteOption? _selectedAccentOption;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ProviderConfigButtonText))]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
-    private string _provider = "本地";
+    private string _provider = AppConstants.ProviderLocal;
 
-    // OpenAI 兼容 API 配置
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
-    private string _openAiApiKey = "";
+    private string _openAiApiKey = string.Empty;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
@@ -50,36 +61,44 @@ public partial class SettingsViewModel : ViewModelBase
     private string _openAiBaseUrl = AppConstants.DefaultOpenAiBaseUrl;
 
     [ObservableProperty]
-    private double _openAiTemperature = 0.7;
+    private double _openAiTemperature = AppConstants.DefaultTemperature;
 
     [ObservableProperty]
-    private int _openAiMaxTokens = 2048;
+    private int _openAiMaxTokens = AppConstants.DefaultMaxTokens;
 
-    public IReadOnlyList<string> AvailableThemes => ThemeDefinitions.ThemeKeys;
+    public IReadOnlyList<ColorPaletteOption> AccentColorOptions { get; } = new[]
+    {
+        new ColorPaletteOption("暮紫", "#6750A4"),
+        new ColorPaletteOption("星蓝", "#1A73E8"),
+        new ColorPaletteOption("湖青", "#00897B"),
+        new ColorPaletteOption("森林", "#2E7D32"),
+        new ColorPaletteOption("日落", "#E8710A"),
+        new ColorPaletteOption("莓红", "#C2185B"),
+        new ColorPaletteOption("赤陶", "#B3261E"),
+        new ColorPaletteOption("石墨", "#546E7A")
+    };
 
-    public IReadOnlyList<string> AvailableProviders => new[] { "本地", "在线" };
+    public IReadOnlyList<string> AvailableProviders => new[] { AppConstants.ProviderLocal, AppConstants.ProviderOnline };
 
-    /// <summary>
-    /// 提供商配置按钮文本
-    /// </summary>
-    public string ProviderConfigButtonText => Provider == "本地" ? "配置本地后端" : "配置 OpenAI 兼容服务";
+    public IBrush AccentPreviewBrush => new SolidColorBrush(DynamicColorPalette.ParseSeed(AccentColor));
 
-    /// <summary>
-    /// 当前提供商状态显示
-    /// </summary>
+    public string NormalizedAccentColor => DynamicColorPalette.NormalizeHexColor(AccentColor);
+
+    public string ProviderConfigButtonText => Provider == AppConstants.ProviderLocal
+        ? "配置本地后端"
+        : "配置 OpenAI 兼容服务";
+
     public string CurrentProviderStatus
     {
         get
         {
-            if (Provider == "本地")
+            if (Provider == AppConstants.ProviderLocal)
             {
                 return $"本地后端 | 协议：{Protocol} | HTTP：{HttpBaseUrl}";
             }
-            else
-            {
-                var keyStatus = string.IsNullOrEmpty(OpenAiApiKey) ? "未设置" : "已配置";
-                return $"在线服务 | 模型：{OpenAiModel} | API Key：{keyStatus}";
-            }
+
+            var keyStatus = string.IsNullOrWhiteSpace(OpenAiApiKey) ? "未设置" : "已配置";
+            return $"在线服务 | 模型：{OpenAiModel} | API Key：{keyStatus}";
         }
     }
 
@@ -97,7 +116,8 @@ public partial class SettingsViewModel : ViewModelBase
         Protocol = s.Protocol;
         FontSize = s.FontSize;
         PerformanceMode = s.PerformanceMode;
-        Theme = s.Theme;
+        AccentColor = s.AccentColor;
+        UseLightTheme = s.UseLightTheme;
         Provider = s.Provider;
 
         OpenAiApiKey = s.OpenAiApiKey;
@@ -113,6 +133,10 @@ public partial class SettingsViewModel : ViewModelBase
     [RelayCommand]
     public void SaveSettings()
     {
+        var normalizedAccent = DynamicColorPalette.NormalizeHexColor(AccentColor);
+        if (AccentColor != normalizedAccent)
+            AccentColor = normalizedAccent;
+
         _settingsService.Update(s =>
         {
             s.HttpBaseUrl = HttpBaseUrl;
@@ -120,7 +144,8 @@ public partial class SettingsViewModel : ViewModelBase
             s.Protocol = Protocol;
             s.FontSize = FontSize;
             s.PerformanceMode = PerformanceMode;
-            s.Theme = Theme;
+            s.AccentColor = normalizedAccent;
+            s.UseLightTheme = UseLightTheme;
             s.Provider = Provider;
 
             s.OpenAiApiKey = OpenAiApiKey;
@@ -130,8 +155,29 @@ public partial class SettingsViewModel : ViewModelBase
             s.OpenAiMaxTokens = OpenAiMaxTokens;
         });
 
+        OnPropertyChanged(nameof(AccentPreviewBrush));
+        OnPropertyChanged(nameof(NormalizedAccentColor));
         OnPropertyChanged(nameof(ProviderConfigButtonText));
         OnPropertyChanged(nameof(CurrentProviderStatus));
+    }
+
+    [RelayCommand]
+    private void SelectAccentColor(string color)
+    {
+        AccentColor = DynamicColorPalette.NormalizeHexColor(color);
+        SaveSettings();
+    }
+
+    partial void OnSelectedAccentOptionChanged(ColorPaletteOption? value)
+    {
+        if (value is null)
+            return;
+
+        var normalized = DynamicColorPalette.NormalizeHexColor(value.Color);
+        if (AccentColor != normalized)
+            AccentColor = normalized;
+
+        SaveSettings();
     }
 
     [RelayCommand]
@@ -140,23 +186,21 @@ public partial class SettingsViewModel : ViewModelBase
         HttpBaseUrl = AppConstants.DefaultHttpBaseUrl;
         GrpcAddress = AppConstants.DefaultGrpcAddress;
         Protocol = AppConstants.ProtocolHttp;
-        FontSize = 14;
+        FontSize = AppConstants.DefaultFontSize;
         PerformanceMode = false;
-        Theme = AppConstants.DefaultTheme;
-        Provider = "本地";
+        AccentColor = AppConstants.DefaultAccentColor;
+        UseLightTheme = AppConstants.DefaultUseLightTheme;
+        Provider = AppConstants.ProviderLocal;
 
-        OpenAiApiKey = "";
+        OpenAiApiKey = string.Empty;
         OpenAiModel = AppConstants.DefaultOpenAiModel;
         OpenAiBaseUrl = AppConstants.DefaultOpenAiBaseUrl;
-        OpenAiTemperature = 0.7;
-        OpenAiMaxTokens = 2048;
+        OpenAiTemperature = AppConstants.DefaultTemperature;
+        OpenAiMaxTokens = AppConstants.DefaultMaxTokens;
 
         SaveSettings();
     }
 
-    /// <summary>
-    /// 打开提供商配置窗口事件
-    /// </summary>
     public event EventHandler<string>? OpenProviderConfigRequested;
 
     [RelayCommand]
@@ -165,9 +209,6 @@ public partial class SettingsViewModel : ViewModelBase
         OpenProviderConfigRequested?.Invoke(this, Provider);
     }
 
-    /// <summary>
-    /// 刷新状态显示（窗口关闭后调用）
-    /// </summary>
     public void RefreshStatus()
     {
         OnPropertyChanged(nameof(ProviderConfigButtonText));

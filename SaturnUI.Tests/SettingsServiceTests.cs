@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using SaturnUI;
 using SaturnUI.Services;
 
@@ -16,7 +16,7 @@ public class SettingsServiceTests
             HttpBaseUrl = "",
             GrpcAddress = "",
             Protocol = "BAD",
-            Theme = "MissingTheme",
+            AccentColor = "not-a-color",
             FontSize = 99,
             Provider = "unknown",
             OpenAiModel = "",
@@ -30,7 +30,8 @@ public class SettingsServiceTests
         Assert.Equal(AppConstants.DefaultHttpBaseUrl, service.Settings.HttpBaseUrl);
         Assert.Equal(AppConstants.DefaultGrpcAddress, service.Settings.GrpcAddress);
         Assert.Equal(AppConstants.ProtocolHttp, service.Settings.Protocol);
-        Assert.Equal(AppConstants.DefaultTheme, service.Settings.Theme);
+        Assert.Equal(AppConstants.DefaultAccentColor, service.Settings.AccentColor);
+        Assert.Equal(AppConstants.DefaultUseLightTheme, service.Settings.UseLightTheme);
         Assert.Equal(AppConstants.DefaultFontSize, service.Settings.FontSize);
         Assert.Equal(AppConstants.ProviderLocal, service.Settings.Provider);
         Assert.Equal(AppConstants.DefaultOpenAiModel, service.Settings.OpenAiModel);
@@ -47,15 +48,41 @@ public class SettingsServiceTests
 
         service.Update(settings =>
         {
-            settings.Theme = "AuroraPurple";
+            settings.AccentColor = "#00aaff";
+            settings.UseLightTheme = true;
             settings.Provider = AppConstants.ProviderOnline;
             settings.OpenAiModel = "custom-model";
         });
 
         var reloaded = new SettingsService(temp.Path);
 
-        Assert.Equal("AuroraPurple", reloaded.Settings.Theme);
+        Assert.Equal("#00AAFF", reloaded.Settings.AccentColor);
+        Assert.True(reloaded.Settings.UseLightTheme);
         Assert.Equal(AppConstants.ProviderOnline, reloaded.Settings.Provider);
         Assert.Equal("custom-model", reloaded.Settings.OpenAiModel);
+    }
+}
+
+public class DynamicColorPaletteTests
+{
+    [Theory]
+    [InlineData("#abc", "#AABBCC")]
+    [InlineData("0x336699", "#336699")]
+    [InlineData("80336699", "#336699")]
+    [InlineData("nope", DynamicColorPalette.FallbackSeedColor)]
+    public void NormalizeHexColorAcceptsCommonSeedFormats(string input, string expected)
+    {
+        Assert.Equal(expected, DynamicColorPalette.NormalizeHexColor(input));
+    }
+
+    [Fact]
+    public void CreateDerivesDifferentLightAndDarkSurfaceColors()
+    {
+        var dark = DynamicColorPalette.Create("#6750A4", useLightTheme: false);
+        var light = DynamicColorPalette.Create("#6750A4", useLightTheme: true);
+
+        Assert.NotEqual(dark.Surface, light.Surface);
+        Assert.NotEqual(dark.Primary, light.Primary);
+        Assert.NotEqual(dark.PrimaryContainer, light.PrimaryContainer);
     }
 }

@@ -4,7 +4,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
-using SaturnUI.Services;
 
 namespace SaturnUI.Views;
 
@@ -21,12 +20,11 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 设置启动画面图标(由 App.axaml.cs 在初始化时调用)
+    /// Sets the splash icon according to the current light/dark appearance.
     /// </summary>
-    public void SetSplashIcon(string theme)
+    public void SetSplashIcon(bool useLightTheme)
     {
-        var isLight = ThemeDefinitions.IsLightTheme(theme);
-        var iconName = isLight
+        var iconName = useLightTheme
             ? "avares://SaturnUI/Themes/icon/icon_light.png"
             : "avares://SaturnUI/Themes/icon/icon_dark.png";
 
@@ -41,14 +39,13 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 淡出并移除启动遮罩
+    /// Fades out and hides the splash overlay.
     /// </summary>
     public void DismissSplash()
     {
         var overlay = this.FindControl<Border>("SplashOverlay");
         if (overlay == null) return;
 
-        // 使用 Transitions 实现平滑淡出
         overlay.Transitions = new Avalonia.Animation.Transitions
         {
             new Avalonia.Animation.DoubleTransition
@@ -59,7 +56,6 @@ public partial class MainWindow : Window
         };
         overlay.Opacity = 0;
 
-        // 动画结束后隐藏遮罩
         var timer = new DispatcherTimer
         {
             Interval = TimeSpan.FromMilliseconds(450)

@@ -1,7 +1,7 @@
 namespace SaturnUI;
 
 /// <summary>
-/// ??????????????????????? UI / Service ?????????
+/// Application-wide defaults shared by UI and services.
 /// </summary>
 public static class AppConstants
 {
@@ -13,8 +13,9 @@ public static class AppConstants
     public const string ProtocolHttp = "HTTP";
     public const string ProtocolGrpc = "gRPC";
 
-    public const string DefaultTheme = "DeepSpace";
-    public const string DefaultSessionTitle = "新会话";
+    public const string DefaultAccentColor = "#6750A4";
+    public const bool DefaultUseLightTheme = false;
+    public const string DefaultSessionTitle = "新对话";
 
     public const string DefaultHttpBaseUrl = "http://127.0.0.1:8000";
     public const string DefaultGrpcAddress = "http://127.0.0.1:50051";

@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using SaturnUI.Services;
 
 namespace SaturnUI.Views;
 
@@ -14,24 +13,19 @@ public partial class SplashWindow : Window
         InitializeComponent();
     }
 
-    public void ApplyTheme(string themeKey)
+    public void ApplyTheme(bool useLightTheme)
     {
-        var isLight = ThemeDefinitions.IsLightTheme(themeKey);
+        RootGrid.Background = useLightTheme
+            ? new SolidColorBrush(Color.Parse("#FFFBFF"))
+            : new SolidColorBrush(Color.Parse("#141218"));
 
-        // 背景(M3 主题令牌)
-        RootGrid.Background = isLight
-            ? new SolidColorBrush(Color.Parse("#F9FAFD"))
-            : new SolidColorBrush(Color.Parse("#0F1115"));
+        SplashText.Foreground = useLightTheme
+            ? new SolidColorBrush(Color.Parse("#1D1B20"))
+            : new SolidColorBrush(Color.Parse("#E6E0E9"));
 
-        // 文字颜色(M3 onBackground)
-        SplashText.Foreground = isLight
-            ? new SolidColorBrush(Color.Parse("#1A1B21"))
-            : new SolidColorBrush(Color.Parse("#E3E2E6"));
-
-        // 图标
         try
         {
-            var iconName = isLight
+            var iconName = useLightTheme
                 ? "avares://SaturnUI/Themes/icon/icon_light.png"
                 : "avares://SaturnUI/Themes/icon/icon_dark.png";
             var stream = AssetLoader.Open(new Uri(iconName));

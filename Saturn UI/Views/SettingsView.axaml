@@ -1,7 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SaturnUI.ViewModels"
-             xmlns:services="using:SaturnUI.Services"
              xmlns:controls="using:SaturnUI.Controls"
              xmlns:materialIcons="using:Material.Icons.Avalonia"
              x:Class="SaturnUI.Views.SettingsView"
@@ -9,7 +8,7 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   Background="{DynamicResource M3Background}">
-        <StackPanel Margin="22" Spacing="18" MaxWidth="680">
+        <StackPanel Margin="22" Spacing="18" MaxWidth="720">
             <Border Classes="Card Tonal" Padding="22">
                 <StackPanel Spacing="10">
                     <TextBlock Text="AI 提供商" Classes="TitleLarge" />
@@ -46,7 +45,7 @@
                 <StackPanel Spacing="18">
                     <StackPanel Spacing="4">
                         <TextBlock Text="外观" Classes="TitleLarge" />
-                        <TextBlock Text="主题令牌、字体大小与渲染策略会即时保存到本地配置。"
+                        <TextBlock Text="使用单一种子色生成整套 Material 3 配色：主色、容器色、辅助色、表面色与状态色会自动联动。"
                                    Classes="BodySmall Muted" TextWrapping="Wrap" />
                     </StackPanel>
 
@@ -61,21 +60,92 @@
                                    Classes="BodySmall Muted" />
                     </StackPanel>
 
-                    <StackPanel Spacing="8">
-                        <TextBlock Text="主题配色" Classes="LabelLarge" />
-                        <ComboBox ItemsSource="{Binding AvailableThemes}"
-                                  SelectedItem="{Binding Theme}"
-                                  HorizontalAlignment="Stretch">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate x:DataType="x:String">
-                                    <TextBlock Text="{Binding Converter={x:Static services:ThemeNameConverter.Instance}}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </StackPanel>
+                    <Border Classes="Card Tonal" Padding="16">
+                        <StackPanel Spacing="14">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                                <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                                    <TextBlock Text="动态取色板" Classes="LabelLarge" />
+                                    <TextBlock Text="从预设中选一个颜色会立即保存并重算主题；也可以输入 HEX 色值后点击保存。"
+                                               Classes="BodySmall Muted" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Border Grid.Column="1"
+                                        Width="48"
+                                        Height="48"
+                                        CornerRadius="16"
+                                        Background="{Binding AccentPreviewBrush}"
+                                        BorderBrush="{DynamicResource M3OutlineVariant}"
+                                        BorderThickness="1" />
+                            </Grid>
+
+                            <ListBox ItemsSource="{Binding AccentColorOptions}"
+                                     SelectedItem="{Binding SelectedAccentOption}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="0"
+                                     HorizontalAlignment="Stretch">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:ColorPaletteOption">
+                                        <StackPanel Margin="0,0,10,10" Spacing="6" Width="66">
+                                            <Border Width="44"
+                                                    Height="44"
+                                                    CornerRadius="16"
+                                                    Background="{Binding Brush}"
+                                                    BorderBrush="{DynamicResource M3OutlineVariant}"
+                                                    BorderThickness="1"
+                                                    HorizontalAlignment="Center" />
+                                            <TextBlock Text="{Binding Name}"
+                                                       Classes="BodySmall"
+                                                       TextAlignment="Center"
+                                                       TextTrimming="CharacterEllipsis" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <TextBlock Grid.Column="0"
+                                           Text="种子色"
+                                           Classes="LabelLarge"
+                                           VerticalAlignment="Center" />
+                                <TextBox Grid.Column="1"
+                                         Text="{Binding AccentColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Watermark="#6750A4"
+                                         HorizontalAlignment="Stretch" />
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding NormalizedAccentColor, StringFormat='当前规范色值：{0}'}"
+                                           Classes="BodySmall Muted"
+                                           VerticalAlignment="Center" />
+                                <ToggleSwitch Grid.Column="1"
+                                              IsChecked="{Binding UseLightTheme}"
+                                              OffContent="深色"
+                                              OnContent="浅色"
+                                              VerticalAlignment="Center" />
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Border Grid.Column="0" Padding="12" CornerRadius="16" Background="{DynamicResource M3PrimaryContainer}">
+                                    <TextBlock Text="Primary" Foreground="{DynamicResource M3OnPrimaryContainer}" Classes="LabelMedium" TextAlignment="Center" />
+                                </Border>
+                                <Border Grid.Column="1" Padding="12" CornerRadius="16" Background="{DynamicResource M3SecondaryContainer}">
+                                    <TextBlock Text="Secondary" Foreground="{DynamicResource M3OnSecondaryContainer}" Classes="LabelMedium" TextAlignment="Center" />
+                                </Border>
+                                <Border Grid.Column="2" Padding="12" CornerRadius="16" Background="{DynamicResource M3TertiaryContainer}">
+                                    <TextBlock Text="Tertiary" Foreground="{DynamicResource M3OnTertiaryContainer}" Classes="LabelMedium" TextAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
 
                     <Border Classes="Card Tonal" Padding="16">
-                        <Grid ColumnDefinitions="*,Auto">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
                             <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
                                 <TextBlock Text="性能模式" Classes="LabelLarge" />
                                 <TextBlock Text="降低部分视觉开销，适合长会话或低功耗设备。"

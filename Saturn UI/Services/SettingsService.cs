@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 
 namespace SaturnUI.Services;
@@ -10,14 +9,13 @@ public class AppSettings
     public string HttpBaseUrl { get; set; } = AppConstants.DefaultHttpBaseUrl;
     public string GrpcAddress { get; set; } = AppConstants.DefaultGrpcAddress;
     public string Protocol { get; set; } = AppConstants.ProtocolHttp;
-    public string Theme { get; set; } = AppConstants.DefaultTheme;
+    public string AccentColor { get; set; } = AppConstants.DefaultAccentColor;
+    public bool UseLightTheme { get; set; } = AppConstants.DefaultUseLightTheme;
     public double FontSize { get; set; } = AppConstants.DefaultFontSize;
     public bool PerformanceMode { get; set; }
 
-    // ???????? / ??
     public string Provider { get; set; } = AppConstants.ProviderLocal;
 
-    // OpenAI ?? API ??
     public string OpenAiApiKey { get; set; } = string.Empty;
     public string OpenAiModel { get; set; } = AppConstants.DefaultOpenAiModel;
     public string OpenAiBaseUrl { get; set; } = AppConstants.DefaultOpenAiBaseUrl;
@@ -29,7 +27,7 @@ public class AppSettings
         if (string.IsNullOrWhiteSpace(HttpBaseUrl)) HttpBaseUrl = AppConstants.DefaultHttpBaseUrl;
         if (string.IsNullOrWhiteSpace(GrpcAddress)) GrpcAddress = AppConstants.DefaultGrpcAddress;
         if (Protocol is not (AppConstants.ProtocolHttp or AppConstants.ProtocolGrpc)) Protocol = AppConstants.ProtocolHttp;
-        if (!ThemeDefinitions.ThemeKeys.Contains(Theme)) Theme = AppConstants.DefaultTheme;
+        AccentColor = DynamicColorPalette.NormalizeHexColor(AccentColor);
         if (FontSize < 11 || FontSize > 24) FontSize = AppConstants.DefaultFontSize;
         if (Provider is not (AppConstants.ProviderLocal or AppConstants.ProviderOnline)) Provider = AppConstants.ProviderLocal;
         if (string.IsNullOrWhiteSpace(OpenAiModel)) OpenAiModel = AppConstants.DefaultOpenAiModel;
@@ -80,7 +78,6 @@ public class SettingsService
         }
         catch
         {
-            // ?????????????????????????????
             _settings = new AppSettings();
         }
     }
@@ -107,5 +104,3 @@ public class SettingsService
         Save();
     }
 }
-
-

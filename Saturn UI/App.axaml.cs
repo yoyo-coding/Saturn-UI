@@ -41,18 +41,17 @@ public partial class App : Application
                 DataContext = Services.GetRequiredService<MainViewModel>()
             };
 
-            mainWindow.SetSplashIcon(settings.Settings.Theme);
-            ApplyWindowIcon(mainWindow, settings.Settings.Theme);
+            mainWindow.SetSplashIcon(settings.Settings.UseLightTheme);
+            ApplyWindowIcon(mainWindow, settings.Settings.UseLightTheme);
 
-            themeService.ThemeChanged += (_, theme) =>
+            themeService.ThemeChanged += (_, useLightTheme) =>
             {
-                ApplyWindowIcon(mainWindow, theme);
+                ApplyWindowIcon(mainWindow, useLightTheme);
             };
 
             desktop.MainWindow = mainWindow;
             mainWindow.Show();
 
-            // 延迟淡出遮罩
             _ = DismissSplashAsync(mainWindow);
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
@@ -73,12 +72,11 @@ public partial class App : Application
         mainWindow.DismissSplash();
     }
 
-    private static void ApplyWindowIcon(Window window, string theme)
+    private static void ApplyWindowIcon(Window window, bool useLightTheme)
     {
         try
         {
-            var isLight = ThemeDefinitions.IsLightTheme(theme);
-            var iconName = isLight
+            var iconName = useLightTheme
                 ? "avares://SaturnUI/Themes/icon/icon_light.png"
                 : "avares://SaturnUI/Themes/icon/icon_dark.png";
 
