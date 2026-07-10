@@ -5,31 +5,30 @@
              x:Class="SaturnUI.Views.MainView"
              x:DataType="vm:MainViewModel">
     <Grid Background="{DynamicResource M3Background}">
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Spacing="16">
-            <Border Width="64"
-                    Height="64"
-                    CornerRadius="20"
-                    Background="{DynamicResource M3PrimaryContainer}">
-                <materialIcons:MaterialIcon Kind="Planet"
-                                            Width="36"
-                                            Height="36"
-                                            Foreground="{DynamicResource M3OnPrimaryContainer}"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center" />
-            </Border>
-            <StackPanel Spacing="4"
-                        HorizontalAlignment="Center">
-                <TextBlock Text="Saturn UI"
-                           Classes="TitleLarge"
-                           Foreground="{DynamicResource M3OnSurface}"
-                           HorizontalAlignment="Center" />
-                <TextBlock Text="正在准备界面"
-                           Classes="BodyMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}"
-                           HorizontalAlignment="Center" />
+        <Border Classes="Card Filled"
+                Width="420"
+                Padding="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <StackPanel Spacing="18" HorizontalAlignment="Center">
+                <Border Width="84" Height="84" CornerRadius="28"
+                        Background="{DynamicResource M3PrimaryContainer}">
+                    <materialIcons:MaterialIcon Kind="Planet"
+                                                Width="46"
+                                                Height="46"
+                                                Foreground="{DynamicResource M3OnPrimaryContainer}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" />
+                </Border>
+                <StackPanel Spacing="6" HorizontalAlignment="Center">
+                    <TextBlock Text="Saturn UI"
+                               Classes="HeadlineSmall"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="Material 3 智能对话工作台"
+                               Classes="BodyMedium Muted"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

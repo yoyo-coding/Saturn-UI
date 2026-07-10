@@ -4,43 +4,53 @@
              xmlns:models="using:SaturnUI.Models"
              xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:controls="using:SaturnUI.Controls"
-             xmlns:converters="using:SaturnUI.Converters"
              x:Class="SaturnUI.Views.SessionListView"
              x:DataType="vm:SessionListViewModel"
              x:Name="RootView">
 
-    <Grid RowDefinitions="Auto,Auto,*">
-        <!-- Header (M3 Top App Bar) -->
-        <Border Grid.Row="0" Classes="TopAppBar">
-            <Grid ColumnDefinitions="*,Auto">
-                <TextBlock Grid.Column="0"
-                           Text="会话"
-                           Classes="TitleLarge"
-                           VerticalAlignment="Center" />
-                <controls:RippleButton Grid.Column="1"
-                        Classes="Icon"
-                        Command="{Binding NewSessionCommand}"
-                        ToolTip.Tip="新建会话">
-                    <materialIcons:MaterialIcon Kind="Plus" Width="24" Height="24" />
-                </controls:RippleButton>
+    <Grid RowDefinitions="Auto,Auto,*" Margin="10">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="4,4,4,12">
+            <Border Grid.Column="0" Width="44" Height="44" CornerRadius="16"
+                    Background="{DynamicResource M3PrimaryContainer}">
+                <materialIcons:MaterialIcon Kind="Planet"
+                                            Width="24" Height="24"
+                                            Foreground="{DynamicResource M3OnPrimaryContainer}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" />
+            </Border>
+            <StackPanel Grid.Column="1" Margin="12,0" Spacing="2" VerticalAlignment="Center">
+                <TextBlock Text="会话" Classes="TitleLarge" />
+                <TextBlock Text="历史记录与草稿" Classes="BodySmall Muted" />
+            </StackPanel>
+            <controls:RippleButton Grid.Column="2"
+                    Classes="Fab"
+                    Command="{Binding NewSessionCommand}"
+                    ToolTip.Tip="新建会话">
+                <materialIcons:MaterialIcon Kind="Plus" Width="24" Height="24" />
+            </controls:RippleButton>
+        </Grid>
+
+        <Border Grid.Row="1"
+                CornerRadius="22"
+                Padding="12,4"
+                Margin="4,0,4,12"
+                Background="{DynamicResource M3SurfaceContainerHigh}"
+                BorderBrush="{DynamicResource M3OutlineVariant}"
+                BorderThickness="1">
+            <Grid ColumnDefinitions="Auto,*">
+                <materialIcons:MaterialIcon Grid.Column="0"
+                                            Kind="Magnify"
+                                            Width="20" Height="20"
+                                            Foreground="{DynamicResource M3OnSurfaceVariant}"
+                                            VerticalAlignment="Center" />
+                <TextBox Grid.Column="1"
+                         Classes="Flat"
+                         Text="{Binding SearchText}"
+                         Watermark="搜索会话..."
+                         Margin="8,0,0,0" />
             </Grid>
         </Border>
 
-        <!-- Search (M3 Search Bar) - 实时过滤,通过 OnSearchTextChanged 触发 -->
-        <Grid Grid.Row="1"
-              ColumnDefinitions="*,Auto"
-              Margin="16,8">
-            <TextBox Grid.Column="0"
-                     Text="{Binding SearchText}"
-                     Watermark="搜索会话..." />
-            <materialIcons:MaterialIcon Grid.Column="1"
-                                        Kind="Magnify"
-                                        Width="20" Height="20"
-                                        Margin="12,0,8,0"
-                                        Foreground="{DynamicResource M3OnSurfaceVariant}" />
-        </Grid>
-
-        <!-- Session List - 使用 ItemsControl + RippleSelectableItem(确保涟漪) -->
         <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Auto"
                       Background="Transparent">
@@ -48,24 +58,25 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="models:Session">
                         <controls:RippleSelectableItem
+                            Classes="SessionItem"
                             IsSelected="{Binding IsSelected, Mode=OneWay}"
                             Command="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).SelectSessionCommand}"
                             CommandParameter="{Binding}">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <StackPanel Grid.Column="0" Spacing="2">
-                                    <TextBlock Text="{Binding Title}"
-                                               Classes="TitleMedium"
-                                               TextTrimming="CharacterEllipsis" />
-                                    <TextBlock Text="{Binding UpdatedAt, StringFormat='{}{0:MM-dd HH:mm}'}"
-                                               Classes="BodySmall"
-                                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                                </StackPanel>
-                                <controls:RippleButton Grid.Column="1"
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="2">
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding Title}"
+                                           Classes="TitleSmall"
+                                           TextTrimming="CharacterEllipsis" />
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                           Text="{Binding UpdatedAt, StringFormat='{}{0:MM-dd HH:mm}'}"
+                                           Classes="BodySmall Muted"
+                                           Margin="0,4,0,0" />
+                                <controls:RippleButton Grid.RowSpan="2" Grid.Column="1"
                                         Classes="Icon"
                                         Command="{Binding $parent[ItemsControl].((vm:SessionListViewModel)DataContext).DeleteSessionCommand}"
                                         CommandParameter="{Binding}"
                                         ToolTip.Tip="删除会话"
-                                        Opacity="0.7">
+                                        Opacity="0.76">
                                     <materialIcons:MaterialIcon Kind="DeleteOutline" Width="18" Height="18" />
                                 </controls:RippleButton>
                             </Grid>

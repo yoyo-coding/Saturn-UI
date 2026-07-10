@@ -13,14 +13,14 @@ public partial class SettingsViewModel : ViewModelBase
     // 本地后端配置
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
-    private string _httpBaseUrl = "http://127.0.0.1:8000";
+    private string _httpBaseUrl = AppConstants.DefaultHttpBaseUrl;
 
     [ObservableProperty]
-    private string _grpcAddress = "http://127.0.0.1:50051";
+    private string _grpcAddress = AppConstants.DefaultGrpcAddress;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
-    private string _protocol = "HTTP";
+    private string _protocol = AppConstants.ProtocolHttp;
 
     [ObservableProperty]
     private double _fontSize = 14;
@@ -29,7 +29,7 @@ public partial class SettingsViewModel : ViewModelBase
     private bool _performanceMode;
 
     [ObservableProperty]
-    private string _theme = "DeepSpace";
+    private string _theme = AppConstants.DefaultTheme;
 
     // 提供商选择
     [ObservableProperty]
@@ -44,10 +44,10 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
-    private string _openAiModel = "gpt-3.5-turbo";
+    private string _openAiModel = AppConstants.DefaultOpenAiModel;
 
     [ObservableProperty]
-    private string _openAiBaseUrl = "https://api.openai.com/v1";
+    private string _openAiBaseUrl = AppConstants.DefaultOpenAiBaseUrl;
 
     [ObservableProperty]
     private double _openAiTemperature = 0.7;
@@ -137,17 +137,17 @@ public partial class SettingsViewModel : ViewModelBase
     [RelayCommand]
     private void ResetSettings()
     {
-        HttpBaseUrl = "http://127.0.0.1:8000";
-        GrpcAddress = "http://127.0.0.1:50051";
-        Protocol = "HTTP";
+        HttpBaseUrl = AppConstants.DefaultHttpBaseUrl;
+        GrpcAddress = AppConstants.DefaultGrpcAddress;
+        Protocol = AppConstants.ProtocolHttp;
         FontSize = 14;
         PerformanceMode = false;
-        Theme = "DeepSpace";
+        Theme = AppConstants.DefaultTheme;
         Provider = "本地";
 
         OpenAiApiKey = "";
-        OpenAiModel = "gpt-3.5-turbo";
-        OpenAiBaseUrl = "https://api.openai.com/v1";
+        OpenAiModel = AppConstants.DefaultOpenAiModel;
+        OpenAiBaseUrl = AppConstants.DefaultOpenAiBaseUrl;
         OpenAiTemperature = 0.7;
         OpenAiMaxTokens = 2048;
 

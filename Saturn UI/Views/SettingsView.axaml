@@ -1,115 +1,106 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SaturnUI.ViewModels"
              xmlns:services="using:SaturnUI.Services"
              xmlns:controls="using:SaturnUI.Controls"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              x:Class="SaturnUI.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   Background="{DynamicResource M3Background}">
-        <StackPanel Margin="24,16" Spacing="16" MaxWidth="600">
-
-            <!-- 提供商选择 -->
-            <TextBlock Text="提供商"
-                       Classes="TitleLarge" />
-
-            <StackPanel Spacing="8">
-                <TextBlock Text="选择 AI 服务提供商"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <ComboBox ItemsSource="{Binding AvailableProviders}"
-                          SelectedItem="{Binding Provider}"
-                          HorizontalAlignment="Stretch" />
-            </StackPanel>
-
-            <!-- 提供商配置入口 -->
-            <StackPanel Spacing="8">
-                <TextBlock Text="提供商配置"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <controls:RippleButton Classes="Filled"
-                        Command="{Binding OpenProviderConfigCommand}"
-                        Padding="16,10"
-                        HorizontalAlignment="Stretch">
-                    <Grid ColumnDefinitions="Auto,*">
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding ProviderConfigButtonText}"
-                                   Classes="BodyLarge"
-                                   VerticalAlignment="Center" />
-                    </Grid>
-                </controls:RippleButton>
-            </StackPanel>
-
-            <!-- 当前提供商状态 -->
-            <Border Background="{DynamicResource M3SurfaceContainerHigh}"
-                    CornerRadius="12"
-                    Padding="16">
-                <StackPanel Spacing="4">
-                    <TextBlock Text="当前配置"
-                               Classes="LabelMedium"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                    <TextBlock Text="{Binding CurrentProviderStatus}"
-                               Classes="BodyMedium" />
+        <StackPanel Margin="22" Spacing="18" MaxWidth="680">
+            <Border Classes="Card Tonal" Padding="22">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="AI 提供商" Classes="TitleLarge" />
+                    <TextBlock Text="选择本地后端或 OpenAI 兼容服务，并在独立面板中维护连接参数。"
+                               Classes="BodyMedium Muted" TextWrapping="Wrap" />
+                    <ComboBox ItemsSource="{Binding AvailableProviders}"
+                              SelectedItem="{Binding Provider}"
+                              HorizontalAlignment="Stretch" />
+                    <controls:RippleButton Classes="Filled"
+                            Command="{Binding OpenProviderConfigCommand}"
+                            Padding="18,12"
+                            HorizontalAlignment="Stretch">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding ProviderConfigButtonText}"
+                                       Classes="LabelLarge"
+                                       VerticalAlignment="Center" />
+                            <materialIcons:MaterialIcon Grid.Column="1" Kind="Cog" Width="20" Height="20" />
+                        </Grid>
+                    </controls:RippleButton>
                 </StackPanel>
             </Border>
 
-            <Border Classes="Divider" Margin="0,8" />
+            <Border Classes="Card Filled" Padding="18">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="当前配置" Classes="LabelLarge Primary" />
+                    <TextBlock Text="{Binding CurrentProviderStatus}"
+                               Classes="BodyMedium"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
 
-            <!-- 外观 -->
-            <TextBlock Text="外观"
-                       Classes="TitleLarge" />
+            <Border Classes="Card Filled" Padding="22">
+                <StackPanel Spacing="18">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="外观" Classes="TitleLarge" />
+                        <TextBlock Text="主题令牌、字体大小与渲染策略会即时保存到本地配置。"
+                                   Classes="BodySmall Muted" TextWrapping="Wrap" />
+                    </StackPanel>
 
-            <StackPanel Spacing="8">
-                <TextBlock Text="字体大小"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <Slider Value="{Binding FontSize}"
-                        Minimum="10"
-                        Maximum="24"
-                        TickFrequency="1"
-                        IsSnapToTickEnabled="True" />
-                <TextBlock Text="{Binding FontSize, StringFormat='{}{0} px'}"
-                           Classes="BodySmall"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-            </StackPanel>
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="字体大小" Classes="LabelLarge" />
+                        <Slider Value="{Binding FontSize}"
+                                Minimum="10"
+                                Maximum="24"
+                                TickFrequency="1"
+                                IsSnapToTickEnabled="True" />
+                        <TextBlock Text="{Binding FontSize, StringFormat='{}{0} px'}"
+                                   Classes="BodySmall Muted" />
+                    </StackPanel>
 
-            <StackPanel Spacing="8">
-                <TextBlock Text="主题"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <ComboBox ItemsSource="{Binding AvailableThemes}"
-                          SelectedItem="{Binding Theme}"
-                          HorizontalAlignment="Stretch">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="x:String">
-                            <TextBlock Text="{Binding Converter={x:Static services:ThemeNameConverter.Instance}}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="主题配色" Classes="LabelLarge" />
+                        <ComboBox ItemsSource="{Binding AvailableThemes}"
+                                  SelectedItem="{Binding Theme}"
+                                  HorizontalAlignment="Stretch">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <TextBlock Text="{Binding Converter={x:Static services:ThemeNameConverter.Instance}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
 
-            <StackPanel Spacing="8">
-                <TextBlock Text="性能模式"
-                           Classes="LabelMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                <ToggleSwitch IsChecked="{Binding PerformanceMode}"
-                              OffContent="关闭"
-                              OnContent="开启" />
-            </StackPanel>
+                    <Border Classes="Card Tonal" Padding="16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock Text="性能模式" Classes="LabelLarge" />
+                                <TextBlock Text="降低部分视觉开销，适合长会话或低功耗设备。"
+                                           Classes="BodySmall Muted" TextWrapping="Wrap" />
+                            </StackPanel>
+                            <ToggleSwitch Grid.Column="1"
+                                          IsChecked="{Binding PerformanceMode}"
+                                          OffContent="关"
+                                          OnContent="开"
+                                          VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Border>
 
-            <Border Classes="Divider" Margin="0,8" />
-
-            <StackPanel Orientation="Horizontal" Spacing="12">
-                <controls:RippleButton Classes="Filled"
-                        Command="{Binding SaveSettingsCommand}"
-                        Padding="24,10">
-                    <TextBlock Text="保存设置" />
-                </controls:RippleButton>
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right">
                 <controls:RippleButton Classes="Outlined"
                         Command="{Binding ResetSettingsCommand}"
-                        Padding="24,10">
+                        Padding="24,12">
                     <TextBlock Text="恢复默认" />
+                </controls:RippleButton>
+                <controls:RippleButton Classes="Filled"
+                        Command="{Binding SaveSettingsCommand}"
+                        Padding="24,12">
+                    <TextBlock Text="保存设置" />
                 </controls:RippleButton>
             </StackPanel>
         </StackPanel>

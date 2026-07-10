@@ -6,84 +6,74 @@
         x:Class="SaturnUI.Views.OnlineProviderWindow"
         x:DataType="vm:SettingsViewModel"
         Title="OpenAI 兼容配置"
-        Background="{DynamicResource M3Surface}"
+        Background="{DynamicResource M3Background}"
         Foreground="{DynamicResource M3OnSurface}"
-        Width="500" Height="500"
+        Width="560" Height="620"
         WindowStartupLocation="CenterOwner">
 
-    <Grid RowDefinitions="*,Auto">
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="24,16" Spacing="16">
-                <TextBlock Text="OpenAI 兼容配置"
-                           Classes="TitleLarge" />
+    <Grid RowDefinitions="*,Auto" Margin="14">
+        <Border Grid.Row="0" Classes="Card Filled" Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Spacing="18">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="OpenAI 兼容配置" Classes="HeadlineSmall" />
+                        <TextBlock Text="支持 OpenAI、Azure OpenAI、vLLM、LM Studio 与其它兼容 /v1/chat/completions 的服务。"
+                                   Classes="BodyMedium Muted" TextWrapping="Wrap" />
+                    </StackPanel>
 
-                <TextBlock Text="支持 OpenAI、Azure OpenAI、vLLM、LM Studio 等"
-                           Classes="BodyMedium"
-                           Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="API Key" Classes="LabelLarge" />
+                        <TextBox Text="{Binding OpenAiApiKey}" Watermark="sk-..." />
+                    </StackPanel>
 
-                <StackPanel Spacing="8">
-                    <TextBlock Text="API Key"
-                               Classes="LabelMedium"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                    <TextBox Text="{Binding OpenAiApiKey}"
-                             Watermark="sk-..." />
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="模型" Classes="LabelLarge" />
+                        <TextBox Text="{Binding OpenAiModel}" Watermark="gpt-4o-mini" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Base URL" Classes="LabelLarge" />
+                        <TextBox Text="{Binding OpenAiBaseUrl}" Watermark="https://api.openai.com/v1" />
+                    </StackPanel>
+
+                    <Border Classes="Card Tonal" Padding="16">
+                        <StackPanel Spacing="10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Grid.Column="0" Text="Temperature" Classes="LabelLarge" />
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding OpenAiTemperature, StringFormat='{}{0:F1}'}"
+                                           Classes="BodySmall Muted" />
+                            </Grid>
+                            <Slider Value="{Binding OpenAiTemperature}"
+                                    Minimum="0"
+                                    Maximum="2"
+                                    TickFrequency="0.1"
+                                    IsSnapToTickEnabled="True" />
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Max Tokens" Classes="LabelLarge" />
+                        <NumericUpDown Value="{Binding OpenAiMaxTokens}"
+                                       Minimum="1"
+                                       Maximum="128000"
+                                       HorizontalAlignment="Stretch" />
+                    </StackPanel>
                 </StackPanel>
+            </ScrollViewer>
+        </Border>
 
-                <StackPanel Spacing="8">
-                    <TextBlock Text="模型"
-                               Classes="LabelMedium"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                    <TextBox Text="{Binding OpenAiModel}"
-                             Watermark="gpt-3.5-turbo" />
-                </StackPanel>
-
-                <StackPanel Spacing="8">
-                    <TextBlock Text="Base URL"
-                               Classes="LabelMedium"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                    <TextBox Text="{Binding OpenAiBaseUrl}"
-                             Watermark="https://api.openai.com/v1" />
-                </StackPanel>
-
-                <StackPanel Spacing="8">
-                    <TextBlock Text="Temperature"
-                               Classes="LabelMedium"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                    <Slider Value="{Binding OpenAiTemperature}"
-                            Minimum="0"
-                            Maximum="2"
-                            TickFrequency="0.1"
-                            IsSnapToTickEnabled="True" />
-                    <TextBlock Text="{Binding OpenAiTemperature, StringFormat='{}{0:F1}'}"
-                               Classes="BodySmall"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                </StackPanel>
-
-                <StackPanel Spacing="8">
-                    <TextBlock Text="Max Tokens"
-                               Classes="LabelMedium"
-                               Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                    <NumericUpDown Value="{Binding OpenAiMaxTokens}"
-                                   Minimum="1"
-                                   Maximum="128000"
-                                   HorizontalAlignment="Stretch" />
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
-
-        <Border Grid.Row="1"
-                Background="{DynamicResource M3SurfaceContainerHigh}"
-                Padding="16">
+        <Border Grid.Row="1" Padding="4,14,4,0">
             <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right">
-                <controls:RippleButton Classes="Filled"
-                        Click="OnSaveClick"
-                        Padding="24,10">
-                    <TextBlock Text="保存" />
-                </controls:RippleButton>
                 <controls:RippleButton Classes="Outlined"
                         Click="OnCancelClick"
-                        Padding="24,10">
+                        Padding="24,12">
                     <TextBlock Text="取消" />
+                </controls:RippleButton>
+                <controls:RippleButton Classes="Filled"
+                        Click="OnSaveClick"
+                        Padding="24,12">
+                    <TextBlock Text="保存" />
                 </controls:RippleButton>
             </StackPanel>
         </Border>

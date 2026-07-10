@@ -1,201 +1,208 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:SaturnUI.ViewModels"
              xmlns:models="using:SaturnUI.Models"
-             xmlns:converters="using:SaturnUI.Converters"
              xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
              xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:controls="using:SaturnUI.Controls"
              x:Class="SaturnUI.Views.ChatView"
              x:DataType="vm:ChatViewModel">
 
-    <Grid RowDefinitions="*,Auto">
-        <!-- Messages List -->
+    <Grid RowDefinitions="*,Auto" Background="{DynamicResource M3Surface}">
         <ScrollViewer Grid.Row="0"
                       Name="MessagesScroll"
                       VerticalScrollBarVisibility="Auto"
-                      Margin="0,0,0,8"
-                      Background="{DynamicResource M3Background}">
-            <ItemsControl ItemsSource="{Binding Messages}"
-                          Margin="16,8">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="models:Message">
-                        <Border Margin="0,4"
-                                Classes="msg"
-                                Classes.user="{Binding IsUser}"
-                                CornerRadius="16"
-                                Padding="16,12"
-                                MaxWidth="800"
-                                HorizontalAlignment="{Binding Role, Converter={StaticResource RoleAlignmentConverter}}">
-                            <StackPanel>
-                                <!-- User message: plain text -->
-                                <TextBlock IsVisible="{Binding IsUser}"
-                                           Text="{Binding Content}"
-                                           TextWrapping="Wrap"
-                                           Classes="BodyLarge" />
+                      Background="Transparent">
+            <StackPanel Margin="28,28,28,160" Spacing="20">
+                <Border Classes="Card Tonal"
+                        Padding="24"
+                        MaxWidth="780"
+                        HorizontalAlignment="Center">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="开始一次新的探索"
+                                   Classes="HeadlineSmall"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="输入问题、粘贴截图或拖入文件。Enter 发送，Ctrl+Enter 换行。"
+                                   Classes="BodyMedium Muted"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </Border>
 
-                                <!-- Assistant message: Markdown -->
-                                <md:MarkdownScrollViewer IsVisible="{Binding IsAssistant}"
-                                                         Markdown="{Binding Content}"
-                                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                                         MaxWidth="768">
-                                    <md:MarkdownScrollViewer.Styles>
-                                        <Style Selector="TextBlock">
-                                            <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
-                                        </Style>
-                                        <Style Selector="Border.CodeBlock">
-                                            <Setter Property="Background" Value="{DynamicResource M3CodeBackground}" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource M3CodeBorder}" />
-                                            <Setter Property="CornerRadius" Value="8" />
-                                        </Style>
-                                        <Style Selector="Border.Blockquote">
-                                            <Setter Property="Background" Value="{DynamicResource M3SurfaceContainer}" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource M3Primary}" />
-                                        </Style>
-                                    </md:MarkdownScrollViewer.Styles>
-                                </md:MarkdownScrollViewer>
+                <ItemsControl ItemsSource="{Binding Messages}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:Message">
+                            <Grid Margin="0,6">
+                                <Border MaxWidth="820"
+                                        HorizontalAlignment="{Binding Role, Converter={StaticResource RoleAlignmentConverter}}">
+                                    <StackPanel Spacing="8">
+                                        <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding IsAssistant}">
+                                            <Border Grid.Column="0"
+                                                    Width="30" Height="30"
+                                                    CornerRadius="15"
+                                                    Background="{DynamicResource M3SecondaryContainer}">
+                                                <TextBlock Text="AI" Classes="LabelSmall"
+                                                           Foreground="{DynamicResource M3OnSecondaryContainer}"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center" />
+                                            </Border>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="Saturn Assistant"
+                                                       Classes="LabelMedium Muted"
+                                                       Margin="8,0,0,0"
+                                                       VerticalAlignment="Center" />
+                                        </Grid>
 
-                                <!-- Image Attachment -->
-                                <Border IsVisible="{Binding IsImageAttachment}"
-                                        Margin="0,8,0,0"
-                                        CornerRadius="8"
-                                        ClipToBounds="True"
-                                        MaxWidth="400"
-                                        MaxHeight="300"
-                                        HorizontalAlignment="Left">
-                                    <Image Source="{Binding AttachmentPath}"
-                                           Stretch="Uniform" />
+                                        <Border Classes="MessageBubble"
+                                                Classes.User="{Binding IsUser}"
+                                                Classes.Assistant="{Binding IsAssistant}"
+                                                Background="{Binding Role, Converter={StaticResource RoleBackgroundConverter}}">
+                                            <StackPanel Spacing="10">
+                                                <TextBlock IsVisible="{Binding IsUser}"
+                                                           Text="{Binding Content}"
+                                                           TextWrapping="Wrap"
+                                                           Classes="BodyLarge" />
+
+                                                <md:MarkdownScrollViewer IsVisible="{Binding IsAssistant}"
+                                                                         Markdown="{Binding Content}"
+                                                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                                         MaxWidth="780">
+                                                    <md:MarkdownScrollViewer.Styles>
+                                                        <Style Selector="TextBlock">
+                                                            <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
+                                                        </Style>
+                                                        <Style Selector="Border.CodeBlock">
+                                                            <Setter Property="Background" Value="{DynamicResource M3CodeBackground}" />
+                                                            <Setter Property="BorderBrush" Value="{DynamicResource M3CodeBorder}" />
+                                                            <Setter Property="CornerRadius" Value="12" />
+                                                        </Style>
+                                                        <Style Selector="Border.Blockquote">
+                                                            <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
+                                                            <Setter Property="BorderBrush" Value="{DynamicResource M3Primary}" />
+                                                        </Style>
+                                                    </md:MarkdownScrollViewer.Styles>
+                                                </md:MarkdownScrollViewer>
+
+                                                <Border IsVisible="{Binding IsImageAttachment}"
+                                                        CornerRadius="18"
+                                                        ClipToBounds="True"
+                                                        BorderBrush="{DynamicResource M3OutlineVariant}"
+                                                        BorderThickness="1"
+                                                        MaxWidth="420"
+                                                        MaxHeight="320"
+                                                        HorizontalAlignment="Left">
+                                                    <Image Source="{Binding AttachmentPath}" Stretch="Uniform" />
+                                                </Border>
+
+                                                <Border IsVisible="{Binding HasAttachment}"
+                                                        Classes="AttachmentChip"
+                                                        HorizontalAlignment="Left">
+                                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                                        <materialIcons:MaterialIcon Kind="FileDocumentOutline"
+                                                                                    Width="16" Height="16"
+                                                                                    Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                                                        <TextBlock Text="{Binding AttachmentName}"
+                                                                   Classes="BodySmall Muted"
+                                                                   VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <TextBlock IsVisible="{Binding IsError}"
+                                                           Text="{Binding ErrorMessage}"
+                                                           Classes="BodySmall Error"
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+                                        </Border>
+
+                                        <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                                   Classes="LabelSmall Muted"
+                                                   HorizontalAlignment="{Binding Role, Converter={StaticResource RoleAlignmentConverter}}" />
+                                    </StackPanel>
                                 </Border>
-
-                                <!-- File Attachment (non-image) -->
-                                <StackPanel IsVisible="{Binding HasAttachment}"
-                                            Margin="0,8,0,0"
-                                            Orientation="Horizontal"
-                                            Spacing="6">
-                                    <materialIcons:MaterialIcon Kind="FileDocumentOutline"
-                                                                Width="16"
-                                                                Height="16"
-                                                                Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                                    <TextBlock Text="{Binding AttachmentName}"
-                                               Foreground="{DynamicResource M3OnSurfaceVariant}"
-                                               Classes="BodySmall"
-                                               TextTrimming="CharacterEllipsis" />
-                                </StackPanel>
-
-                                <StackPanel IsVisible="{Binding IsError}"
-                                            Margin="0,8,0,0">
-                                    <TextBlock Text="{Binding ErrorMessage}"
-                                               Foreground="{DynamicResource M3Error}"
-                                               TextWrapping="Wrap"
-                                               Classes="BodySmall" />
-                                </StackPanel>
-                                <StackPanel IsVisible="{Binding IsStreaming}"
-                                            Margin="0,4,0,0"
-                                            Orientation="Horizontal"
-                                            Spacing="2">
-                                    <Border Width="6" Height="14" Background="{DynamicResource M3Primary}" CornerRadius="3" />
-                                    <Border Width="6" Height="14" Background="{DynamicResource M3Primary}" Opacity="0.7" CornerRadius="3" />
-                                    <Border Width="6" Height="14" Background="{DynamicResource M3Primary}" Opacity="0.4" CornerRadius="3" />
-                                </StackPanel>
-                                <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
-                                           Classes="LabelSmall"
-                                           Foreground="{DynamicResource M3OnSurfaceVariant}"
-                                           HorizontalAlignment="Right"
-                                           Margin="0,4,0,0" />
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
         </ScrollViewer>
 
-        <!-- 悬浮输入框区域(M3 Floating Chat Bar) -->
-        <Grid Grid.Row="1">
-            <!-- 顶部阴影渐变: 让消息内容自然渐隐到输入框 -->
-            <Border Height="32" VerticalAlignment="Top" IsHitTestVisible="False">
+        <Grid Grid.Row="1" VerticalAlignment="Bottom">
+            <Border Height="44" VerticalAlignment="Top" IsHitTestVisible="False">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                         <GradientStop Offset="0" Color="Transparent" />
-                        <GradientStop Offset="1" Color="{Binding $parent[Window].Background}" />
+                        <GradientStop Offset="1" Color="#CC000000" />
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
 
-            <!-- 输入框容器: 附件预览 + 输入框,贴底悬浮 -->
-            <Grid VerticalAlignment="Bottom" Margin="16,0,16,12" RowDefinitions="Auto,Auto">
-                <!-- Pending Attachment Chip -->
-                <Border Grid.Row="0"
-                        IsVisible="{Binding PendingAttachmentName, Converter={x:Static ObjectConverters.IsNotNull}}"
-                        Classes="Card Filled"
-                        Margin="4,0,4,8">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <StackPanel Grid.Column="0"
-                                    Orientation="Horizontal"
-                                    Spacing="8">
-                            <materialIcons:MaterialIcon Kind="FileDocumentOutline"
-                                                        Width="16"
-                                                        Height="16"
-                                                        Foreground="{DynamicResource M3OnSurfaceVariant}" />
-                            <TextBlock Text="{Binding PendingAttachmentName}"
-                                       Foreground="{DynamicResource M3OnSurfaceVariant}"
-                                       Classes="BodySmall"
+            <Border Margin="28,0,28,24"
+                    VerticalAlignment="Bottom"
+                    Classes="Card Filled"
+                    Padding="10"
+                    CornerRadius="30"
+                    BorderBrush="{DynamicResource M3OutlineVariant}"
+                    BorderThickness="1">
+                <Grid RowDefinitions="Auto,Auto">
+                    <Border Grid.Row="0"
+                            IsVisible="{Binding PendingAttachmentName, Converter={x:Static ObjectConverters.IsNotNull}}"
+                            Classes="AttachmentChip"
+                            Margin="6,4,6,10">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <materialIcons:MaterialIcon Grid.Column="0"
+                                                        Kind="FileDocumentOutline"
+                                                        Width="18" Height="18"
+                                                        Foreground="{DynamicResource M3OnSurfaceVariant}"
+                                                        VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding PendingAttachmentName}"
+                                       Classes="BodySmall Muted"
+                                       Margin="8,0"
+                                       TextTrimming="CharacterEllipsis"
                                        VerticalAlignment="Center" />
-                        </StackPanel>
-                        <controls:RippleButton Grid.Column="1"
-                                Classes="Icon"
-                                Command="{Binding ClearAttachmentCommand}"
-                                Padding="4">
-                            <materialIcons:MaterialIcon Kind="Close" Width="16" Height="16" />
-                        </controls:RippleButton>
-                    </Grid>
-                </Border>
+                            <controls:RippleButton Grid.Column="2"
+                                    Classes="Icon"
+                                    Command="{Binding ClearAttachmentCommand}"
+                                    Padding="4"
+                                    ToolTip.Tip="移除附件">
+                                <materialIcons:MaterialIcon Kind="Close" Width="16" Height="16" />
+                            </controls:RippleButton>
+                        </Grid>
+                    </Border>
 
-                <!-- 悬浮输入框: 圆角 + 阴影 + 集成发送按钮 -->
-                <Border Grid.Row="1"
-                        Background="{DynamicResource M3SurfaceContainer}"
-                        BorderBrush="{DynamicResource M3OutlineVariant}"
-                        BorderThickness="1"
-                        CornerRadius="28"
-                        Padding="4"
-                        BoxShadow="0 2 12 0 #30000000">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <!-- TextBox: 透明背景,无边距,与容器融为一体 -->
+                    <Grid Grid.Row="1" ColumnDefinitions="*,Auto" VerticalAlignment="Bottom">
                         <TextBox Grid.Column="0"
-                                 Classes="flat"
+                                 Classes="Flat"
                                  Text="{Binding InputText}"
-                                 Watermark="输入消息... (Shift+Enter 换行, Ctrl+Enter 发送)"
+                                 Watermark="输入消息，或拖入文件 / Ctrl+V 粘贴图片..."
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
-                                 MaxHeight="120"
+                                 MinHeight="48"
+                                 MaxHeight="150"
                                  VerticalContentAlignment="Center"
-                                 Padding="20,12">
-                            <TextBox.KeyBindings>
-                                <KeyBinding Gesture="Ctrl+Enter"
-                                            Command="{Binding SendMessageCommand}" />
-                            </TextBox.KeyBindings>
-                        </TextBox>
+                                 Padding="18,12"
+                                 KeyDown="OnInputKeyDown" />
 
-                        <!-- 发送 / 停止 按钮: 圆形,集成在输入框右侧 -->
                         <controls:RippleButton Grid.Column="1"
                                 Classes="Filled Icon"
                                 Command="{Binding SendMessageCommand}"
                                 IsVisible="{Binding !IsBusy}"
-                                Margin="4"
-                                ToolTip.Tip="发送 (Ctrl+Enter)">
+                                Margin="8,4,4,4"
+                                ToolTip.Tip="发送 (Enter)">
                             <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
                         </controls:RippleButton>
                         <controls:RippleButton Grid.Column="1"
                                 Classes="FilledTonal Icon"
                                 Command="{Binding StopGenerationCommand}"
                                 IsVisible="{Binding IsBusy}"
-                                Margin="4"
+                                Margin="8,4,4,4"
                                 ToolTip.Tip="停止生成">
                             <materialIcons:MaterialIcon Kind="Stop" Width="20" Height="20" />
                         </controls:RippleButton>
                     </Grid>
-                </Border>
-            </Grid>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

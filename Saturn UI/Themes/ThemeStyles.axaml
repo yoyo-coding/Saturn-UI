@@ -1,19 +1,11 @@
-<Styles xmlns="https://github.com/avaloniaui"
+﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:materialIcons="using:Material.Icons.Avalonia"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:controls="using:SaturnUI.Controls">
-    <!-- ============================================ -->
-    <!-- Saturn UI Material 3 组件样式                       -->
-    <!-- 覆盖 FluentTheme 默认颜色,确保所有控件遵循 M3 设计   -->
-    <!-- 形状:全圆角(顶部按钮) / 中圆角(卡片/输入框) / 大圆角(对话框) -->
-    <!-- 所有 Button 样式同时作用于 Button 与 RippleButton     -->
-    <!-- ============================================ -->
 
     <Styles.Resources>
-        <!-- ===== 字号方案(M3 Type scale) ===== -->
-        <sys:Double x:Key="M3FontDisplayLarge">57</sys:Double>
-        <sys:Double x:Key="M3FontDisplayMedium">45</sys:Double>
+        <Thickness x:Key="M3PagePadding">24</Thickness>
+        <Thickness x:Key="M3CardPadding">20</Thickness>
         <sys:Double x:Key="M3FontDisplaySmall">36</sys:Double>
         <sys:Double x:Key="M3FontHeadlineLarge">32</sys:Double>
         <sys:Double x:Key="M3FontHeadlineMedium">28</sys:Double>
@@ -29,86 +21,137 @@
         <sys:Double x:Key="M3FontLabelSmall">11</sys:Double>
     </Styles.Resources>
 
-    <!-- ===== 形状方案(M3 Shape scheme) ===== -->
-    <!-- None:0 / ExtraSmall:4 / Small:8 / Medium:12 / Large:16 / ExtraLarge:28 / Full:9999 -->
-
-    <!-- ===== Window 默认背景 ===== -->
     <Style Selector="Window">
         <Setter Property="Background" Value="{DynamicResource M3Surface}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
+        <Setter Property="FontFamily" Value="Inter, Segoe UI, Microsoft YaHei UI" />
     </Style>
 
-    <!-- ===== 文本类型样式 ===== -->
+    <Style Selector="UserControl">
+        <Setter Property="FontFamily" Value="Inter, Segoe UI, Microsoft YaHei UI" />
+    </Style>
+
+    <!-- Typography -->
+    <Style Selector="TextBlock.DisplaySmall">
+        <Setter Property="FontSize" Value="{StaticResource M3FontDisplaySmall}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="LineHeight" Value="44" />
+    </Style>
     <Style Selector="TextBlock.HeadlineLarge">
         <Setter Property="FontSize" Value="{StaticResource M3FontHeadlineLarge}" />
-        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="LineHeight" Value="40" />
     </Style>
     <Style Selector="TextBlock.HeadlineMedium">
         <Setter Property="FontSize" Value="{StaticResource M3FontHeadlineMedium}" />
-        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="LineHeight" Value="36" />
     </Style>
     <Style Selector="TextBlock.HeadlineSmall">
         <Setter Property="FontSize" Value="{StaticResource M3FontHeadlineSmall}" />
-        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="LineHeight" Value="32" />
     </Style>
     <Style Selector="TextBlock.TitleLarge">
         <Setter Property="FontSize" Value="{StaticResource M3FontTitleLarge}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style Selector="TextBlock.TitleMedium">
         <Setter Property="FontSize" Value="{StaticResource M3FontTitleMedium}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style Selector="TextBlock.TitleSmall">
         <Setter Property="FontSize" Value="{StaticResource M3FontTitleSmall}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style Selector="TextBlock.BodyLarge">
         <Setter Property="FontSize" Value="{StaticResource M3FontBodyLarge}" />
-        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="LineHeight" Value="24" />
     </Style>
     <Style Selector="TextBlock.BodyMedium">
         <Setter Property="FontSize" Value="{StaticResource M3FontBodyMedium}" />
-        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="LineHeight" Value="20" />
     </Style>
     <Style Selector="TextBlock.BodySmall">
         <Setter Property="FontSize" Value="{StaticResource M3FontBodySmall}" />
-        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="LineHeight" Value="16" />
     </Style>
     <Style Selector="TextBlock.LabelLarge">
         <Setter Property="FontSize" Value="{StaticResource M3FontLabelLarge}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style Selector="TextBlock.LabelMedium">
         <Setter Property="FontSize" Value="{StaticResource M3FontLabelMedium}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style Selector="TextBlock.LabelSmall">
         <Setter Property="FontSize" Value="{StaticResource M3FontLabelSmall}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.Muted">
+        <Setter Property="Foreground" Value="{DynamicResource M3OnSurfaceVariant}" />
+    </Style>
+    <Style Selector="TextBlock.Primary">
+        <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
+    </Style>
+    <Style Selector="TextBlock.Error">
+        <Setter Property="Foreground" Value="{DynamicResource M3Error}" />
     </Style>
 
-    <!-- ===== Button / RippleButton - M3 圆角形状 ===== -->
+    <!-- Surfaces -->
+    <Style Selector="Border.AppSurface">
+        <Setter Property="Background" Value="{DynamicResource M3Surface}" />
+    </Style>
+    <Style Selector="Border.NavigationRail">
+        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerLow}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource M3OutlineVariant}" />
+        <Setter Property="BorderThickness" Value="0,0,1,0" />
+    </Style>
+    <Style Selector="Border.TopAppBar">
+        <Setter Property="Background" Value="{DynamicResource M3Surface}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource M3OutlineVariant}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Padding" Value="20,12" />
+        <Setter Property="MinHeight" Value="72" />
+    </Style>
+    <Style Selector="Border.Card">
+        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainer}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource M3OutlineVariant}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="28" />
+        <Setter Property="Padding" Value="20" />
+    </Style>
+    <Style Selector="Border.Card.Filled">
+        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="Border.Card.Tonal">
+        <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="Border.Divider">
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource M3OutlineVariant}" />
+    </Style>
+    <Style Selector="Border.Pill">
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
+    </Style>
+
+    <!-- Buttons -->
     <Style Selector="Button, controls|RippleButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="20" />
-        <Setter Property="Padding" Value="24,10" />
+        <Setter Property="Padding" Value="20,10" />
         <Setter Property="MinHeight" Value="40" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
-
-    <!-- Filled Button (默认) - 实心按钮 -->
     <Style Selector="Button.Filled, controls|RippleButton.Filled">
         <Setter Property="Background" Value="{DynamicResource M3Primary}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimary}" />
@@ -116,310 +159,95 @@
     <Style Selector="Button.Filled:pointerover /template/ ContentPresenter, controls|RippleButton.Filled:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource M3FilledHover}" />
     </Style>
-    <Style Selector="Button.Filled:pressed /template/ ContentPresenter, controls|RippleButton.Filled:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledPressed}" />
-    </Style>
-
-    <!-- Tonal Button - 色调按钮 -->
-    <Style Selector="Button.Tonal, controls|RippleButton.Tonal">
+    <Style Selector="Button.FilledTonal, Button.Tonal, controls|RippleButton.FilledTonal, controls|RippleButton.Tonal">
         <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
     </Style>
-    <Style Selector="Button.Tonal:pointerover /template/ ContentPresenter, controls|RippleButton.Tonal:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
-    </Style>
-    <Style Selector="Button.Tonal:pressed /template/ ContentPresenter, controls|RippleButton.Tonal:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledTonalPressed}" />
-    </Style>
-
-    <!-- Outlined Button - 轮廓按钮 -->
     <Style Selector="Button.Outlined, controls|RippleButton.Outlined">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
         <Setter Property="BorderBrush" Value="{DynamicResource M3Outline}" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
-    <Style Selector="Button.Outlined:pointerover /template/ ContentPresenter, controls|RippleButton.Outlined:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
-    </Style>
-    <Style Selector="Button.Outlined:pressed /template/ ContentPresenter, controls|RippleButton.Outlined:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FocusOverlay}" />
-    </Style>
-
-    <!-- Text Button - 文本按钮(默认) -->
     <Style Selector="Button.Text, controls|RippleButton.Text">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
-        <Setter Property="Padding" Value="12,8" />
     </Style>
-    <Style Selector="Button.Text:pointerover /template/ ContentPresenter, controls|RippleButton.Text:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
-    </Style>
-    <Style Selector="Button.Text:pressed /template/ ContentPresenter, controls|RippleButton.Text:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FocusOverlay}" />
-    </Style>
-
-    <!-- Icon Button - 圆形图标按钮 -->
     <Style Selector="Button.Icon, controls|RippleButton.Icon">
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="MinHeight" Value="40" />
+        <Setter Property="Width" Value="44" />
+        <Setter Property="Height" Value="44" />
+        <Setter Property="MinWidth" Value="44" />
+        <Setter Property="MinHeight" Value="44" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="CornerRadius" Value="22" />
     </Style>
-    <Style Selector="Button.Icon:pointerover /template/ ContentPresenter, controls|RippleButton.Icon:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
-    </Style>
-    <Style Selector="Button.Icon:pressed /template/ ContentPresenter, controls|RippleButton.Icon:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FocusOverlay}" />
-    </Style>
-
-    <!-- Filled Tonal Icon Button -->
-    <Style Selector="Button.FilledTonal, controls|RippleButton.FilledTonal">
-        <Setter Property="Background" Value="{DynamicResource M3PrimaryContainer}" />
-        <Setter Property="Foreground" Value="{DynamicResource M3OnPrimaryContainer}" />
-    </Style>
-    <Style Selector="Button.FilledTonal:pointerover /template/ ContentPresenter, controls|RippleButton.FilledTonal:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
-    </Style>
-    <Style Selector="Button.FilledTonal:pressed /template/ ContentPresenter, controls|RippleButton.FilledTonal:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledTonalPressed}" />
-    </Style>
-
-    <!-- ===== TextBox - M3 填充式输入框 ===== -->
-    <Style Selector="TextBox">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHighest}" />
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource M3Primary}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="4" />
-        <Setter Property="Padding" Value="16,12" />
-        <Setter Property="MinHeight" Value="40" />
-        <Setter Property="FontSize" Value="14" />
-    </Style>
-    <Style Selector="TextBox /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHighest}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="4" />
-    </Style>
-    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
-    </Style>
-    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
-    </Style>
-
-    <!-- Outlined TextBox - 轮廓式输入框 -->
-    <Style Selector="TextBox.Outlined">
-        <Setter Property="Background" Value="Transparent" />
-    </Style>
-    <Style Selector="TextBox.Outlined /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource M3Outline}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="4" />
-    </Style>
-    <Style Selector="TextBox.Outlined:focus /template/ Border#PART_BorderElement">
-        <Setter Property="BorderBrush" Value="{DynamicResource M3Primary}" />
-        <Setter Property="BorderThickness" Value="2" />
-    </Style>
-
-    <!-- Flat TextBox - 嵌入悬浮输入框: 彻底无边框/无背景/无任何状态变化 -->
-    <Style Selector="TextBox.flat">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
-    </Style>
-    <Style Selector="TextBox.flat /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-    </Style>
-    <Style Selector="TextBox.flat:focus /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-    </Style>
-    <Style Selector="TextBox.flat:pointerover /template/ Border#PART_BorderElement">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-    </Style>
-
-    <!-- ===== ListBoxItem ===== -->
-    <Style Selector="ListBoxItem">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
-        <Setter Property="Padding" Value="16,8" />
-        <Setter Property="MinHeight" Value="48" />
-        <Setter Property="CornerRadius" Value="20" />
-    </Style>
-    <!-- 悬停指示: 仅背景颜色变化,不影响文字 -->
-    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3HoverOverlay}" />
-    </Style>
-    <!-- 选中状态: 使用 SecondaryContainer 实色背景,文字使用 OnSecondaryContainer 颜色 -->
-    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3SecondaryContainer}" />
-    </Style>
-    <Style Selector="ListBoxItem:selected TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
-    </Style>
-
-    <!-- ===== ComboBox ===== -->
-    <Style Selector="ComboBox">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHighest}" />
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="4" />
-        <Setter Property="Padding" Value="16,8" />
-        <Setter Property="MinHeight" Value="40" />
-    </Style>
-
-    <!-- ===== ToggleSwitch - M3 风格 ===== -->
-    <Style Selector="ToggleSwitch">
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
-    </Style>
-    <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnobBounds">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-    </Style>
-    <Style Selector="ToggleSwitch:checked /template/ Ellipse#SwitchKnob">
-        <Setter Property="Fill" Value="{DynamicResource M3OnPrimary}" />
-    </Style>
-    <Style Selector="ToggleSwitch /template/ Border#SwitchKnobBounds">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHighest}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource M3Outline}" />
-    </Style>
-    <Style Selector="ToggleSwitch /template/ Ellipse#SwitchKnob">
-        <Setter Property="Fill" Value="{DynamicResource M3Outline}" />
-    </Style>
-
-    <!-- ===== Slider ===== -->
-    <Style Selector="Slider">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
-    </Style>
-    <Style Selector="Slider:horizontal /template/ Thumb">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-    </Style>
-    <Style Selector="Slider:horizontal /template/ RepeatButton#PART_DecreaseButton">
-        <Setter Property="Background" Value="{DynamicResource M3Primary}" />
-    </Style>
-    <Style Selector="Slider:horizontal /template/ RepeatButton#PART_IncreaseButton">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHighest}" />
-    </Style>
-
-    <!-- ===== ScrollViewer 滚动条 ===== -->
-    <Style Selector="ScrollViewer">
-        <Setter Property="Background" Value="Transparent" />
-    </Style>
-
-    <!-- ===== Card (自定义 .Card 样式) ===== -->
-    <Style Selector="Border.Card">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainer}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource M3OutlineVariant}" />
-        <Setter Property="CornerRadius" Value="12" />
-        <Setter Property="Padding" Value="16" />
-    </Style>
-    <Style Selector="Border.Card.Elevated">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerLow}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style Selector="Border.Card.Filled">
-        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style Selector="Border.Card.Outlined">
-        <Setter Property="Background" Value="Transparent" />
-    </Style>
-
-    <!-- ===== TopAppBar (M3 顶栏) ===== -->
-    <Style Selector="Border.TopAppBar">
-        <Setter Property="Background" Value="{DynamicResource M3Surface}" />
-        <Setter Property="Height" Value="64" />
-        <Setter Property="Padding" Value="16,0" />
-    </Style>
-
-    <!-- ===== Divider ===== -->
-    <Style Selector="Border.Divider">
-        <Setter Property="Background" Value="{DynamicResource M3OutlineVariant}" />
-        <Setter Property="Height" Value="1" />
-    </Style>
-
-    <!-- ===== FAB (悬浮操作按钮) ===== -->
-    <Style Selector="Button.FAB, controls|RippleButton.FAB">
+    <Style Selector="Button.Fab, controls|RippleButton.Fab">
         <Setter Property="Width" Value="56" />
         <Setter Property="Height" Value="56" />
+        <Setter Property="MinWidth" Value="56" />
         <Setter Property="MinHeight" Value="56" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="CornerRadius" Value="18" />
         <Setter Property="Background" Value="{DynamicResource M3PrimaryContainer}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnPrimaryContainer}" />
     </Style>
-    <Style Selector="Button.FAB:pointerover /template/ ContentPresenter, controls|RippleButton.FAB:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledTonalHover}" />
-    </Style>
-    <Style Selector="Button.FAB:pressed /template/ ContentPresenter, controls|RippleButton.FAB:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource M3FilledTonalPressed}" />
-    </Style>
-    <Style Selector="Button.FAB.Extended, controls|RippleButton.FAB.Extended">
-        <Setter Property="Width" Value="NaN" />
-        <Setter Property="Padding" Value="20,16" />
-        <Setter Property="CornerRadius" Value="16" />
-    </Style>
-    <Style Selector="Button.FAB.Small, controls|RippleButton.FAB.Small">
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="MinHeight" Value="40" />
-        <Setter Property="CornerRadius" Value="12" />
-    </Style>
 
-    <!-- ===== Icon(图标容器) ===== -->
-    <Style Selector="materialIcons|MaterialIcon">
+    <!-- Input controls -->
+    <Style Selector="TextBox, ComboBox, NumericUpDown">
+        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
         <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource M3OutlineVariant}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="Padding" Value="14,10" />
+        <Setter Property="MinHeight" Value="44" />
+    </Style>
+    <Style Selector="TextBox:focus, ComboBox:focus, NumericUpDown:focus">
+        <Setter Property="BorderBrush" Value="{DynamicResource M3Primary}" />
+    </Style>
+    <Style Selector="TextBox.Flat">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="Slider">
+        <Setter Property="Foreground" Value="{DynamicResource M3Primary}" />
+    </Style>
+    <Style Selector="ToggleSwitch">
+        <Setter Property="OnContent" Value="开" />
+        <Setter Property="OffContent" Value="关" />
     </Style>
 
-    <!-- ===== 消息气泡(用户/AI) ===== -->
-    <Style Selector="Border.msg">
-        <Setter Property="Background" Value="{DynamicResource M3AiBubble}" />
+    <!-- Lists / messages -->
+    <Style Selector="controls|RippleSelectableItem.SessionItem">
+        <Setter Property="CornerRadius" Value="22" />
+        <Setter Property="Padding" Value="14" />
+        <Setter Property="Margin" Value="0,4" />
+        <Setter Property="HoverBackground" Value="{DynamicResource M3HoverOverlay}" />
+        <Setter Property="SelectedBackground" Value="{DynamicResource M3SecondaryContainer}" />
+        <Setter Property="SelectedHoverBackground" Value="{DynamicResource M3FilledTonalHover}" />
+        <Setter Property="RippleBrush" Value="{DynamicResource M3Primary}" />
     </Style>
-    <Style Selector="Border.msg.user">
+    <Style Selector="Border.MessageBubble">
+        <Setter Property="CornerRadius" Value="24" />
+        <Setter Property="Padding" Value="18,14" />
+        <Setter Property="MaxWidth" Value="820" />
+    </Style>
+    <Style Selector="Border.MessageBubble.User">
         <Setter Property="Background" Value="{DynamicResource M3UserBubble}" />
     </Style>
-    <Style Selector="Border.msg TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource M3OnAiBubble}" />
+    <Style Selector="Border.MessageBubble.Assistant">
+        <Setter Property="Background" Value="{DynamicResource M3AiBubble}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource M3OutlineVariant}" />
+        <Setter Property="BorderThickness" Value="1" />
     </Style>
-    <Style Selector="Border.msg.user TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource M3OnUserBubble}" />
+    <Style Selector="Border.AttachmentChip">
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="10,8" />
+        <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHighest}" />
     </Style>
 
-    <!-- ===== RippleSelectableItem - M3 选中列表项样式 ===== -->
-    <!-- 视觉状态由代码驱动(代码状态机),样式只配置颜色属性与静态外观 -->
-    <Style Selector="controls|RippleSelectableItem">
-        <!-- hover 背景(12% 主色叠加) -->
-        <Setter Property="HoverBackground" Value="{DynamicResource M3HoverOverlay}" />
-        <!-- 选中背景(M3 SecondaryContainer 实色) -->
-        <Setter Property="SelectedBackground" Value="{DynamicResource M3SecondaryContainer}" />
-        <!-- 选中+hover 背景(M3 SecondaryContainer 更深色) -->
-        <Setter Property="SelectedHoverBackground" Value="{DynamicResource M3FilledTonalPressed}" />
-        <Setter Property="CornerRadius" Value="12" />
-        <Setter Property="Padding" Value="12,10" />
-        <Setter Property="Margin" Value="4,2" />
-        <Setter Property="RippleOpacity" Value="0.24" />
-        <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSurface}" />
-    </Style>
-    <!-- 选中状态: 子元素文字色 -->
-    <Style Selector="controls|RippleSelectableItem:selected TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
-    </Style>
-    <!-- 选中时时间文字弱化 -->
-    <Style Selector="controls|RippleSelectableItem:selected TextBlock.BodySmall">
-        <Setter Property="Foreground" Value="{DynamicResource M3OnSecondaryContainer}" />
-        <Setter Property="Opacity" Value="0.7" />
+    <Style Selector="ScrollViewer">
+        <Setter Property="Background" Value="Transparent" />
     </Style>
 </Styles>

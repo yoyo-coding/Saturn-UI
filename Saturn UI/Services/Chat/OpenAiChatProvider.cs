@@ -132,7 +132,7 @@ public sealed class OpenAiChatProvider : IChatProvider
 
         if (httpError != null)
         {
-            yield return $"[ERROR]{httpError}";
+            yield return httpError.StartsWith("[ERROR]", StringComparison.Ordinal) ? httpError : $"[ERROR]{httpError}";
             yield break;
         }
 

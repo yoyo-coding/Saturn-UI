@@ -6,7 +6,7 @@ using SaturnUI.Models;
 namespace SaturnUI.ViewModels;
 
 /// <summary>
-/// 主视图模型 - 聚合子 ViewModel,管理主窗口全局状态
+/// ????????????????????????
 /// </summary>
 public partial class MainViewModel : ViewModelBase
 {
@@ -33,13 +33,18 @@ public partial class MainViewModel : ViewModelBase
         SettingsViewModel = settingsVm;
 
         SessionListViewModel.SessionSelected += OnSessionSelected;
+        ChatViewModel.SessionCreated += OnSessionCreated;
     }
 
     private void OnSessionSelected(object? sender, Session session)
     {
         ChatViewModel.LoadSession(session);
         CurrentViewName = "Chat";
+        IsSettingsOpen = false;
     }
+
+    private void OnSessionCreated(object? sender, Session session)
+        => SessionListViewModel.AddOrRefreshSession(session);
 
     [RelayCommand]
     private void ToggleSessionPanel() => IsSessionPanelOpen = !IsSessionPanelOpen;
@@ -51,11 +56,12 @@ public partial class MainViewModel : ViewModelBase
     private void CloseSettings() => IsSettingsOpen = false;
 
     [RelayCommand]
-    private void NewChat() => ChatViewModel.NewSession();
+    private void NewChat() => SessionListViewModel.NewSessionCommand.Execute(null);
 
     protected override void DisposeCore()
     {
         SessionListViewModel.SessionSelected -= OnSessionSelected;
+        ChatViewModel.SessionCreated -= OnSessionCreated;
         ChatViewModel.Dispose();
         SettingsViewModel.Dispose();
     }

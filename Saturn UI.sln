@@ -1,6 +1,7 @@
-
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn UI", "Saturn UI\Saturn UI.csproj", "{7CEC4FB0-9120-41AA-9A5E-40DB86A0E4AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaturnUI.Tests", "SaturnUI.Tests\SaturnUI.Tests.csproj", "{320A5CFB-76FA-4EF7-8905-5A89E91389ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +13,9 @@ Global
 		{7CEC4FB0-9120-41AA-9A5E-40DB86A0E4AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CEC4FB0-9120-41AA-9A5E-40DB86A0E4AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CEC4FB0-9120-41AA-9A5E-40DB86A0E4AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320A5CFB-76FA-4EF7-8905-5A89E91389ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320A5CFB-76FA-4EF7-8905-5A89E91389ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320A5CFB-76FA-4EF7-8905-5A89E91389ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320A5CFB-76FA-4EF7-8905-5A89E91389ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -10,14 +10,7 @@ using SaturnUI.Services;
 namespace SaturnUI.ViewModels;
 
 /// <summary>
-/// 聊天视图模型
-///
-/// 优化:
-///   1. 继承 ViewModelBase,统一 IsBusy/StatusText/ErrorMessage
-///   2. 消息流式更新使用 AppendContent(string token) 替代 += ,
-///      减少属性变更通知次数,提升渲染性能
-///   3. Stop 命令通过 CancellationToken 统一控制
-///   4. 移除冗余 _statusText / _isBusy / _errorMessage(已迁移到基类)
+/// ?????????????????????????????
 /// </summary>
 public partial class ChatViewModel : ViewModelBase
 {
@@ -29,6 +22,7 @@ public partial class ChatViewModel : ViewModelBase
     private ObservableCollection<Message> _messages = new();
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SendMessageCommand))]
     private string _inputText = string.Empty;
 
     [ObservableProperty]
@@ -40,35 +34,42 @@ public partial class ChatViewModel : ViewModelBase
     [ObservableProperty]
     private string? _pendingAttachmentName;
 
+    public event EventHandler<Session>? SessionCreated;
+
     public ChatViewModel(ChatService chatService, LocalStorageService storage)
     {
         _chatService = chatService;
         _storage = storage;
+        StatusText = "就绪";
     }
 
     public void LoadSession(Session session)
     {
         CurrentSession = session;
-        // 增量更新 ObservableCollection,避免整体重置
         Messages.Clear();
         foreach (var msg in session.Messages)
             Messages.Add(msg);
-        StatusText = $"会话: {session.Title}";
+        StatusText = $"已加载：{session.Title}";
+        ClearError();
     }
 
     [RelayCommand]
     public void NewSession()
     {
         _cts?.Cancel();
-        var session = new Session("新会话");
+        var session = new Session(AppConstants.DefaultSessionTitle);
+        session.UpdatedAt = DateTime.Now;
         _storage.SaveSession(session);
         LoadSession(session);
+        SessionCreated?.Invoke(this, session);
     }
 
-    [RelayCommand]
+    private bool CanSendMessage() => !IsBusy && !string.IsNullOrWhiteSpace(InputText);
+
+    [RelayCommand(CanExecute = nameof(CanSendMessage))]
     private async Task SendMessageAsync()
     {
-        if (string.IsNullOrWhiteSpace(InputText) || IsBusy) return;
+        if (!CanSendMessage()) return;
 
         var userText = InputText.Trim();
         InputText = string.Empty;
@@ -88,7 +89,7 @@ public partial class ChatViewModel : ViewModelBase
         PendingAttachmentPath = null;
         PendingAttachmentName = null;
 
-        var aiMsg = new Message(MessageRole.Assistant, "")
+        var aiMsg = new Message(MessageRole.Assistant, string.Empty)
         {
             SessionId = sessionId,
             IsStreaming = true
@@ -96,59 +97,68 @@ public partial class ChatViewModel : ViewModelBase
         Messages.Add(aiMsg);
 
         IsBusy = true;
-        StatusText = "AI 正在思考...";
+        SendMessageCommand.NotifyCanExecuteChanged();
+        StatusText = "AI 正在生成...";
+        ClearError();
+        _cts?.Dispose();
         _cts = new CancellationTokenSource();
 
         try
         {
-            await foreach (var token in _chatService.SendMessageStreamAsync(
-                userText, sessionId, _cts.Token))
+            await foreach (var token in _chatService.SendMessageStreamAsync(userText, sessionId, _cts.Token))
             {
-                if (token.StartsWith("[ERROR]"))
+                if (token.StartsWith("[ERROR]", StringComparison.Ordinal))
                 {
                     aiMsg.IsError = true;
                     aiMsg.ErrorMessage = token[7..];
-                    aiMsg.IsStreaming = false;
-                    StatusText = "出错";
+                    RaiseError(aiMsg.ErrorMessage);
                     break;
                 }
 
                 aiMsg.AppendContent(token);
             }
 
-            aiMsg.IsStreaming = false;
+            aiMsg.CompleteStreaming();
             _storage.SaveMessage(aiMsg);
 
             if (!aiMsg.IsError)
             {
                 StatusText = "完成";
-                if (CurrentSession!.Title == "新会话" && Messages.Count >= 2)
-                {
-                    var title = userText.Length > 20 ? userText[..20] + "..." : userText;
-                    CurrentSession.Title = title;
-                    _storage.UpdateSessionTitle(CurrentSession.Id, title);
-                }
+                TryPromoteSessionTitle(userText);
             }
 
-            CurrentSession.UpdatedAt = DateTime.Now;
+            CurrentSession!.UpdatedAt = DateTime.Now;
             _storage.SaveSession(CurrentSession);
         }
         catch (OperationCanceledException)
         {
-            aiMsg.IsStreaming = false;
+            aiMsg.CompleteStreaming();
             StatusText = "已取消";
         }
         catch (Exception ex)
         {
+            aiMsg.CompleteStreaming();
             aiMsg.IsError = true;
             aiMsg.ErrorMessage = ex.Message;
-            aiMsg.IsStreaming = false;
-            StatusText = "错误";
+            RaiseError(ex.Message);
+            _storage.SaveMessage(aiMsg);
         }
         finally
         {
             IsBusy = false;
+            SendMessageCommand.NotifyCanExecuteChanged();
         }
+    }
+
+    private void TryPromoteSessionTitle(string userText)
+    {
+        if (CurrentSession is null || CurrentSession.Title != AppConstants.DefaultSessionTitle || Messages.Count < 2)
+            return;
+
+        var normalized = userText.ReplaceLineEndings(" ").Trim();
+        var title = normalized.Length > 20 ? normalized[..20] + "..." : normalized;
+        CurrentSession.Title = string.IsNullOrWhiteSpace(title) ? AppConstants.DefaultSessionTitle : title;
+        _storage.UpdateSessionTitle(CurrentSession.Id, CurrentSession.Title);
     }
 
     [RelayCommand]

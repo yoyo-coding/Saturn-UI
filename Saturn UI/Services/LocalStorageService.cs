@@ -8,8 +8,8 @@ using SaturnUI.Models;
 namespace SaturnUI.Services;
 
 /// <summary>
-/// 本地数据访问服务 - 基于 LiteDB
-/// 优化: 共享 LiteDatabase 实例,避免每次操作都打开/关闭文件
+/// ???????? - ?? LiteDB?
+/// ????????????????????????????????????????????
 /// </summary>
 public sealed class LocalStorageService : IDisposable
 {
@@ -18,14 +18,13 @@ public sealed class LocalStorageService : IDisposable
 
     private readonly LiteDatabase _db;
 
-    public LocalStorageService()
+    public LocalStorageService(string? dataDirectory = null)
     {
-        var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        var dir = Path.Combine(appData, "SaturnUI");
-        Directory.CreateDirectory(dir);
+        var dir = AppDataPaths.ResolveDataDirectory(dataDirectory);
         var dbPath = Path.Combine(dir, "SaturnUI.db");
 
         _db = new LiteDatabase(dbPath, CreateMapper());
+        EnsureIndexes();
     }
 
     private static BsonMapper CreateMapper()
@@ -36,7 +35,9 @@ public sealed class LocalStorageService : IDisposable
             .Id(x => x.Id)
             .Field(x => x.Title, "title")
             .Field(x => x.CreatedAt, "created_at")
-            .Field(x => x.UpdatedAt, "updated_at");
+            .Field(x => x.UpdatedAt, "updated_at")
+            .Ignore(x => x.Messages)
+            .Ignore(x => x.IsSelected);
 
         mapper.Entity<Message>()
             .Id(x => x.Id)
@@ -46,9 +47,22 @@ public sealed class LocalStorageService : IDisposable
             .Field(x => x.Timestamp, "timestamp")
             .Field(x => x.IsStreaming, "is_streaming")
             .Field(x => x.IsError, "is_error")
-            .Field(x => x.ErrorMessage, "error_message");
+            .Field(x => x.ErrorMessage, "error_message")
+            .Field(x => x.AttachmentPath, "attachment_path")
+            .Field(x => x.AttachmentName, "attachment_name")
+            .Field(x => x.HasAttachment, "has_attachment");
 
         return mapper;
+    }
+
+    private void EnsureIndexes()
+    {
+        _db.GetCollection<Session>(SessionsCollection)
+            .EnsureIndex(x => x.UpdatedAt);
+
+        var messages = _db.GetCollection<Message>(MessagesCollection);
+        messages.EnsureIndex(x => x.SessionId);
+        messages.EnsureIndex(x => x.Timestamp);
     }
 
     public List<Session> GetSessions()
@@ -65,25 +79,30 @@ public sealed class LocalStorageService : IDisposable
         if (session == null) return null;
 
         var messages = _db.GetCollection<Message>(MessagesCollection)
-            .Find(m => m.SessionId == id)
+            .Query()
+            .Where(m => m.SessionId == id)
             .OrderBy(m => m.Timestamp)
             .ToList();
 
         foreach (var msg in messages)
+        {
+            msg.IsStreaming = false;
             session.Messages.Add(msg);
+        }
 
         return session;
     }
 
     public void SaveSession(Session session)
     {
-        var sessions = _db.GetCollection<Session>(SessionsCollection);
-        sessions.Upsert(session);
+        session.UpdatedAt = session.UpdatedAt == default ? DateTime.Now : session.UpdatedAt;
+        _db.GetCollection<Session>(SessionsCollection).Upsert(session);
 
         var messages = _db.GetCollection<Message>(MessagesCollection);
         foreach (var msg in session.Messages)
         {
             msg.SessionId = session.Id;
+            msg.FlushContentBuffer();
             messages.Upsert(msg);
         }
     }
@@ -91,12 +110,12 @@ public sealed class LocalStorageService : IDisposable
     public void DeleteSession(string id)
     {
         _db.GetCollection<Session>(SessionsCollection).Delete(id);
-        _db.GetCollection<Message>(MessagesCollection)
-            .DeleteMany(m => m.SessionId == id);
+        _db.GetCollection<Message>(MessagesCollection).DeleteMany(m => m.SessionId == id);
     }
 
     public void SaveMessage(Message message)
     {
+        message.FlushContentBuffer();
         _db.GetCollection<Message>(MessagesCollection).Upsert(message);
     }
 
