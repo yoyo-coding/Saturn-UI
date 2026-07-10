@@ -58,8 +58,17 @@ public static class DynamicColorPalette
 
     public static string NormalizeHexColor(string? value)
     {
+        return TryNormalizeHexColor(value, out var normalized)
+            ? normalized
+            : FallbackSeedColor;
+    }
+
+    public static bool TryNormalizeHexColor(string? value, out string normalized)
+    {
+        normalized = FallbackSeedColor;
+
         if (string.IsNullOrWhiteSpace(value))
-            return FallbackSeedColor;
+            return false;
 
         var hex = value.Trim();
         if (hex.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
@@ -77,15 +86,16 @@ public static class DynamicColorPalette
         }
 
         if (hex.Length != 6)
-            return FallbackSeedColor;
+            return false;
 
         foreach (var ch in hex)
         {
             if (!Uri.IsHexDigit(ch))
-                return FallbackSeedColor;
+                return false;
         }
 
-        return $"#{hex.ToUpperInvariant()}";
+        normalized = $"#{hex.ToUpperInvariant()}";
+        return true;
     }
 
     public static Color ParseSeed(string? value)

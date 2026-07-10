@@ -94,7 +94,7 @@ public static class RippleAnimator
             ClipToBounds = true,
             CornerRadius = target is Border border ? border.CornerRadius
                           : target is TemplatedControl tc ? tc.CornerRadius
-                          : new CornerRadius(0),
+                          : MaterialShapeTokens.None,
             Background = null,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,

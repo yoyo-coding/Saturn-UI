@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Media;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SaturnUI.Services;
@@ -15,6 +16,9 @@ public sealed record ColorPaletteOption(string Name, string Color)
 public partial class SettingsViewModel : ViewModelBase
 {
     private readonly SettingsService _settingsService;
+    private readonly DispatcherTimer _appearanceSaveTimer;
+    private bool _isLoading;
+    private bool _isNormalizingAccentColor;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentProviderStatus))]
@@ -105,29 +109,100 @@ public partial class SettingsViewModel : ViewModelBase
     public SettingsViewModel(SettingsService settingsService)
     {
         _settingsService = settingsService;
+        _appearanceSaveTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(220)
+        };
+        _appearanceSaveTimer.Tick += (_, _) =>
+        {
+            _appearanceSaveTimer.Stop();
+            CommitAppearanceSettings();
+        };
+
         Load();
     }
 
     private void Load()
     {
-        var s = _settingsService.Settings;
-        HttpBaseUrl = s.HttpBaseUrl;
-        GrpcAddress = s.GrpcAddress;
-        Protocol = s.Protocol;
-        FontSize = s.FontSize;
-        PerformanceMode = s.PerformanceMode;
-        AccentColor = s.AccentColor;
-        UseLightTheme = s.UseLightTheme;
-        Provider = s.Provider;
+        _isLoading = true;
+        try
+        {
+            var s = _settingsService.Settings;
+            HttpBaseUrl = s.HttpBaseUrl;
+            GrpcAddress = s.GrpcAddress;
+            Protocol = s.Protocol;
+            FontSize = s.FontSize;
+            PerformanceMode = s.PerformanceMode;
+            AccentColor = s.AccentColor;
+            UseLightTheme = s.UseLightTheme;
+            Provider = s.Provider;
 
-        OpenAiApiKey = s.OpenAiApiKey;
-        OpenAiModel = s.OpenAiModel;
-        OpenAiBaseUrl = s.OpenAiBaseUrl;
-        OpenAiTemperature = s.OpenAiTemperature;
-        OpenAiMaxTokens = s.OpenAiMaxTokens;
+            OpenAiApiKey = s.OpenAiApiKey;
+            OpenAiModel = s.OpenAiModel;
+            OpenAiBaseUrl = s.OpenAiBaseUrl;
+            OpenAiTemperature = s.OpenAiTemperature;
+            OpenAiMaxTokens = s.OpenAiMaxTokens;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
 
         OnPropertyChanged(nameof(ProviderConfigButtonText));
         OnPropertyChanged(nameof(CurrentProviderStatus));
+    }
+
+
+    partial void OnAccentColorChanged(string value)
+    {
+        if (_isLoading || _isNormalizingAccentColor)
+            return;
+
+        OnPropertyChanged(nameof(AccentPreviewBrush));
+        OnPropertyChanged(nameof(NormalizedAccentColor));
+
+        if (DynamicColorPalette.TryNormalizeHexColor(value, out _))
+            ScheduleAppearanceCommit();
+    }
+
+    partial void OnUseLightThemeChanged(bool value)
+    {
+        if (!_isLoading)
+            ScheduleAppearanceCommit();
+    }
+
+    private void ScheduleAppearanceCommit()
+    {
+        _appearanceSaveTimer.Stop();
+        _appearanceSaveTimer.Start();
+    }
+
+    private void CommitAppearanceSettings()
+    {
+        if (!DynamicColorPalette.TryNormalizeHexColor(AccentColor, out var normalizedAccent))
+            return;
+
+        if (AccentColor != normalizedAccent)
+        {
+            _isNormalizingAccentColor = true;
+            try
+            {
+                AccentColor = normalizedAccent;
+            }
+            finally
+            {
+                _isNormalizingAccentColor = false;
+            }
+        }
+
+        _settingsService.Update(s =>
+        {
+            s.AccentColor = normalizedAccent;
+            s.UseLightTheme = UseLightTheme;
+        });
+
+        OnPropertyChanged(nameof(AccentPreviewBrush));
+        OnPropertyChanged(nameof(NormalizedAccentColor));
     }
 
     [RelayCommand]

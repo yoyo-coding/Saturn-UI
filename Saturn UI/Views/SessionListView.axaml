@@ -10,7 +10,7 @@
 
     <Grid RowDefinitions="Auto,Auto,*" Margin="10">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="4,4,4,12">
-            <Border Grid.Column="0" Width="44" Height="44" CornerRadius="16"
+            <Border Grid.Column="0" Width="44" Height="44" CornerRadius="{StaticResource M3ShapeFull}"
                     Background="{DynamicResource M3PrimaryContainer}">
                 <materialIcons:MaterialIcon Kind="Planet"
                                             Width="24" Height="24"
@@ -31,7 +31,7 @@
         </Grid>
 
         <Border Grid.Row="1"
-                CornerRadius="8"
+                CornerRadius="{StaticResource M3ShapeExtraSmall}"
                 Padding="12,4"
                 Margin="4,0,4,12"
                 Background="{DynamicResource M3SurfaceContainerHigh}"

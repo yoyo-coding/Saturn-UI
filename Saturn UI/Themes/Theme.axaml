@@ -1,5 +1,14 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Material 3 shape scale: None, XS, S, M, L, XL, Full. -->
+    <CornerRadius x:Key="M3ShapeNone">0</CornerRadius>
+    <CornerRadius x:Key="M3ShapeExtraSmall">4</CornerRadius>
+    <CornerRadius x:Key="M3ShapeSmall">8</CornerRadius>
+    <CornerRadius x:Key="M3ShapeMedium">12</CornerRadius>
+    <CornerRadius x:Key="M3ShapeLarge">16</CornerRadius>
+    <CornerRadius x:Key="M3ShapeExtraLarge">28</CornerRadius>
+    <CornerRadius x:Key="M3ShapeFull">999</CornerRadius>
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://SaturnUI/Themes/ThemeColors.axaml" />
     </ResourceDictionary.MergedDictionaries>

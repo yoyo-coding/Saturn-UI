@@ -65,17 +65,20 @@
                             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
                                 <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
                                     <TextBlock Text="动态取色板" Classes="LabelLarge" />
-                                    <TextBlock Text="从预设中选一个颜色会立即保存并重算主题；也可以输入 HEX 色值后点击保存。"
+                                    <TextBlock Text="在上方矩形中无级选取种子色，系统会自动重算主题的子颜色。下方保留常用色作为快速入口。"
                                                Classes="BodySmall Muted" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <Border Grid.Column="1"
                                         Width="48"
                                         Height="48"
-                                        CornerRadius="16"
+                                        CornerRadius="{StaticResource M3ShapeFull}"
                                         Background="{Binding AccentPreviewBrush}"
                                         BorderBrush="{DynamicResource M3OutlineVariant}"
                                         BorderThickness="1" />
                             </Grid>
+
+                            <controls:ColorPalettePicker Height="176"
+                                                         SelectedColorHex="{Binding AccentColor, Mode=TwoWay}" />
 
                             <ListBox ItemsSource="{Binding AccentColorOptions}"
                                      SelectedItem="{Binding SelectedAccentOption}"
@@ -93,7 +96,7 @@
                                         <StackPanel Margin="0,0,10,10" Spacing="6" Width="66">
                                             <Border Width="44"
                                                     Height="44"
-                                                    CornerRadius="16"
+                                                    CornerRadius="{StaticResource M3ShapeFull}"
                                                     Background="{Binding Brush}"
                                                     BorderBrush="{DynamicResource M3OutlineVariant}"
                                                     BorderThickness="1"
@@ -113,7 +116,7 @@
                                            Classes="LabelLarge"
                                            VerticalAlignment="Center" />
                                 <TextBox Grid.Column="1"
-                                         Text="{Binding AccentColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding AccentColor, Mode=TwoWay}"
                                          Watermark="#6750A4"
                                          HorizontalAlignment="Stretch" />
                             </Grid>
@@ -131,13 +134,13 @@
                             </Grid>
 
                             <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
-                                <Border Grid.Column="0" Padding="12" CornerRadius="16" Background="{DynamicResource M3PrimaryContainer}">
+                                <Border Grid.Column="0" Padding="12" CornerRadius="{StaticResource M3ShapeLarge}" Background="{DynamicResource M3PrimaryContainer}">
                                     <TextBlock Text="Primary" Foreground="{DynamicResource M3OnPrimaryContainer}" Classes="LabelMedium" TextAlignment="Center" />
                                 </Border>
-                                <Border Grid.Column="1" Padding="12" CornerRadius="16" Background="{DynamicResource M3SecondaryContainer}">
+                                <Border Grid.Column="1" Padding="12" CornerRadius="{StaticResource M3ShapeLarge}" Background="{DynamicResource M3SecondaryContainer}">
                                     <TextBlock Text="Secondary" Foreground="{DynamicResource M3OnSecondaryContainer}" Classes="LabelMedium" TextAlignment="Center" />
                                 </Border>
-                                <Border Grid.Column="2" Padding="12" CornerRadius="16" Background="{DynamicResource M3TertiaryContainer}">
+                                <Border Grid.Column="2" Padding="12" CornerRadius="{StaticResource M3ShapeLarge}" Background="{DynamicResource M3TertiaryContainer}">
                                     <TextBlock Text="Tertiary" Foreground="{DynamicResource M3OnTertiaryContainer}" Classes="LabelMedium" TextAlignment="Center" />
                                 </Border>
                             </Grid>

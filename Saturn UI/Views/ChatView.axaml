@@ -39,7 +39,7 @@
                                         <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding IsAssistant}">
                                             <Border Grid.Column="0"
                                                     Width="30" Height="30"
-                                                    CornerRadius="16"
+                                                    CornerRadius="{StaticResource M3ShapeFull}"
                                                     Background="{DynamicResource M3SecondaryContainer}">
                                                 <TextBlock Text="AI" Classes="LabelSmall"
                                                            Foreground="{DynamicResource M3OnSecondaryContainer}"
@@ -75,7 +75,7 @@
                                                         <Style Selector="Border.CodeBlock">
                                                             <Setter Property="Background" Value="{DynamicResource M3CodeBackground}" />
                                                             <Setter Property="BorderBrush" Value="{DynamicResource M3CodeBorder}" />
-                                                            <Setter Property="CornerRadius" Value="4" />
+                                                            <Setter Property="CornerRadius" Value="{StaticResource M3ShapeExtraSmall}" />
                                                         </Style>
                                                         <Style Selector="Border.Blockquote">
                                                             <Setter Property="Background" Value="{DynamicResource M3SurfaceContainerHigh}" />
@@ -85,7 +85,7 @@
                                                 </md:MarkdownScrollViewer>
 
                                                 <Border IsVisible="{Binding IsImageAttachment}"
-                                                        CornerRadius="8"
+                                                        CornerRadius="{StaticResource M3ShapeSmall}"
                                                         ClipToBounds="True"
                                                         BorderBrush="{DynamicResource M3OutlineVariant}"
                                                         BorderThickness="1"
@@ -132,7 +132,7 @@
                     VerticalAlignment="Bottom"
                     Classes="Card Filled"
                     Padding="10"
-                    CornerRadius="16"
+                    CornerRadius="{StaticResource M3ShapeLarge}"
                     BorderBrush="{DynamicResource M3OutlineVariant}"
                     BorderThickness="1">
                 <Grid RowDefinitions="Auto,Auto">
