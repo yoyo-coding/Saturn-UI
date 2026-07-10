@@ -6,6 +6,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using SaturnUI.Services;
+using SaturnUI.Services.Coding;
 using SaturnUI.ViewModels;
 using SaturnUI.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -92,10 +93,16 @@ public partial class App : Application
         services.AddSingleton<ThemeService>();
         services.AddSingleton<LocalStorageService>();
         services.AddSingleton<ChatService>();
+        services.AddSingleton<CodeLanguageService>();
+        services.AddSingleton<CodeFileService>();
+        services.AddSingleton<CodeAssistantService>();
+        services.AddSingleton<CodeHighlightingService>();
 
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<ChatViewModel>();
         services.AddSingleton<SessionListViewModel>();
         services.AddSingleton<SettingsViewModel>();
+        services.AddSingleton<CodingWorkspaceViewModel>();
     }
 }
+

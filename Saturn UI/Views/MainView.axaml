@@ -1,34 +1,16 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:vm="using:SaturnUI.ViewModels"
              x:Class="SaturnUI.Views.MainView"
              x:DataType="vm:MainViewModel">
-    <Grid Background="{DynamicResource M3Background}">
-        <Border Classes="Card Filled"
-                Width="420"
-                Padding="32"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-            <StackPanel Spacing="18" HorizontalAlignment="Center">
-                <Border Width="84" Height="84" CornerRadius="{StaticResource M3ShapeExtraLarge}"
-                        Background="{DynamicResource M3PrimaryContainer}">
-                    <materialIcons:MaterialIcon Kind="Planet"
-                                                Width="46"
-                                                Height="46"
-                                                Foreground="{DynamicResource M3OnPrimaryContainer}"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" />
-                </Border>
-                <StackPanel Spacing="6" HorizontalAlignment="Center">
-                    <TextBlock Text="Saturn UI"
-                               Classes="HeadlineSmall"
-                               HorizontalAlignment="Center" />
-                    <TextBlock Text="Material 3 智能对话工作台"
-                               Classes="BodyMedium Muted"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
+    <Grid RowDefinitions="Auto,*" Background="{DynamicResource M3Background}" Margin="12">
+        <Border Grid.Row="0" Classes="TopAppBar" CornerRadius="{StaticResource M3ShapeLarge}" Padding="12" Margin="0,0,0,12">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="Chat" Command="{Binding SwitchToChatModeCommand}" />
+                <Button Content="Coding" Command="{Binding SwitchToCodingModeCommand}" />
+                <TextBlock Text="{Binding ActiveStatusText}" Classes="BodySmall Muted" VerticalAlignment="Center" Margin="12,0,0,0" />
             </StackPanel>
         </Border>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentWorkspace}" />
     </Grid>
 </UserControl>

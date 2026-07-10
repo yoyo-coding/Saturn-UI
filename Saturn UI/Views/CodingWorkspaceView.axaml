@@ -1,0 +1,192 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SaturnUI.ViewModels"
+             xmlns:models="using:SaturnUI.Models"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
+             xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+             xmlns:controls="using:SaturnUI.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             x:Class="SaturnUI.Views.CodingWorkspaceView"
+             x:DataType="vm:CodingWorkspaceViewModel"
+             Background="{DynamicResource M3Background}">
+    <Grid RowDefinitions="Auto,*">
+        <Border Classes="TopAppBar"
+                Margin="0,0,0,12"
+                Padding="18,14"
+                CornerRadius="{StaticResource M3ShapeLarge}"
+                BorderBrush="{DynamicResource M3OutlineVariant}"
+                BorderThickness="1">
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <controls:RippleButton Classes="FilledTonal Icon" Click="OnOpenFileClicked" ToolTip.Tip="Open file">
+                        <materialIcons:MaterialIcon Kind="FileDocumentOutline" Width="20" Height="20" />
+                    </controls:RippleButton>
+                    <controls:RippleButton Classes="FilledTonal Icon" Click="OnOpenFolderClicked" ToolTip.Tip="Open folder">
+                        <materialIcons:MaterialIcon Kind="FolderOpenOutline" Width="20" Height="20" />
+                    </controls:RippleButton>
+                    <controls:RippleButton Classes="Filled Icon" Command="{Binding SaveCommand}" ToolTip.Tip="Save">
+                        <materialIcons:MaterialIcon Kind="ContentSave" Width="20" Height="20" />
+                    </controls:RippleButton>
+                    <controls:RippleButton Classes="FilledTonal Icon" Click="OnSaveAsClicked" IsVisible="{Binding HasDocument}" ToolTip.Tip="Save as">
+                        <materialIcons:MaterialIcon Kind="ContentSaveEditOutline" Width="20" Height="20" />
+                    </controls:RippleButton>
+                    <controls:RippleButton Classes="Icon" Command="{Binding CloseDocumentCommand}" IsVisible="{Binding HasDocument}" ToolTip.Tip="Close document">
+                        <materialIcons:MaterialIcon Kind="Close" Width="20" Height="20" />
+                    </controls:RippleButton>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="16,0" Spacing="2" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding WorkspaceTitle}" Classes="TitleMedium" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding StatusText}" Classes="BodySmall Muted" TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <controls:RippleButton Classes="Icon" Command="{Binding ToggleExplorerPanelCommand}" ToolTip.Tip="Toggle explorer">
+                        <materialIcons:MaterialIcon Kind="Menu" Width="20" Height="20" />
+                    </controls:RippleButton>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,360" ColumnSpacing="12">
+            <Border Grid.Column="0"
+                    Classes="Card Filled"
+                    Padding="0"
+                    CornerRadius="{StaticResource M3ShapeLarge}"
+                    BorderBrush="{DynamicResource M3OutlineVariant}"
+                    BorderThickness="1"
+                    IsVisible="{Binding IsExplorerOpen}"
+                    MinWidth="260"
+                    MaxWidth="380">
+                <Grid RowDefinitions="Auto,*">
+                    <Border Classes="TopAppBar" Padding="16,12" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource M3OutlineVariant}">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <materialIcons:MaterialIcon Kind="Folder" Width="18" Height="18" Foreground="{DynamicResource M3OnSurfaceVariant}" />
+                            <TextBlock Text="Files" Classes="LabelLarge" />
+                        </StackPanel>
+                    </Border>
+                    <ListBox Grid.Row="1"
+                             x:Name="WorkspaceTree"
+                             ItemsSource="{Binding VisibleWorkspaceNodes}"
+                             Background="Transparent"
+                             SelectionChanged="OnTreeSelectedItemChanged"
+                             DoubleTapped="OnTreeDoubleTapped">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="models:CodeWorkspaceNode">
+                                <Border Padding="8,6" Margin="4,1">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                        <TextBlock Grid.Column="0" Text="{Binding IconKind}" Classes="BodySmall Muted" VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1" Text="{Binding TreeDisplayName}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Classes="Card Filled"
+                    Padding="0"
+                    CornerRadius="{StaticResource M3ShapeLarge}"
+                    BorderBrush="{DynamicResource M3OutlineVariant}"
+                    BorderThickness="1"
+                    ClipToBounds="True">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <Border Classes="TopAppBar" Padding="16,12" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource M3OutlineVariant}">
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <StackPanel Grid.Column="0" Spacing="2">
+                                <TextBlock Text="{Binding ActiveDocument.DisplayName, TargetNullValue=No document}" Classes="LabelLarge" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding ActiveDocument.FilePath, TargetNullValue=Open a file or folder}" Classes="BodySmall Muted" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding ActiveDocument.LanguageName, TargetNullValue=PlainText}" Classes="LabelSmall Muted" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="1">
+                        <avaloniaEdit:TextEditor x:Name="Editor"
+                                                 Background="Transparent"
+                                                 Foreground="{DynamicResource M3OnSurface}"
+                                                 ShowLineNumbers="True"
+                                                 FontFamily="Consolas"
+                                                 FontSize="14"
+                                                 VerticalScrollBarVisibility="Auto"
+                                                 HorizontalScrollBarVisibility="Auto"
+                                                 TextChanged="OnEditorTextChanged"
+                                                 KeyDown="OnEditorKeyDown" />
+
+                        <Border IsVisible="{Binding HasGhostSuggestion}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="18,0,18,18"
+                                Padding="10,6"
+                                CornerRadius="{StaticResource M3ShapeSmall}"
+                                Background="#20000000"
+                                BorderBrush="{DynamicResource M3OutlineVariant}"
+                                BorderThickness="1"
+                                IsHitTestVisible="False">
+                            <TextBlock Text="{Binding GhostSuggestion}" FontFamily="Consolas" FontSize="14" Opacity="0.55" TextWrapping="Wrap" />
+                        </Border>
+                    </Grid>
+
+                    <Border Grid.Row="2" Padding="14,10" BorderThickness="1,0,0,0" BorderBrush="{DynamicResource M3OutlineVariant}">
+                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                            <TextBlock Text="Tab accepts completion, Esc cancels, Ctrl+Space requests manually" Classes="BodySmall Muted" TextTrimming="CharacterEllipsis" />
+                            <TextBlock Grid.Column="1" Text="{Binding CurrentSelectionText, TargetNullValue=No selection}" Classes="BodySmall Muted" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right" Margin="16,0,0,0" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2"
+                    Classes="Card Filled"
+                    Padding="0"
+                    CornerRadius="{StaticResource M3ShapeLarge}"
+                    BorderBrush="{DynamicResource M3OutlineVariant}"
+                    BorderThickness="1"
+                    ClipToBounds="True">
+                <Grid RowDefinitions="Auto,*,Auto">
+                    <Border Classes="TopAppBar" Padding="16,12" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource M3OutlineVariant}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel Grid.Column="0" Spacing="2">
+                                <TextBlock Text="AI Coding Assistant" Classes="LabelLarge" />
+                                <TextBlock Text="Uses current file, selection and folder context" Classes="BodySmall Muted" />
+                            </StackPanel>
+                            <controls:RippleButton Grid.Column="1" Classes="Icon" Command="{Binding AskAssistantCommand}" ToolTip.Tip="Send">
+                                <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
+                            </controls:RippleButton>
+                        </Grid>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Background="Transparent">
+                        <ItemsControl ItemsSource="{Binding AssistantMessages}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="models:CodeAssistantMessage">
+                                    <Border Margin="12,10" Padding="12" CornerRadius="{StaticResource M3ShapeLarge}" Background="{DynamicResource M3SurfaceContainerHigh}">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="{Binding Role}" Classes="LabelSmall Muted" />
+                                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Classes="BodyMedium" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <Border Grid.Row="2" Padding="12" BorderThickness="1,0,0,0" BorderBrush="{DynamicResource M3OutlineVariant}">
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding AssistantInput, Mode=TwoWay}" Watermark="Ask about the current file, selection or folder..." AcceptsReturn="False" KeyDown="OnAssistantInputKeyDown" Classes="Flat" />
+                            <controls:RippleButton Grid.Row="0" Grid.Column="1" Classes="Filled Icon" Command="{Binding AskAssistantCommand}" ToolTip.Tip="Send">
+                                <materialIcons:MaterialIcon Kind="Send" Width="20" Height="20" />
+                            </controls:RippleButton>
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="2,8,2,0" Text="AI settings are shared with chat mode" Classes="BodySmall Muted" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
+
