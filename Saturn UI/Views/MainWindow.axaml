@@ -13,68 +13,138 @@
         Title="Saturn UI - 灵星"
         Background="{DynamicResource M3Surface}"
         Foreground="{DynamicResource M3OnSurface}"
+        SystemDecorations="None"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="0"
         MinWidth="860" MinHeight="620"
         Width="1280" Height="820">
 
-    <Grid Background="{DynamicResource M3Background}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding IsSessionPanelOpen, Converter={x:Static converters:BoolConverters.StarGridLength}, ConverterParameter=292, FallbackValue=292}" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid RowDefinitions="Auto,*" Background="{DynamicResource M3Background}">
+        <Border Grid.Row="0"
+                Classes="TitleBar"
+                Height="56"
+                Padding="12,0,8,0">
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+                <Border Grid.Column="0"
+                        Background="Transparent"
+                        Padding="4,0,18,0"
+                        PointerPressed="OnTitleBarPointerPressed">
+                    <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                        <Border Width="32" Height="32" CornerRadius="12"
+                                Background="{DynamicResource M3PrimaryContainer}">
+                            <materialIcons:MaterialIcon Kind="Planet"
+                                                        Width="20" Height="20"
+                                                        Foreground="{DynamicResource M3OnPrimaryContainer}"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel Spacing="0" VerticalAlignment="Center">
+                            <TextBlock Text="Saturn UI" Classes="TitleSmall" />
+                            <TextBlock Text="Material 3"
+                                       Classes="LabelSmall Muted" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
 
-        <Border Grid.Column="0"
-                Margin="12,12,0,12"
-                Classes="NavigationRail"
-                CornerRadius="28"
-                BorderBrush="{DynamicResource M3OutlineVariant}"
-                BorderThickness="1"
-                IsVisible="{Binding IsSessionPanelOpen}">
-            <views:SessionListView DataContext="{Binding SessionListViewModel}" />
+                <Border Grid.Column="1"
+                        Background="Transparent"
+                        PointerPressed="OnTitleBarPointerPressed">
+                    <TextBlock Text="{Binding ChatViewModel.StatusText}"
+                               Classes="BodySmall Muted"
+                               TextTrimming="CharacterEllipsis"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            Spacing="4"
+                            VerticalAlignment="Center">
+                    <controls:RippleButton Classes="Icon WindowControl"
+                            Click="OnMinimizeClick"
+                            ToolTip.Tip="最小化">
+                        <TextBlock Text="—"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </controls:RippleButton>
+                    <controls:RippleButton Classes="Icon WindowControl"
+                            Click="OnMaximizeRestoreClick"
+                            ToolTip.Tip="最大化/还原">
+                        <TextBlock x:Name="MaximizeRestoreGlyph"
+                                   Text="□"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </controls:RippleButton>
+                    <controls:RippleButton Classes="Icon WindowControl WindowClose"
+                            Click="OnCloseClick"
+                            ToolTip.Tip="关闭">
+                        <materialIcons:MaterialIcon Kind="Close" Width="20" Height="20" />
+                    </controls:RippleButton>
+                </StackPanel>
+            </Grid>
         </Border>
 
-        <Grid Grid.Column="1" RowDefinitions="Auto,*" Margin="12">
-            <Border Grid.Row="0"
-                    Classes="TopAppBar"
+        <Grid Grid.Row="1" Background="{DynamicResource M3Background}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding IsSessionPanelOpen, Converter={x:Static converters:BoolConverters.StarGridLength}, ConverterParameter=292, FallbackValue=292}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Margin="12,0,0,12"
+                    Classes="NavigationRail"
                     CornerRadius="28"
                     BorderBrush="{DynamicResource M3OutlineVariant}"
                     BorderThickness="1"
-                    Margin="0,0,0,12">
-                <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
-                    <controls:RippleButton Grid.Column="0"
-                            Classes="Icon"
-                            Command="{Binding ToggleSessionPanelCommand}"
-                            ToolTip.Tip="切换会话列表">
-                        <materialIcons:MaterialIcon Kind="Menu" Width="24" Height="24" />
-                    </controls:RippleButton>
-
-                    <StackPanel Grid.Column="1" Margin="16,0" Spacing="2" VerticalAlignment="Center">
-                        <TextBlock Text="Saturn UI" Classes="TitleMedium" />
-                        <TextBlock Text="{Binding ChatViewModel.StatusText}"
-                                   Classes="BodySmall Muted"
-                                   TextTrimming="CharacterEllipsis" />
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
-                        <controls:RippleButton Classes="FilledTonal Icon"
-                                Command="{Binding NewChatCommand}"
-                                ToolTip.Tip="新会话">
-                            <materialIcons:MaterialIcon Kind="Plus" Width="22" Height="22" />
-                        </controls:RippleButton>
-                        <controls:RippleButton Classes="Icon"
-                                Command="{Binding OpenSettingsCommand}"
-                                ToolTip.Tip="设置">
-                            <materialIcons:MaterialIcon Kind="Cog" Width="22" Height="22" />
-                        </controls:RippleButton>
-                    </StackPanel>
-                </Grid>
+                    IsVisible="{Binding IsSessionPanelOpen}">
+                <views:SessionListView DataContext="{Binding SessionListViewModel}" />
             </Border>
 
-            <Border Grid.Row="1" Classes="Card Filled" Padding="0" ClipToBounds="True">
-                <views:ChatView DataContext="{Binding ChatViewModel}" />
-            </Border>
+            <Grid Grid.Column="1" RowDefinitions="Auto,*" Margin="12,0,12,12">
+                <Border Grid.Row="0"
+                        Classes="TopAppBar"
+                        CornerRadius="28"
+                        BorderBrush="{DynamicResource M3OutlineVariant}"
+                        BorderThickness="1"
+                        Margin="0,0,0,12">
+                    <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+                        <controls:RippleButton Grid.Column="0"
+                                Classes="Icon"
+                                Command="{Binding ToggleSessionPanelCommand}"
+                                ToolTip.Tip="切换会话列表">
+                            <materialIcons:MaterialIcon Kind="Menu" Width="24" Height="24" />
+                        </controls:RippleButton>
+
+                        <StackPanel Grid.Column="1" Margin="16,0" Spacing="2" VerticalAlignment="Center">
+                            <TextBlock Text="聊天工作台" Classes="TitleMedium" />
+                            <TextBlock Text="{Binding ChatViewModel.StatusText}"
+                                       Classes="BodySmall Muted"
+                                       TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                            <controls:RippleButton Classes="Icon"
+                                    Command="{Binding OpenSettingsCommand}"
+                                    ToolTip.Tip="设置">
+                                <materialIcons:MaterialIcon Kind="Cog" Width="22" Height="22" />
+                            </controls:RippleButton>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Classes="Card Filled" Padding="0" ClipToBounds="True">
+                    <views:ChatView DataContext="{Binding ChatViewModel}" />
+                </Border>
+            </Grid>
         </Grid>
 
-        <Border Grid.ColumnSpan="2"
+        <Border Grid.Row="0"
+                Grid.RowSpan="2"
                 ZIndex="10"
                 Background="#99000000"
                 IsVisible="{Binding IsSettingsOpen}">
@@ -105,7 +175,8 @@
         </Border>
 
         <Border x:Name="SplashOverlay"
-                Grid.ColumnSpan="2"
+                Grid.Row="0"
+                Grid.RowSpan="2"
                 ZIndex="99"
                 Background="{DynamicResource M3Background}"
                 HorizontalAlignment="Stretch"

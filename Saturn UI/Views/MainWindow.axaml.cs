@@ -1,5 +1,7 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -13,11 +15,61 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        UpdateMaximizeRestoreGlyph();
     }
 
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+    }
+
+    private void OnTitleBarPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var pointer = e.GetCurrentPoint(this);
+        if (!pointer.Properties.IsLeftButtonPressed)
+            return;
+
+        if (e.ClickCount == 2)
+        {
+            ToggleMaximizeRestore();
+            e.Handled = true;
+            return;
+        }
+
+        BeginMoveDrag(e);
+        e.Handled = true;
+    }
+
+    private void OnMinimizeClick(object? sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
+    }
+
+    private void OnMaximizeRestoreClick(object? sender, RoutedEventArgs e)
+    {
+        ToggleMaximizeRestore();
+    }
+
+    private void OnCloseClick(object? sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void ToggleMaximizeRestore()
+    {
+        WindowState = WindowState == WindowState.Maximized
+            ? WindowState.Normal
+            : WindowState.Maximized;
+
+        UpdateMaximizeRestoreGlyph();
+    }
+
+    private void UpdateMaximizeRestoreGlyph()
+    {
+        var glyph = this.FindControl<TextBlock>("MaximizeRestoreGlyph");
+        if (glyph == null) return;
+
+        glyph.Text = WindowState == WindowState.Maximized ? "❐" : "□";
     }
 
     /// <summary>
