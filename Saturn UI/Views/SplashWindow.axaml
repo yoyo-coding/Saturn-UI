@@ -7,13 +7,13 @@
         CanResize="False"
         Background="{DynamicResource M3Background}">
     <Grid x:Name="RootGrid">
-        <Border Width="460" Height="460" CornerRadius="230"
+        <Border Width="460" Height="460" CornerRadius="16"
                 Opacity="0.20"
                 Background="{DynamicResource M3PrimaryContainer}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="18">
-            <Border Width="150" Height="150" CornerRadius="44"
+            <Border Width="150" Height="150" CornerRadius="16"
                     Background="{DynamicResource M3SurfaceContainerHighest}"
                     BorderBrush="{DynamicResource M3OutlineVariant}"
                     BorderThickness="1">

@@ -31,7 +31,7 @@
         </Grid>
 
         <Border Grid.Row="1"
-                CornerRadius="22"
+                CornerRadius="8"
                 Padding="12,4"
                 Margin="4,0,4,12"
                 Background="{DynamicResource M3SurfaceContainerHigh}"
