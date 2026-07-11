@@ -13,18 +13,31 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5c8fce0-d931-42d9-9d6a-c628c748afc4" name="更改" comment="">
+    <list default="true" id="efbe4c74-0343-4eeb-b9f8-a923161615cc" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Saturn UI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trae/documents/OpenAI兼容API支持实施计划.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI Dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI Light.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/bin/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/resources" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Avalonia/resources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/Saturn UI.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/SaturnUI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/ref/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/ref/SaturnUI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/SaturnUI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/Debug/net10.0/refint/SaturnUI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saturn UI/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Saturn UI/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +48,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="2" />
+    <option name="cachedIndexableFilesCount" value="1" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -46,10 +59,10 @@
     <urls />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8,
-  &quot;fromUser&quot;: false
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="3FNa7jYJvgDYJoxq3BztIgyBy9n" />
+  <component name="ProjectId" id="3GFd2pbH51UGwM9ZxGEQM2WKqPY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -71,6 +84,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AcpAgentsConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -99,21 +113,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="e5c8fce0-d931-42d9-9d6a-c628c748afc4" name="更改" comment="" />
-      <created>1781917817085</created>
+      <changelist id="efbe4c74-0343-4eeb-b9f8-a923161615cc" name="更改" comment="" />
+      <created>1783571049922</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1781917817085</updated>
-      <workItem from="1781917818352" duration="2404000" />
-      <workItem from="1781930258965" duration="1303000" />
-      <workItem from="1782261668494" duration="99000" />
-      <workItem from="1782384772146" duration="88000" />
-      <workItem from="1782385003339" duration="1047000" />
-      <workItem from="1782386084050" duration="1529000" />
-      <workItem from="1782388210253" duration="36000" />
-      <workItem from="1782388776891" duration="45000" />
-      <workItem from="1782389348166" duration="964000" />
-      <workItem from="1782392186462" duration="611000" />
+      <updated>1783571049922</updated>
+      <workItem from="1783571052528" duration="66000" />
+      <workItem from="1783580105099" duration="1000" />
+      <workItem from="1783580552288" duration="210000" />
+      <workItem from="1783582658677" duration="3046000" />
+      <workItem from="1783643501561" duration="3875000" />
+      <workItem from="1783683296838" duration="19000" />
+      <workItem from="1783687953378" duration="74000" />
+      <workItem from="1783692068888" duration="58000" />
     </task>
     <servers />
   </component>
@@ -141,5 +153,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -47,6 +47,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [F:/Saturn-UI/Saturn UI/Views/ChatView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[F:/Saturn-UI/Saturn UI/Views/CodingWorkspaceView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [F:/Saturn-UI/Saturn UI/Views/LocalProviderWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

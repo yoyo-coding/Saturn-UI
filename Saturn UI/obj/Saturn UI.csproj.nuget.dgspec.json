@@ -31,6 +31,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -49,11 +50,16 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Avalonia": {
               "target": "Package",
               "version": "[11.3.18, )"
+            },
+            "Avalonia.AvaloniaEdit": {
+              "target": "Package",
+              "version": "[11.0.0, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",

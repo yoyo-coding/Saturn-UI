@@ -9,6 +9,7 @@
       "SaturnUI/1.0.0": {
         "dependencies": {
           "Avalonia": "11.3.18",
+          "Avalonia.AvaloniaEdit": "11.0.0",
           "Avalonia.Desktop": "11.3.18",
           "Avalonia.Fonts.Inter": "11.3.18",
           "Avalonia.Themes.Fluent": "11.3.18",

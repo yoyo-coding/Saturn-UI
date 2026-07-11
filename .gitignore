@@ -1,18 +1,82 @@
-# =============================================================================
+﻿# =============================================================================
 # Saturn UI .gitignore
-# 针对 Avalonia 11 + .NET 10 + JetBrains Rider + VSCode 组合
+# Avalonia / .NET desktop project hygiene
+# -----------------------------------------------------------------------------
+# Keep repository focused on source code plus README and LICENSE.
+# Root-level project plans, implementation notes, screenshots, IDE state,
+# local Codex/Trae files, build outputs, caches and runtime data are ignored.
 # =============================================================================
 
 # -----------------------------------------------------------------------------
-# .NET / C# 编译产物
+# Repository root: keep only project/source essentials
 # -----------------------------------------------------------------------------
+# Root-level documents: only README and LICENSE should be kept in the repo.
+/*.md
+!/README.md
+!/REFACTOR_REPORT.md
+!/readme.md
+!/REFACTOR_REPORT.md
+!/Readme.md
+!/REFACTOR_REPORT.md
+!/LICENSE.md
+!/license.md
+!/License.md
+!/LICENSE
+!/license
+!/License
+
+# Explicit root project/implementation plans and local planning folders.
+/Plan.md
+/Implementation.md
+/.trae/
+/.codex/
+
+# Root-level documents / notes / office exports.
+/*.txt
+/*.rtf
+/*.doc
+/*.docx
+/*.pdf
+/*.ppt
+/*.pptx
+/*.xls
+/*.xlsx
+/*.csv
+
+# Root-level archives / temporary deliverables.
+/*.zip
+/*.7z
+/*.rar
+/*.tar
+/*.tar.gz
+
+# Root-level screenshots / design exports / throwaway assets.
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.webp
+/*.bmp
+/*.tiff
+/*.svg
+
+# Local build/package artifacts at repository root.
+/artifacts/
+/out/
+/publish/
+
+# -----------------------------------------------------------------------------
+# .NET / C# build outputs
+# -----------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
 bin/
 obj/
 out/
 publish/
 artifacts/
 
-# 编译输出
+# Compiled binaries and symbols
 *.dll
 *.exe
 *.pdb
@@ -22,31 +86,9 @@ artifacts/
 *.exe.config
 *.exe.mdb
 *.dll.mdb
+*.apphost
 
-# NuGet 还原
-*.nupkg
-*.snupkg
-.nuget/
-packages/
-*.nupkg.info
-*.nupkg.spec
-*.lock.json
-
-# Visual Studio / Rider 项目缓存
-*.user
-*.suo
-*.userprefs
-*.sln.docstates
-*.userosscache
-*.sln.ide
-*.csproj.user
-*.csproj.user.*
-
-# .NET Core 运行时配置
-*.runtimeconfig.json.bak
-app.config
-app.amo
-app.config
+# Build configurations and generated folders
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -57,9 +99,59 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-# 测试结果
+# -----------------------------------------------------------------------------
+# NuGet / package restore
+# -----------------------------------------------------------------------------
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+*.nupkg.info
+*.nupkg.spec
+project.lock.json
+project.fragment.lock.json
+*.lock.json
+
+# -----------------------------------------------------------------------------
+# Visual Studio / Rider / VS Code / editor state
+# -----------------------------------------------------------------------------
+.idea/
+.vs/
+.vscode/
+*.sln.iml
+*.csproj.iml
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+*.userosscache
+*.sln.ide
+*.csproj.user
+*.csproj.user.*
+*.swp
+*.swo
+
+# -----------------------------------------------------------------------------
+# Avalonia generated/cache files
+# -----------------------------------------------------------------------------
+Avalonia.Generators.Compiled.dll
+Generated/Pages/
+.generated/
+.designer/
+Designer.avalonia
+*.cache
+Resources.Inputs.cache
+*.resources.cache
+
+# -----------------------------------------------------------------------------
+# Test results / coverage
+# -----------------------------------------------------------------------------
 TestResults/
 [Tt]est[Rr]esult*/
+*.testsettings
+*.vsmdi
+*.trx
+*.testlog
 *.coverage
 *.coveragexml
 .coverage
@@ -72,60 +164,47 @@ coverage*.info
 *.coverage.html
 *.coverage.xml
 
-# MSTest / xUnit / NUnit
-[Tt]est[Rr]esult*/
-*.testsettings
-*.vsmdi
-
-# 单元测试 / 集成测试输出
-*.trx
-*.coverage
-*.coveragexml
-*.testlog
+# -----------------------------------------------------------------------------
+# Local runtime configuration / secrets
+# -----------------------------------------------------------------------------
+*.local
+*.local.json
+appsettings.*.local.json
+appsettings.Development.json
+secrets.json
+.env
+.env.*
+*.key
+*.pem
 
 # -----------------------------------------------------------------------------
-# Avalonia 特定
+# Local databases / cache data / Saturn UI runtime state
 # -----------------------------------------------------------------------------
-# Avalonia.Generators 编译输出
-Avalonia.Generators.Compiled.dll
-Generated\Pages\
-.generated\
-
-# Avalonia Designer 缓存
-.designer/
-Designer.avalonia
-
-# Avalonia 资源缓存
-*.cache
-Resources.Inputs.cache
-*.resources.cache
-
-# -----------------------------------------------------------------------------
-# IDE
-# -----------------------------------------------------------------------------
-
-# JetBrains Rider / IntelliJ
-.idea/
-*.sln.iml
-*.csproj.iml
-
-# Visual Studio Code
-.vscode/
-!.vscode/launch.json
-!.vscode/tasks.json
-!.vscode/settings.json
-!.vscode/extensions.json
-
-# Visual Studio
-.vs/
-.vscode/
-*.swp
-*.swo
+*.ldb
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+Data/
+storage/
+sessions.db
+*.localstorage
+.cache/
+.tmp/
+tmp/
+temp/
+*.tmp
+*.temp
 
 # -----------------------------------------------------------------------------
-# 操作系统
+# Logs
 # -----------------------------------------------------------------------------
+*.log
+*.log.*
 
+# -----------------------------------------------------------------------------
+# OS generated files
+# -----------------------------------------------------------------------------
 # Windows
 Thumbs.db
 ehthumbs.db
@@ -136,7 +215,6 @@ $RECYCLE.BIN/
 [Bb]ackup*/
 *.[Bb]ak
 *.orig
-*.tmp
 
 # macOS
 .DS_Store
@@ -157,50 +235,3 @@ $RECYCLE.BIN/
 .Trash-*
 .nfs*
 
-# -----------------------------------------------------------------------------
-# 本地构建 / 用户配置
-# -----------------------------------------------------------------------------
-*.local
-*.local.json
-appsettings.*.local.json
-secrets.json
-appsettings.Development.json
-
-# 数据库 / 缓存数据 (Saturn UI 用 LiteDB 存储会话)
-*.ldb
-*.sqlite
-*.sqlite3
-*.db
-*.db3
-Data/
-storage/
-sessions.db
-*.localstorage
-
-# 日志
-*.log
-*.log.*
-
-# 临时文件
-tmp/
-temp/
-.cache/
-.tmp/
-*.tmp
-*.temp
-
-# -----------------------------------------------------------------------------
-# 截屏 / 设计素材 (本地非仓库资产)
-# -----------------------------------------------------------------------------
-# 注释掉的: 如果你希望 design mocks 进库就保留, 否则忽略
-# *-preview.png
-# *.sketch
-# *.fig
-
-# -----------------------------------------------------------------------------
-# NuGet
-# -----------------------------------------------------------------------------
-*.nupkg
-project.lock.json
-project.fragment.lock.json
-artifacts/
